@@ -1,11 +1,17 @@
-<h1>All Cocktails</h1>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)), url('<%= image_path 'bar_cocktails.jpg' %>');">
+  <div class="container">
+    <h1>Le Wagon's Bar</h1>
+    <p>The best cocktails in a single place</p>
+    <%= link_to 'Add a Cocktail', new_cocktail_path, class: "btn btn-gradient" %>
+  </div>
+</div>
 
-<ul>
-  <% @cocktails.each do |cocktail| %>
-    <li>
-      <%= link_to cocktail.name, cocktail_path(cocktail) %>
-    </li>
-  <% end %>
-</ul>
-
-<%= link_to 'New', new_cocktail_path %>
+<div class="container-cards">
+  <div class="cards">
+    <% @cocktails.each do |cocktail| %>
+      <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.35)), url(<%= cocktail.image_url %>); width: 250px; height: 250px">
+        <%= link_to cocktail.name, cocktail_path(cocktail) %>
+      </div>
+    <% end %>
+  </div>
+</div>

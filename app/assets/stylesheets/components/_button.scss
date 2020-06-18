@@ -1,0 +1,28 @@
+.btn-gradient {
+  color: white;
+  padding: 6px 12px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+  background: linear-gradient(#247bdf, #0c4d9c);
+  transition: background 0.3s ease;
+  border: 1px solid #0F60C4;
+}
+  
+.btn-gradient:hover {
+  background: linear-gradient(#348dfb, #0e3970);
+  color: white;
+}
+
+.btn-ghost {
+  color: #4A4A4A;
+  border: 1px solid #4A4A4A;
+  padding: 1px 8px;
+  border-radius: 20px;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.btn-ghost:hover {
+  opacity: 1;
+}
