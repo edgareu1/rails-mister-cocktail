@@ -54,3 +54,6 @@ gem 'simple_form'
 
 # Save keys in a secure way
 gem 'dotenv-rails', groups: [:development, :test]
+
+# Cloudinary & Environment
+gem 'cloudinary', '~> 1.12.0'
