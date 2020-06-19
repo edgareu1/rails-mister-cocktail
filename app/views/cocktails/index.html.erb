@@ -9,7 +9,7 @@
 <div class="container-cards">
   <div class="cards">
     <% @cocktails.each do |cocktail| %>
-      <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.35)), url(<%= cocktail.image_url %>); width: 250px; height: 250px">
+      <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.35)), url('<%= cl_image_path cocktail.photo.key, height: 250, width: 250, crop: :fill %>'); min-height: 250px; min-width: 250px">
         <%= link_to cocktail.name, cocktail_path(cocktail) %>
       </div>
     <% end %>
