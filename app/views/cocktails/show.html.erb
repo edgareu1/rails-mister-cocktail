@@ -2,35 +2,43 @@
   <div style="display: flex; margin-bottom: 20px">
     <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.25),rgba(0,0,0,0.25)), url(<%= @cocktail.image_url %>); width: 250px; height: 250px; min-height: 250px; min-width: 250px; padding: 0"></div>
     <div style="margin: 35px 15px; min-width: 200px">
-      <h1 style="color: white; font-weight: bold; text-shadow: 1px 1px 10px rgba(0,0,0,0.4)"><%= @cocktail.name %></h1>
+      <h1 style="color: white; font-weight: bold; text-shadow: 1px 1px 5px rgba(0,0,0,0.6)"><%= @cocktail.name %></h1>
       <%= link_to 'Back to Cocktails', cocktails_path, class: "btn btn-gradient", style: "margin-top: 20px" %>
     </div> 
   </div>
 
-  <ul style="margin: 10px 0">
+  <ul style="margin: 10px 0; min-width: 450px">
     <h3>
       Recipe
       <%= link_to 'Add Dose', new_cocktail_dose_path(@cocktail), class: "btn btn-ghost", style: "margin: 0 0 3px 5px"%>
     </h3>
-    <% @cocktail.doses.each do |dose| %>
-      <li style="list-style: none; display: flex; align-items: center; margin: 10px 0 0 10px">
-        <%= link_to dose_path(dose), method: :delete, data: {confirm: "Are you sure?"} do %>
-          <i class="fas fa-trash-alt" style="margin-right: 5px; font-size: 16px; color: black"></i>
-        <% end %>
-        <p  style="font-size: 18px; margin: 0"><%= "#{dose.ingredient.name}: #{dose.description}" %></p>
-      </li>
+    <% if @cocktail.doses.length == 0 %>
+      <p style="margin-left: 10px">No recipe for it yet...</p>
+    <% else %>
+      <% @cocktail.doses.each do |dose| %>
+        <li style="list-style: none; display: flex; align-items: center; margin: 10px 0 0 10px">
+          <%= link_to dose_path(dose), method: :delete, data: {confirm: "Are you sure?"} do %>
+            <i class="fas fa-trash-alt" style="margin-right: 5px; font-size: 16px; color: black"></i>
+          <% end %>
+          <p  style="font-size: 18px; margin: 0"><%= "#{dose.ingredient.name}: #{dose.description}" %></p>
+        </li>
+      <% end %>
     <% end %>
   </ul>
 
-  <ul style="margin: 40px 0 10px">
+  <ul style="margin: 40px 0 10px; min-width: 450px">
     <h3>
       Reviews
       <%= link_to 'Add Review', new_cocktail_review_path(@cocktail), class: "btn btn-ghost", style: "margin: 0 0 3px 5px"%>
     </h3>
-    <% @cocktail.reviews.each do |review| %>
-      <li>
-        <p  style="font-size: 18px; margin: 0"><%= "#{review.rating}: #{review.content}" %></p>
-      </li>
+    <% if @cocktail.reviews.length == 0 %>
+      <p style="margin-left: 10px">Be the first to leave a review!</p>
+    <% else %>
+      <% @cocktail.reviews.each do |review| %>
+        <li style="list-style: none; display: flex; align-items: center; margin: 10px 0 0 10px">
+          <p style="font-size: 18px; margin: 0"><%= "#{review.rating}★ #{review.content}" %></p>
+        </li>
+      <% end %>
     <% end %>
   </ul>
 </div>
