@@ -1,18 +1,12 @@
 class CocktailsController < ApplicationController
   def index
     @cocktails = Cocktail.all
+
+    @cocktails_array = @cocktails.sort_by { |cocktail| - cocktail.relevance_points }
   end
 
   def show
     @cocktail = Cocktail.find(params[:id])
-
-    count = 0
-    sum = 0
-    @cocktail.reviews.each do |review|
-      sum += review["rating"]
-      count += 1
-    end
-    @average = (sum.to_f / count).round(1)
   end
 
   def new

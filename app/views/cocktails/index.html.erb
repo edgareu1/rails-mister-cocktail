@@ -1,4 +1,4 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)), url('<%= image_path 'bar_cocktails.jpg' %>');">
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url('<%= image_path 'bar_cocktails.jpg' %>');">
   <div class="container">
     <h1>Le Wagon's Bar</h1>
     <p>The best cocktails in a single place</p>
@@ -8,9 +8,16 @@
 
 <div class="container-cards">
   <div class="cards">
-    <% @cocktails.each do |cocktail| %>
+    <% @cocktails_array.each do |cocktail| %>
       <div class="card" data-aos="fade-zoom-in" data-aos-duration="500" style="background-image: linear-gradient(rgba(0,0,0,0.35),rgba(0,0,0,0.35)), url('<%= cl_image_path cocktail.photo.key, height: 250, width: 250, crop: :fill %>'); min-height: 250px; min-width: 250px">
-        <%= link_to cocktail.name, cocktail_path(cocktail) %>
+        <div>
+          <%= link_to cocktail.name, cocktail_path(cocktail) %>
+          <% if cocktail.reviews.empty? %>
+            <p>Not rated</p>
+          <% else %>
+            <p><%= cocktail.rating_average.round(1) %> ★</p>
+          <% end %>
+        </div>
       </div>
     <% end %>
   </div>

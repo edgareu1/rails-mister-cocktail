@@ -38,7 +38,7 @@
         <% else %>
           <h3>
             Reviews
-            <span style="font-size: 18px"> <%= @average %> ★</span>
+            <span style="font-size: 18px"> <%= @cocktail.rating_average.round(1) %> ★</span>
           <%= link_to 'Add Review', new_cocktail_review_path(@cocktail), class: "btn btn-ghost", style: "margin: 0 0 3px 5px"%>
           </h3>
           <% @cocktail.reviews.reverse[0..4].each do |review| %>

@@ -21,16 +21,23 @@
   padding: 10px;
 }
 
-.card > a {
-  color: rgba(255, 255, 255, 0.8);
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-  font-size: 22px;
+.card > div > a {
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+  font-size: 24px;
   font-weight: bold;
   transition: 0.1s ease;
 }
 
-.card > a:hover {
+.card > div > a:hover {
   color: white;
-  text-shadow: 2px 2px 12px rgba(0,0,0,0.6);
+  text-shadow: 5px 5px 20px rgba(0,0,0,0.65);
   text-decoration: none;
+}
+
+.card > div > p {
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+  font-size: 20px;
+  font-weight: bold;
 }
