@@ -1,53 +1,78 @@
 <div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-8 col" style="min-width: 500px; margin: 20px">
+  <div class="row justify-content-center" style="margin: 20px; min-width: 650px">
+
       <div style="display: flex; margin-bottom: 20px">
-        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.25),rgba(0,0,0,0.25)), url('<%= cl_image_path @cocktail.photo.key, height: 250, width: 250, crop: :fill %>'); min-height: 250px; min-width: 250px; padding: 0"></div>
-        <div style="margin: 35px 15px; min-width: 200px">
+
+        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.15),rgba(0,0,0,0.15)), url('<%= cl_image_path @cocktail.photo.key, height: 350, width: 350, crop: :fill %>'); min-height: 350px; min-width: 350px; padding: 0"></div>
+
+        <div style="margin: 10px 20px; min-width: 200px">
           <h1 style="color: white; font-weight: bold; text-shadow: 1px 1px 5px rgba(0,0,0,0.6)"><%= @cocktail.name %></h1>
-          <%= link_to 'Back to Cocktails', cocktails_path, class: "btn btn-gradient", style: "margin-top: 20px" %>
-        </div> 
+
+          <% if @cocktail.reviews.length == 0 %>
+            <p style="font-size: 15px; margin: 0 0 5px 5px">Be the first to leave a review!</p>
+          <% else %>
+              <p style="font-size: 15px; margin: 0 0 5px 5px"><strong>Rating: </strong><%= @cocktail.rating_average.round(1) %> ★</p>
+              <p style="font-size: 15px; margin: 0 0 5px 5px">Leave a review too!</p>
+
+          <% end %>
+
+          <div style="padding: 8px; box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.3)">
+            <%= simple_form_for [@cocktail, @review] do |f| %>
+              <%= f.input :rating %>
+              <%= f.input :content %>
+              <%= f.button :submit, class: "btn btn-ghost" %>
+            <% end %>
+          </div>
+
+          <%= link_to 'Back to Cocktails', cocktails_path, class: "btn btn-gradient", style: "margin: 20px 0 0 10px" %>
+
+        </div>
       </div>
 
-      <ul style="margin: 10px 0; min-width: 450px">
-        <h3>
-          Recipe
-          <%= link_to 'Add Dose', new_cocktail_dose_path(@cocktail), class: "btn btn-ghost", style: "margin: 0 0 3px 5px"%>
-        </h3>
-        <% if @cocktail.doses.length == 0 %>
-          <p style="margin-left: 10px">No recipe for it yet...</p>
+      <div style="display: flex; min-width: 630px; margin: 25px 0; padding: 8px 8px 12px ; box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.3)">
+        <ul style="margin: 10px 0; min-width: 350px">
+          <h3>
+            Recipe
+          </h3>
+          <% if @cocktail.doses.length == 0 %>
+            <p style="margin-left: 10px">No recipe for it yet...</p>
+          <% else %>
+            <% @cocktail.doses.each do |dose| %>
+              <li style="list-style: none; display: flex; align-items: center; margin: 10px 0 0 10px">
+                <%= link_to dose_path(dose), method: :delete, data: {confirm: "Are you sure?"} do %>
+                  <i class="fas fa-trash-alt" style="margin-right: 5px; font-size: 16px; color: black"></i>
+                <% end %>
+                <p  style="font-size: 18px; margin: 0"><%= "#{dose.ingredient.name}: #{dose.description}" %></p>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+
+        <div style="margin: 10px 0 0 28px; min-width: 200px">
+          <%= simple_form_for [@cocktail, @dose] do |f| %>
+            <%= f.association :ingredient %>
+            <%= f.input :description %>
+            <%= f.button :submit, class: "btn btn-ghost" %>
+          <% end %>
+        </div>
+      </div>
+
+      <ul style="margin-bottom: 10px; min-width: 630px; padding: 8px 8px 12px ; box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.3)">
+        <h3>Reviews</h3>
+        <% if @cocktail.reviews.length == 0 %>
+          <p style="margin-left: 10px">Be the first to leave a review!</p>
         <% else %>
-          <% @cocktail.doses.each do |dose| %>
-            <li style="list-style: none; display: flex; align-items: center; margin: 10px 0 0 10px">
-              <%= link_to dose_path(dose), method: :delete, data: {confirm: "Are you sure?"} do %>
-                <i class="fas fa-trash-alt" style="margin-right: 5px; font-size: 16px; color: black"></i>
-              <% end %>
-              <p  style="font-size: 18px; margin: 0"><%= "#{dose.ingredient.name}: #{dose.description}" %></p>
+          <% @cocktail.reviews.reverse[0..4].each do |review| %>
+            <li style="list-style: none; align-items: center; margin: 10px 0 0 10px">
+              <p style="font-size: 18px; margin: 0">
+                <%= ("★" * review.rating) + ("☆" * (5 - review.rating)) %>
+                <span style="font-size: 12px"><%= " #{review.created_at.strftime("%Y-%m-%d")}" %></span>
+              </p>
+              <p style="margin-left: 16px"><%= review.content %></p>
             </li>
           <% end %>
         <% end %>
       </ul>
 
-      <ul style="margin: 40px 0 10px; min-width: 450px">
-        <% if @cocktail.reviews.length == 0 %>
-          <h3>
-            Reviews
-            <%= link_to 'Add Review', new_cocktail_review_path(@cocktail), class: "btn btn-ghost", style: "margin: 0 0 3px 5px"%>
-          </h3>
-          <p style="margin-left: 10px">Be the first to leave a review!</p>
-        <% else %>
-          <h3>
-            Reviews
-            <span style="font-size: 18px"> <%= @cocktail.rating_average.round(1) %> ★</span>
-          <%= link_to 'Add Review', new_cocktail_review_path(@cocktail), class: "btn btn-ghost", style: "margin: 0 0 3px 5px"%>
-          </h3>
-          <% @cocktail.reviews.reverse[0..4].each do |review| %>
-            <li style="list-style: none; display: flex; align-items: center; margin: 10px 0 0 10px">
-              <p style="font-size: 18px; margin: 0"><%= "#{review.rating}★ #{review.content}" %></p>
-            </li>
-          <% end %>
-        <% end %>
-      </ul>
-    </div>
   </div>
 </div>

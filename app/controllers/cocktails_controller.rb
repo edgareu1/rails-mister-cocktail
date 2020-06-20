@@ -1,12 +1,13 @@
 class CocktailsController < ApplicationController
   def index
     @cocktails = Cocktail.all
-
     @cocktails_array = @cocktails.sort_by { |cocktail| - cocktail.relevance_points }
   end
 
   def show
     @cocktail = Cocktail.find(params[:id])
+    @dose = Dose.new
+    @review = Review.new
   end
 
   def new
