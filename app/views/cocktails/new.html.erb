@@ -1,8 +1,10 @@
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-8 col" style="min-width: 500px; margin: 20px">
+    <div class="col-md-8 col-lg-6" style="min-width: 500px; margin: 20px">
+
       <h1 style="margin-bottom: 20px">Create a new Cocktail</h1>
 
+      <!-- Form for a new cocktail -->
       <%= simple_form_for @cocktail do |f| %>
         <%= f.input :name %>
         <%= f.input :photo, as: :file %>
@@ -10,6 +12,7 @@
       <% end %>
 
       <%= link_to 'Back', cocktails_path, class: "btn btn-gradient", style: "margin-top: 10px" %>
+
     </div>
   </div>
 </div>
