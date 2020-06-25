@@ -67,7 +67,7 @@
       <p style="margin-left: 10px">Be the first to leave a review!</p>
     <% else %>
       <% @cocktail.reviews.reverse[0..4].each do |review| %>
-        <li style="list-style: none; align-items: center; margin: 20px 0 0 10px">
+        <li style="list-style: none; align-items: center; margin: 10px 0 0 10px">
 
           <p style="font-size: 18px; margin: 0">
             <%= ("★" * review.rating) + ("☆" * (5 - review.rating)) %>
