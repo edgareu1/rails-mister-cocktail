@@ -5,7 +5,7 @@
 
     <p>The best cocktails in a single place</p>
 
-    <%= link_to 'Add a Cocktail', new_cocktail_path, class: "btn btn-gradient" %>
+    <%= link_to "Add a Cocktail", new_cocktail_path, data: { toggle: "modal", target: "#ModalNewCocktail" }, class: "btn btn-gradient" %>
 
   </div>
 </div>
@@ -28,5 +28,20 @@
 
       </div>
     <% end %>
+  </div>
+</div>
+
+<!-- Modal Cocktail New Form -->
+<div class="modal fade" id="ModalNewCocktail" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">New Cocktail</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <%= render "cocktails/form-new" %>
+      </div>
+    </div>
   </div>
 </div>
