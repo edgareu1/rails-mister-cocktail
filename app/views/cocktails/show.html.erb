@@ -20,9 +20,11 @@
         <!-- Form for a new review -->
         <div style="padding: 8px; box-shadow: 0 0 5px 0.8px rgba(0, 0, 0, 0.3)">
           <%= simple_form_for [@cocktail, @review] do |f| %>
-            <%= f.collection_radio_buttons :rating, [[5], [4], [3], [2], [1]], :first, :last, item_wrapper_tag: false, boolean_style: :inline do |b| %>
-              <%= b.radio_button + b.label {''} %>
-            <% end %>
+            <div class="stars">
+              <%= f.collection_radio_buttons :rating, [[5], [4], [3], [2], [1]], :first, :last, item_wrapper_tag: false, boolean_style: :inline do |b| %>
+                <%= b.radio_button + b.label {''} %>
+              <% end %>
+            </div>
 
             <%= f.input :content %>
             <%= f.button :submit, class: "btn btn-ghost" %>
