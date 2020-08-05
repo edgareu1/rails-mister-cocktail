@@ -21,3 +21,14 @@
   opacity: 0.9;
   text-shadow: 1px 1px 5px rgba(0, 0, 0, 1);
 }
+
+.scroll-down {
+  position: absolute;
+  bottom: 3vh;
+  left: 5vh;
+
+  a > .fas {
+    color: white;
+    font-size: 50px;
+  }
+}

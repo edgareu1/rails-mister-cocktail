@@ -8,10 +8,16 @@
     <%= link_to "Add a Cocktail", new_cocktail_path, data: { toggle: "modal", target: "#ModalNewCocktail" }, class: "btn btn-gradient" %>
 
   </div>
+
+  <div class="scroll-down">
+    <%= link_to "#cards" do %>
+      <i class="fas fa-angle-double-down"></i>
+    <% end %>
+  </div>
 </div>
 
 <div class="container-cards">
-  <div class="cards">
+  <div id="cards">
 
     <% @cocktails_array.each do |cocktail| %>
       <%= link_to cocktail_path(cocktail) do %>
