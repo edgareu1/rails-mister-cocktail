@@ -2,13 +2,15 @@
   background-size: cover;
   background-position: center;
   padding: 150px 0;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 20px 1px rgba(160, 0, 0, 0.6);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1)), url('bar_cocktails.jpg');
+  height: 100vh;
 }
 
 .banner h1 {
   margin: 0;
   color: white;
-  text-shadow: 0px 0px 20px rgb(0, 0, 0);
+  text-shadow: 1px 1px 10px rgba(0, 0, 0, 1);
   font-size: 36px;
   font-weight: bold;
 }
@@ -16,6 +18,17 @@
 .banner p {
   font-size: 24px;
   color: white;
-  opacity: .85;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+  opacity: 0.9;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 1);
+}
+
+.scroll-down {
+  position: absolute;
+  bottom: 3vh;
+  left: 5vh;
+
+  a > .fas {
+    color: white;
+    font-size: 50px;
+  }
 }

@@ -1,0 +1,44 @@
+.container-page {
+  display: flex;
+  flex-direction: column;
+  width: 650px;
+  min-width: 650px;
+  margin: 20px 0 0;
+}
+
+.container-page-headers {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 20px 10px 10px;
+
+  h1 {
+    color: white;
+    font-weight: bold;
+  }
+
+  a {
+    color: white;
+    font-size: 30px;
+  }
+}
+
+.container-general {
+  background-color: rgba(160, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 5px;
+
+  h3, p {
+    color: white;
+  }
+}
+
+.form-group > label {
+  color: white;
+}
+
+.bar-image {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(25, 0, 0, 0.8)), url('bar-bottles.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}

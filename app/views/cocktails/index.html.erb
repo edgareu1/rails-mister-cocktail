@@ -1,32 +1,38 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url('<%= image_path 'bar_cocktails.jpg' %>');">
+<div class="banner">
   <div class="container">
 
     <h1>Le Wagon's Bar</h1>
 
-    <p>The best cocktails in a single place</p>
+    <p>World class cocktails waiting for you</p>
 
     <%= link_to "Add a Cocktail", new_cocktail_path, data: { toggle: "modal", target: "#ModalNewCocktail" }, class: "btn btn-gradient" %>
 
   </div>
+
+  <div class="scroll-down">
+    <%= link_to "#cards" do %>
+      <i class="fas fa-angle-double-down"></i>
+    <% end %>
+  </div>
 </div>
 
 <div class="container-cards">
-  <div class="cards">
+  <div id="cards">
 
     <% @cocktails_array.each do |cocktail| %>
-      <div class="card" data-aos="fade-zoom-in" data-aos-duration="500" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= cl_image_path cocktail.photo.key, height: 250, width: 250, crop: :fill %>'); min-height: 250px; min-width: 250px">
-
-        <!-- What to display about it's rating -->
-        <div>
-          <%= link_to cocktail.name, cocktail_path(cocktail) %>
-          <% if cocktail.reviews.empty? %>
-            <p>Not rated</p>
-          <% else %>
-            <p><%= cocktail.rating_average.round(1) %> ★</p>
-          <% end %>
+      <%= link_to cocktail_path(cocktail) do %>
+        <div class="card" data-aos="fade-zoom-in" data-aos-duration="400">
+          <div class="img-card" style="background-image: url('<%= cl_image_path cocktail.photo.key, height: 250, width: 250, crop: :fill %>')"></div>
+          <div class="text-card">
+            <h5><%= cocktail.name %></h5>
+            <% if cocktail.reviews.empty? %>
+              <p>Not rated</p>
+            <% else %>
+              <p><%= cocktail.rating_average.round(1) %> ★</p>
+            <% end %>
+          </div>
         </div>
-
-      </div>
+      <% end %>
     <% end %>
   </div>
 </div>
