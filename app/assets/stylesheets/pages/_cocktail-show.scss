@@ -1,0 +1,28 @@
+.container-page {
+  display: flex;
+  flex-direction: column;
+  width: 650px;
+  min-width: 650px;
+  margin: 20px 0 0;
+}
+
+.container-page-headers {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 20px 10px 10px;
+
+  h1 {
+    color: rgba(160, 0, 0, 0.8);
+    font-weight: bold;
+  }
+
+  a {
+    color: rgba(160, 0, 0, 0.8);
+    font-size: 30px;
+  }
+}
+
+.container-general {
+  background-color: rgba(160, 0, 0, 0.8);
+  padding: 10px;
+}
