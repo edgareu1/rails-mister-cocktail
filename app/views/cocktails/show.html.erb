@@ -1,4 +1,4 @@
-<div class="row justify-content-center">
+<div class="row justify-content-center bar-image">
   <div class="container-page">
     <div class="container-page-headers">
       <h1><%= @cocktail.name %></h1>
@@ -10,7 +10,7 @@
 
     <div style="display: flex">
       <!-- Cocktail Image -->
-      <div style="background-image: url('<%= cl_image_path @cocktail.photo.key, height: 380, width: 380, crop: :fill %>'); min-height: 380px; min-width: 380px; padding: 0"></div>
+      <div style="background-image: url('<%= cl_image_path @cocktail.photo.key, height: 380, width: 380, crop: :fill %>'); min-height: 380px; min-width: 380px; padding: 0; border-radius: 2px"></div>
 
       <!-- Form for Review Creation -->
       <div class="container-general" style="margin-left: 20px">
@@ -38,7 +38,7 @@
     </div>
 
     <div class="container-general" style="margin: 20px 0; display: flex">
-      <ul style="min-width: 380px">
+      <ul style="min-width: 400px">
         <h3>Recipe</h3>
 
         <!-- Display the ingredients -->
@@ -66,7 +66,7 @@
       </div>
     </div>
 
-    <ul class="container-general" style="margin: 0 0 10px 0; min-width: 270px">
+    <ul class="container-general" style="margin: 0 0 10px 0; padding-left: 20px">
       <h3>Reviews</h3>
 
       <!-- Display the reviews -->
@@ -75,11 +75,11 @@
       <% else %>
         <% @cocktail.reviews.reverse[0..4].each do |review| %>
           <li style="list-style: none; align-items: center; margin: 10px 0 0 10px">
-            <p style="font-size: 18px; margin: 0">
+            <p style="font-size: 20px; margin: 0">
               <%= ("★" * review.rating) + ("☆" * (5 - review.rating)) %>
-              <span style="font-size: 12px"><%= " #{review.created_at.strftime("%Y-%m-%d")}" %></span>
+              <span style="font-size: 14px"><%= " #{review.created_at.strftime("%Y-%m-%d")}" %></span>
             </p>
-            <p style="margin-left: 16px"><%= review.content %></p>
+            <p style="margin-left: 15px"><%= review.content %></p>
           </li>
         <% end %>
       <% end %>
