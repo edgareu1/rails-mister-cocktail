@@ -3,6 +3,7 @@
   padding-left: 10px;
   overflow: hidden;
   width: 100%;
+  margin-bottom: 10px;
 }
 
 .stars input[type=radio] {
@@ -28,7 +29,7 @@
   content: "\f005";
   font-family: FontAwesome;
   font-size: 24px;
-  color: rgb(80, 80, 80);
+  color: white;
 }
 
 .stars input[type=radio]:first-child + label {}
@@ -38,9 +39,9 @@
 
 .stars label:hover:after,
 .stars label:hover ~ label:after {
-  color: rgb(255, 94, 0) !important;
+  color: gold !important;
 }
 
 .stars input[type=radio]:checked ~ label:after {
-  color: rgb(255, 94, 0);
+  color: gold;
 }

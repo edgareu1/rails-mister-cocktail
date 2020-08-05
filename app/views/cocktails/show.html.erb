@@ -13,7 +13,15 @@
       <div style="background-image: url('<%= cl_image_path @cocktail.photo.key, height: 380, width: 380, crop: :fill %>'); min-height: 380px; min-width: 380px; padding: 0"></div>
 
       <!-- Form for Review Creation -->
-      <div class="container-general" style="margin-left: 20px; width: 290">
+      <div class="container-general" style="margin-left: 20px">
+        <div>
+          <p>Difficulty: 7/10</p>
+          <p>Rating: 4.3</p>
+          <p>Reviews: 123</p>
+        </div>
+
+        <hr style="border: 1px solid white; margin: 25px 0">
+
         <h3>Add Review</h3>
 
         <%= simple_form_for [@cocktail, @review] do |f| %>
@@ -23,24 +31,24 @@
             <% end %>
           </div>
 
-          <%= f.input :content %>
+          <%= f.input :content, label: false %>
           <%= f.button :submit, class: "btn btn-ghost" %>
         <% end %>
       </div>
     </div>
 
-    <div style="margin: 20px 0; display: flex">
-      <ul class="container-general" style="min-width: 400px">
+    <div class="container-general" style="margin: 20px 0; display: flex">
+      <ul style="min-width: 380px">
         <h3>Recipe</h3>
 
         <!-- Display the ingredients -->
         <% if @cocktail.doses.length == 0 %>
-          <p style="margin-left: 10px">No recipe for it yet...</p>
+          <p style="margin-left: 10px">No recipe yet...</p>
         <% else %>
           <% @cocktail.doses.each do |dose| %>
             <li style="list-style: none; display: flex; align-items: center; margin: 10px 0 0 10px">
               <%= link_to dose_path(dose), method: :delete, data: {confirm: "Are you sure?"} do %>
-                <i class="fas fa-trash-alt" style="margin-right: 5px; font-size: 16px; color: black"></i>
+                <i class="fas fa-trash-alt" style="margin-right: 5px; font-size: 16px; color: white"></i>
               <% end %>
               <p style="font-size: 18px; margin: 0"><%= "#{dose.ingredient.name}: #{dose.description}" %></p>
             </li>
@@ -48,7 +56,8 @@
         <% end %>
       </ul>
 
-      <div class="container-general" style="min-width: 250px">
+      <!-- Form for Ingredient Creation -->
+      <div style="min-width: 230px">
         <%= simple_form_for [@cocktail, @dose] do |f| %>
           <%= f.association :ingredient %>
           <%= f.input :description %>
