@@ -1,4 +1,4 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url('<%= image_path 'bar_cocktails.jpg' %>');">
+<div class="banner" style="background-image: url('<%= image_path 'bar_cocktails.jpg' %>');">
   <div class="container">
 
     <h1>Le Wagon's Bar</h1>
@@ -14,7 +14,7 @@
   <div class="cards">
 
     <% @cocktails_array.each do |cocktail| %>
-      <div class="card" data-aos="fade-zoom-in" data-aos-duration="500" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= cl_image_path cocktail.photo.key, height: 250, width: 250, crop: :fill %>'); min-height: 250px; min-width: 250px">
+      <div class="card" data-aos="fade-zoom-in" data-aos-duration="400" style="background-image: url('<%= cl_image_path cocktail.photo.key, height: 250, width: 250, crop: :fill %>')">
 
         <!-- What to display about it's rating -->
         <div>
