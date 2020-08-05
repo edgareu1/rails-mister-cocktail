@@ -1,0 +1,19 @@
+.modal {
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  transform: translate(-50%, -50%);
+}
+
+.modal-content {
+  background-color: rgba(25, 0, 0, 0.9);
+  color: white
+}
+
+.close {
+  color: white;
+
+  &:hover {
+    color: white;
+  }
+}
