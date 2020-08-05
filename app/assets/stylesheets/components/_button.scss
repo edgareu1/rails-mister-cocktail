@@ -2,15 +2,14 @@
   color: white;
   padding: 6px 12px;
   border-radius: 5px;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.25);
   font-weight: bold;
-  background: linear-gradient(#247bdf, #0c4d9c);
+  background: linear-gradient(rgba(160, 0, 0, 1), rgba(140, 0, 0, 0.5));
   transition: background 0.3s ease;
-  border: 1px solid #0F60C4;
 }
   
 .btn-gradient:hover {
-  background: linear-gradient(#348dfb, #0e3970);
+  background: linear-gradient(rgba(190, 0, 0, 1), rgba(150, 0, 0, 0.8));
   color: white;
 }
 
