@@ -14,19 +14,19 @@
   <div class="cards">
 
     <% @cocktails_array.each do |cocktail| %>
-      <div class="card" data-aos="fade-zoom-in" data-aos-duration="400" style="background-image: url('<%= cl_image_path cocktail.photo.key, height: 250, width: 250, crop: :fill %>')">
-
-        <!-- What to display about it's rating -->
-        <div>
-          <%= link_to cocktail.name, cocktail_path(cocktail) %>
-          <% if cocktail.reviews.empty? %>
-            <p>Not rated</p>
-          <% else %>
-            <p><%= cocktail.rating_average.round(1) %> ★</p>
-          <% end %>
+      <%= link_to cocktail_path(cocktail) do %>
+        <div class="card" data-aos="fade-zoom-in" data-aos-duration="400">
+          <div class="img-card" style="background-image: url('<%= cl_image_path cocktail.photo.key, height: 250, width: 250, crop: :fill %>')"></div>
+          <div class="text-card">
+            <h5><%= cocktail.name %></h5>
+            <% if cocktail.reviews.empty? %>
+              <p>Not rated</p>
+            <% else %>
+              <p><%= cocktail.rating_average.round(1) %> ★</p>
+            <% end %>
+          </div>
         </div>
-
-      </div>
+      <% end %>
     <% end %>
   </div>
 </div>

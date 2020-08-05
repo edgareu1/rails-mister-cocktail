@@ -5,40 +5,70 @@
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-gap: 18px;
+  grid-gap: 20px;
   margin: 20px 10px;
   justify-items: center;
 }
 
 .card {
+  height: 250px;
+  width: 250px;
+  min-height: 250px;
+  min-width: 250px;
+
+  position: relative;
+  align-items: center;
+  justify-content: space-around;
+
+  background-color: rgba(15, 0, 0, 1);
+  border-radius: 3px;
+  box-shadow: 0 0 15px 1px rgba(50, 0, 0, 0.35);
+
+  transition: 0.2s ease;
+}
+
+.img-card {
+  height: 250px;
+  width: 250px;
+  min-height: 250px;
+  min-width: 250px;
+
+  position: absolute;
   background-size: cover;
   background-position: center;
-  border-radius: 2px;
-  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.3);
-  justify-content: space-around;
-  text-justify: center;
+
+  opacity: 0.9;
+  border-radius: 3px;
+}
+
+.text-card {
+  position: absolute;
   text-align: center;
-  padding: 10px;
-  min-height: 250px;
-  min-width: 250px
+
+  h5, p {
+    color: white;
+    opacity: 0;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+  }
+
+  h5 {
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  p {
+    font-size: 16px;
+  }
 }
 
-.card > div > a {
-  color: rgba(255, 255, 255, 0.8);
-  text-shadow: 0 0 1px rgba(0,0,0,0.4);
-  font-size: 24px;
-  font-weight: bold;
-  transition: 0.1s ease;
-}
-
-.card > div > a:hover {
-  color: white;
+a:hover {
   text-decoration: none;
-}
 
-.card > div > p {
-  color: rgba(255, 255, 255, 0.85);
-  text-shadow: 0 0 1px rgba(0,0,0,0.4);
-  font-size: 20px;
-  font-weight: bold;
+  .img-card {
+    opacity: 0.4;
+  }
+
+  h5, p {
+    opacity: 1;
+  }
 }
