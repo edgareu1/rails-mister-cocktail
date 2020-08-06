@@ -9,13 +9,8 @@ class Cocktail < ApplicationRecord
   has_one_attached :photo
 
   def rating_average
-    count = 0
-    sum = 0
-    reviews.each do |review|
-      sum += review["rating"]
-      count += 1
-    end
-    sum.to_f / count
+    sum_ratings = reviews.reduce(0) { |sum, review| sum + review["rating"] }
+    sum_ratings.fdiv(reviews.size)
   end
 
   # Relevance points has a positive relationship with both the average rating and the number of
