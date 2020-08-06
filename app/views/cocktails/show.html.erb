@@ -15,9 +15,9 @@
       <!-- Form for Review Creation -->
       <div class="container-general" style="margin-left: 20px">
         <div>
-          <p>Difficulty: 7/10</p>
-          <p>Rating: 4.3</p>
-          <p>Reviews: 123</p>
+          <p>Difficulty: <%= @cocktail.difficulty %></p>
+          <p>Rating: <%= @cocktail.reviews.empty? ? "NA" : @cocktail.rating_average.round(1) %></p>
+          <p>Reviews: <%= @cocktail.reviews.size %></p>
         </div>
 
         <hr style="border: 1px solid white; margin: 25px 0">
@@ -69,11 +69,11 @@
     <ul class="container-general" style="margin: 0 0 10px 0; padding-left: 20px">
       <h3>Reviews</h3>
 
-      <!-- Display the reviews -->
+      <!-- Display the last 5 reviews -->
       <% if @cocktail.reviews.length == 0 %>
         <p style="margin-left: 10px">Be the first to leave a review!</p>
       <% else %>
-        <% @cocktail.reviews.reverse[0..4].each do |review| %>
+        <% @cocktail.reviews.last(5).reverse.each do |review| %>
           <li style="list-style: none; align-items: center; margin: 10px 0 0 10px">
             <p style="font-size: 20px; margin: 0">
               <%= ("★" * review.rating) + ("☆" * (5 - review.rating)) %>
