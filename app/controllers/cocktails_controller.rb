@@ -17,7 +17,9 @@ class CocktailsController < ApplicationController
     if @cocktail.save
       redirect_to cocktail_path(@cocktail)
     else
-      redirect_to cocktails_path
+      @cocktails = Cocktail.all
+      @cocktails_sorted = cocktails_sorter(@cocktails)
+      render 'cocktails/index'
     end
   end
 
