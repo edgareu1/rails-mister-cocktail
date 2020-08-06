@@ -16,7 +16,17 @@ class Cocktail < ApplicationRecord
   # Relevance points has a positive relationship with both the average rating and the number of
   # reviews; the number of reviews has a decreasing relevance
   def relevance_points
-    size = reviews.size
-    rating_average.nan? ? 0 : (size * rating_average) / (size ** 0.67)
+    num_reviews = reviews.size
+    rating_average.nan? ? 0 : (num_reviews * rating_average) / (num_reviews ** 0.67)
+  end
+
+  # Difficulty level based on the number of ingredients it has
+  def difficulty
+    case doses.size
+    when 0 then "NA"
+    when 1..3 then "Low"
+    when 4..6 then "Medium"
+    else "High"
+    end
   end
 end
