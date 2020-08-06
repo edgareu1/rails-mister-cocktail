@@ -57,3 +57,7 @@ gem 'dotenv-rails', groups: [:development, :test]
 
 # Cloudinary & Environment
 gem 'cloudinary', '~> 1.12.0'
+
+# Pagination
+gem 'will_paginate', '~> 3.3.0'
+gem 'will_paginate-bootstrap4'
