@@ -1,8 +1,10 @@
+require 'will_paginate/array'
+
 class CocktailsController < ApplicationController
   def index
     @cocktail = Cocktail.new
     @cocktails = Cocktail.all
-    @cocktails_sorted = cocktails_sorter(@cocktails)
+    @cocktails_sorted = cocktails_sorter(@cocktails).paginate(page: params[:page], per_page: 12)
   end
 
   def show
