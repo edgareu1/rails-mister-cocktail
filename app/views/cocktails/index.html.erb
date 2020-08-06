@@ -7,14 +7,21 @@
   </div>
 
   <div class="scroll-down">
-    <%= link_to "#cards" do %>
+    <%= link_to "#container-cards" do %>
       <i class="fas fa-angle-double-down"></i>
     <% end %>
   </div>
 </div>
 
-<div class="container-cards">
-  <div id="cards">
+<div id="container-cards">
+  <div class="sorter">
+    <i class="fas fa-sort-amount-down"></i>
+    <%= link_to "Rating", cocktails_path(sorty_by: "relevance", anchor: "container-cards") %>
+    <%= link_to "Popularity", cocktails_path(sorty_by: "popularity", anchor: "container-cards") %>
+    <%= link_to "Ingredients", data: { toggle: "modal", target: "#ModalSortByIngredients" }, class: "btn btn-gradient" %>
+  </div>
+
+  <div class="cards">
     <% @cocktails_sorted.each do |cocktail| %>
       <%= link_to cocktail_path(cocktail) do %>
         <div class="card" data-aos="fade-zoom-in" data-aos-duration="400">
