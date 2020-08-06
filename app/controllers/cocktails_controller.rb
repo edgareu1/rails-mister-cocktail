@@ -1,14 +1,14 @@
 class CocktailsController < ApplicationController
   def index
-    @cocktails = Cocktail.all
-    @cocktails_array = @cocktails.sort_by { |cocktail| - cocktail.relevance_points }
     @cocktail = Cocktail.new
+    @cocktails = Cocktail.all
+    @cocktails_sorted = cocktails_sorter(@cocktails)
   end
 
   def show
     @cocktail = Cocktail.find(params[:id])
-    @dose = Dose.new
     @review = Review.new
+    @dose = Dose.new
   end
 
   def create
@@ -17,11 +17,15 @@ class CocktailsController < ApplicationController
     if @cocktail.save
       redirect_to cocktail_path(@cocktail)
     else
-      render :index
+      redirect_to cocktails_path
     end
   end
 
   private
+
+  def cocktails_sorter(cocktails)
+    cocktails.sort_by { |cocktail| - cocktail.relevance_points }
+  end
 
   def cocktail_params
     params.require(:cocktail).permit(:name, :photo)
