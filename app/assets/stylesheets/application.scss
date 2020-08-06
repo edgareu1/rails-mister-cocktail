@@ -15,3 +15,11 @@
 ul {
   padding-left: 10px;
 }
+
+body {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(25, 0, 0, 0.8)), url('bar-bottles.jpg');
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
