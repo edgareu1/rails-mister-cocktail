@@ -59,7 +59,7 @@
       <!-- Form for Ingredient Creation -->
       <div style="min-width: 230px">
         <%= simple_form_for [@cocktail, @dose] do |f| %>
-          <%= f.association :ingredient %>
+          <%= f.association :ingredient, collection: Ingredient.order('name ASC') %>
           <%= f.input :description %>
           <%= f.button :submit, class: "btn btn-ghost" %>
         <% end %>
