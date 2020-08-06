@@ -18,11 +18,10 @@ class Cocktail < ApplicationRecord
     sum.to_f / count
   end
 
+  # Relevance points has a positive relationship with both the average rating and the number of
+  # reviews; the number of reviews has a decreasing relevance
   def relevance_points
-    if rating_average.nan?
-      return 0
-    else
-      (reviews.size * rating_average) / ( reviews.size ** 0.5 )
-    end
+    size = reviews.size
+    rating_average.nan? ? 0 : (size * rating_average) / (size ** 0.67)
   end
 end
