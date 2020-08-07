@@ -40,11 +40,11 @@ class CocktailsController < ApplicationController
   private
 
   def cocktails_sorter(cocktails)
-    # Sorting by popularity takes into account the cocktail's number of reviews
-    if params[:sort_by] == "popularity"
-      return cocktails.sort_by { |cocktail| - cocktail.reviews.size }
+    # Sorting by the cocktails name
+    if params[:sort_by] == "abc"
+      return cocktails.sort_by { |cocktail| cocktail.name.downcase }
 
-    # Sorting by filter takes into account the ingredient list selected by the user
+    # Sorting by the filter selected by the user
     elsif params[:sort_by] == "Filter" && !params[:ingredients].nil?
       # Only cocktails with ingredients should be displayed
       relevant_cocktails = cocktails.reject { |cocktail| cocktail.ingredients.empty? }
