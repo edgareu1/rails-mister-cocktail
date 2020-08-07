@@ -61,3 +61,6 @@ gem 'cloudinary', '~> 1.12.0'
 # Pagination
 gem 'will_paginate', '~> 3.3.0'
 gem 'will_paginate-bootstrap4'
+
+# Search bar
+gem 'pg_search', '~> 2.3.0'
