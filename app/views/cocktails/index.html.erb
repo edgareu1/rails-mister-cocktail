@@ -15,6 +15,15 @@
 
 <div id="container-cards">
   <div class="sorter">
+    <%= form_tag cocktails_path(anchor: "container-cards"), method: :get do %>
+      <%= text_field_tag :query,
+        params[:query],
+        class: "form-control",
+        placeholder: "Cocktail name"
+      %>
+      <%= submit_tag "Search" %>
+    <% end %>
+
     <%= link_to cocktails_path(sorty_by: "rating", anchor: "container-cards") do %>
       <i class="fas fa-sort-amount-down"></i>
     <% end %>
