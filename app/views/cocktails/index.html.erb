@@ -15,18 +15,11 @@
 
 <div id="container-cards">
   <div class="sorter">
-    <%= form_tag cocktails_path(anchor: "container-cards"), method: :get do %>
-      <%= text_field_tag :query,
-        params[:query],
-        class: "form-control",
-        placeholder: "Cocktail name"
-      %>
-      <%= submit_tag "Search" %>
-    <% end %>
+    <form action="/cocktails#container-cards" accept-charset="UTF-8" method="get">
+      <input type="text" name="query" id="query" class="form-control" placeholder="Cocktail name">
+      <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
 
-    <%= link_to cocktails_path(sorty_by: "rating", anchor: "container-cards") do %>
-      <i class="fas fa-sort-amount-down"></i>
-    <% end %>
     <%= link_to "Rating", cocktails_path(sort_by: "rating", anchor: "container-cards") %>
     <%= link_to "Popularity", cocktails_path(sort_by: "popularity", anchor: "container-cards") %>
     <%= link_to "Ingredients", cocktails_path(sort_by: "ingredients", anchor: "container-cards"), data: { toggle: "modal", target: "#ModalCocktailsFilter" } %>
