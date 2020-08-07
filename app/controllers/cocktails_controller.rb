@@ -5,6 +5,8 @@ class CocktailsController < ApplicationController
     @cocktail = Cocktail.new
     @cocktails = Cocktail.all
     @cocktails_sorted = cocktails_sorter(@cocktails).paginate(page: params[:page], per_page: 12)
+
+    @ingredients = Ingredient.all.sort_by(&:name)
   end
 
   def show
@@ -20,7 +22,8 @@ class CocktailsController < ApplicationController
       redirect_to cocktail_path(@cocktail)
     else
       @cocktails = Cocktail.all
-      @cocktails_sorted = cocktails_sorter(@cocktails)
+      @cocktails_sorted = cocktails_sorter(@cocktails).paginate(page: params[:page], per_page: 12)
+
       render 'cocktails/index'
     end
   end
@@ -28,7 +31,41 @@ class CocktailsController < ApplicationController
   private
 
   def cocktails_sorter(cocktails)
-    cocktails.sort_by { |cocktail| - cocktail.relevance_points }
+    # Only cocktails with ingredients will be displayed
+    relevant_cocktails = cocktails.reject { |cocktail| cocktail.ingredients.empty? }
+
+    # Sorting by popularity takes into account the cocktail's number of reviews
+    if params[:sort_by] == "popularity"
+      return relevant_cocktails.sort_by { |cocktail| - cocktail.reviews.size }
+
+    # Sorting by filter takes into account the ingredient list selected by the user
+    elsif params[:sort_by] == "Filter" && !params[:ingredients].nil?
+      # The cocktails will first be sorted based on the number of ingredients in common with the
+      # user's list and then sorted by ranking
+      relevant_cocktails.map! do |cocktail|
+        [
+          - cocktail.ingredients.count { |ingredient| params[:ingredients].include?(ingredient.name) },
+          - cocktail.rating_points,
+          cocktail
+        ]
+      end
+
+      # If the user selects the "only_this" option the cocktails that contain other ingredients
+      # will be rejected
+      if params[:only_this] == "1"
+        relevant_cocktails.select! { |cocktail| - cocktail.first == cocktail.last.ingredients.size }
+
+      # Nonetheless, even if the option is not selected, it should contain at least one match
+      else
+        relevant_cocktails.select! { |cocktail| - cocktail.first >= 1 }
+      end
+
+      return relevant_cocktails.sort.map(&:last)
+    end
+
+    # By default cocktails are sorted by ranking; If the user chooses to filter by ingredients but
+    # does not select any, the sorting will also be done by ranking
+    return relevant_cocktails.sort_by { |cocktail| - cocktail.rating_points }
   end
 
   def cocktail_params

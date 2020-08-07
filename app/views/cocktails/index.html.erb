@@ -3,18 +3,27 @@
     <h1>Le Wagon's Bar</h1>
     <p>World class cocktails waiting for you</p>
 
-    <%= link_to "Add a Cocktail", new_cocktail_path, data: { toggle: "modal", target: "#ModalNewCocktail" }, class: "btn btn-gradient" %>
+    <%= link_to "New Cocktail", new_cocktail_path, data: { toggle: "modal", target: "#ModalNewCocktail" }, class: "btn btn-gradient" %>
   </div>
 
   <div class="scroll-down">
-    <%= link_to "#cards" do %>
+    <%= link_to "#container-cards" do %>
       <i class="fas fa-angle-double-down"></i>
     <% end %>
   </div>
 </div>
 
-<div class="container-cards">
-  <div id="cards">
+<div id="container-cards">
+  <div class="sorter">
+    <%= link_to cocktails_path(sorty_by: "rating", anchor: "container-cards") do %>
+      <i class="fas fa-sort-amount-down"></i>
+    <% end %>
+    <%= link_to "Rating", cocktails_path(sort_by: "rating", anchor: "container-cards") %>
+    <%= link_to "Popularity", cocktails_path(sort_by: "popularity", anchor: "container-cards") %>
+    <%= link_to "Ingredients", cocktails_path(sort_by: "ingredients", anchor: "container-cards"), data: { toggle: "modal", target: "#ModalCocktailsFilter" } %>
+  </div>
+
+  <div class="cards">
     <% @cocktails_sorted.each do |cocktail| %>
       <%= link_to cocktail_path(cocktail) do %>
         <div class="card" data-aos="fade-zoom-in" data-aos-duration="400">
@@ -50,6 +59,22 @@
 
       <div class="modal-body">
         <%= render "cocktails/form-new" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Ingredients Filter -->
+<div class="modal fade" id="ModalCocktailsFilter" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Ingredients Filter</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <%= render "cocktails/form-fridge-filter" %>
       </div>
     </div>
   </div>

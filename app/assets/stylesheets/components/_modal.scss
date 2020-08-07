@@ -1,8 +1,9 @@
 .modal {
-  position: absolute;
-  left: 50%;
-  top: 60%;
-  transform: translate(-50%, -50%);
+  margin-top: 15vh;
+}
+
+.modal-dialog {
+  max-width: 450px;
 }
 
 .modal-content {
@@ -21,4 +22,14 @@
 
 .modal-backdrop {
     opacity: 0.65 !important;
+}
+
+#ModalCocktailsFilter > .modal-dialog {
+  max-width: 320px;
+
+  .btn-ghost {
+    position: absolute;
+    bottom: 20px;
+    margin-left: 20px;
+  }
 }
