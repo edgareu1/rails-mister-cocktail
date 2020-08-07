@@ -8,6 +8,13 @@ class Cocktail < ApplicationRecord
 
   has_one_attached :photo
 
+  include PgSearch::Model
+  pg_search_scope :search_by_name,
+    against: [:name],
+    using: {
+      tsearch: { prefix: true } # Search by incomplete words
+    }
+
   def rating_average
     sum_ratings = reviews.reduce(0) { |sum, review| sum + review["rating"] }
     sum_ratings.fdiv(reviews.size)
