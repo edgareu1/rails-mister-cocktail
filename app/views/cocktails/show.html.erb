@@ -3,7 +3,7 @@
     <div class="container-page-headers">
       <h1><%= @cocktail.name %></h1>
 
-      <%= link_to cocktails_path do %>
+      <%= link_to cocktails_path(anchor: "container-cards") do %>
         <i class="fas fa-undo-alt"></i>
       <% end %>
     </div>
