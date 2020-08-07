@@ -3,10 +3,14 @@ require 'will_paginate/array'
 class CocktailsController < ApplicationController
   def index
     @cocktail = Cocktail.new
-    @cocktails = Cocktail.all
-    @cocktails_sorted = cocktails_sorter(@cocktails).paginate(page: params[:page], per_page: 12)
-
     @ingredients = Ingredient.all.sort_by(&:name)
+
+    if params[:query].present?
+      @cocktails_sorted = Cocktail.search_by_name(params[:query]).paginate(page: params[:page], per_page: 12)
+    else
+      @cocktails = Cocktail.all
+      @cocktails_sorted = cocktails_sorter(@cocktails).paginate(page: params[:page], per_page: 12)
+    end
   end
 
   def show
@@ -21,8 +25,12 @@ class CocktailsController < ApplicationController
     if @cocktail.save
       redirect_to cocktail_path(@cocktail)
     else
-      @cocktails = Cocktail.all
-      @cocktails_sorted = cocktails_sorter(@cocktails).paginate(page: params[:page], per_page: 12)
+      if params[:query].present?
+        @cocktails_sorted = Cocktail.search_by_name(params[:query]).paginate(page: params[:page], per_page: 12)
+      else
+        @cocktails = Cocktail.all
+        @cocktails_sorted = cocktails_sorter(@cocktails).paginate(page: params[:page], per_page: 12)
+      end
 
       render 'cocktails/index'
     end
