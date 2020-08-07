@@ -5,6 +5,8 @@ class CocktailsController < ApplicationController
     @cocktail = Cocktail.new
     @cocktails = Cocktail.all
     @cocktails_sorted = cocktails_sorter(@cocktails).paginate(page: params[:page], per_page: 12)
+
+    @ingredients = Ingredient.all.sort_by(&:name)
   end
 
   def show

@@ -20,7 +20,7 @@
     <% end %>
     <%= link_to "Rating", cocktails_path(sorty_by: "relevance", anchor: "container-cards") %>
     <%= link_to "Popularity", cocktails_path(sorty_by: "popularity", anchor: "container-cards") %>
-    <%= link_to "Ingredients", data: { toggle: "modal", target: "#ModalSortByIngredients" }, class: "btn btn-gradient" %>
+    <%= link_to "Ingredients", cocktails_path(sorty_by: "ingredients", anchor: "container-cards"), data: { toggle: "modal", target: "#ModalFridgeFilter" } %>
   </div>
 
   <div class="cards">
@@ -59,6 +59,22 @@
 
       <div class="modal-body">
         <%= render "cocktails/form-new" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Ingredients Filter -->
+<div class="modal fade" id="ModalFridgeFilter" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Fridge Filter</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <%= render "cocktails/form-fridge-filter" %>
       </div>
     </div>
   </div>
