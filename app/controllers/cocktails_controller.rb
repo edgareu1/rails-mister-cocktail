@@ -20,7 +20,7 @@ class CocktailsController < ApplicationController
       redirect_to cocktail_path(@cocktail)
     else
       @cocktails = Cocktail.all
-      @cocktails_sorted = cocktails_sorter(@cocktails)
+      @cocktails_sorted = cocktails_sorter(@cocktails).paginate(page: params[:page], per_page: 12)
       render 'cocktails/index'
     end
   end

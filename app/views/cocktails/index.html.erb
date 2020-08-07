@@ -15,7 +15,9 @@
 
 <div id="container-cards">
   <div class="sorter">
-    <i class="fas fa-sort-amount-down"></i>
+    <%= link_to cocktails_path(sorty_by: "relevance", anchor: "container-cards") do %>
+      <i class="fas fa-sort-amount-down"></i>
+    <% end %>
     <%= link_to "Rating", cocktails_path(sorty_by: "relevance", anchor: "container-cards") %>
     <%= link_to "Popularity", cocktails_path(sorty_by: "popularity", anchor: "container-cards") %>
     <%= link_to "Ingredients", data: { toggle: "modal", target: "#ModalSortByIngredients" }, class: "btn btn-gradient" %>
