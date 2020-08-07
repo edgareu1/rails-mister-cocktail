@@ -45,9 +45,7 @@
     <% end %>
   </div>
 
-  <div style="margin-left: 20px">
-    <%= will_paginate @cocktails_sorted, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, previous_label: "&laquo;", next_label: "&raquo;" %>
-  </div>
+  <%= will_paginate @cocktails_sorted, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, previous_label: "&laquo;", next_label: "&raquo;" %>
 </div>
 
 <!-- Modal Cocktail New Form -->
