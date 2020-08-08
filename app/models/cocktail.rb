@@ -3,6 +3,7 @@ class Cocktail < ApplicationRecord
   validates :photo, presence: true
 
   belongs_to :category
+  belongs_to :glass
 
   has_many :doses, dependent: :destroy
   has_many :reviews, dependent: :destroy
