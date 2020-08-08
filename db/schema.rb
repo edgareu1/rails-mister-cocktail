@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_08_120743) do
+ActiveRecord::Schema.define(version: 2020_08_08_121345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 2020_08_08_120743) do
     t.string "instructions", default: [], array: true
     t.bigint "category_id", null: false
     t.bigint "glass_id", null: false
+    t.boolean "editable", default: true
     t.index ["category_id"], name: "index_cocktails_on_category_id"
     t.index ["glass_id"], name: "index_cocktails_on_glass_id"
   end
