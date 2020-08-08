@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_08_114507) do
+ActiveRecord::Schema.define(version: 2020_08_08_115000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(version: 2020_08_08_114507) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "alcoholic"
     t.string "instructions", default: [], array: true
+    t.bigint "category_id", null: false
+    t.index ["category_id"], name: "index_cocktails_on_category_id"
   end
 
   create_table "doses", force: :cascade do |t|
@@ -76,6 +78,7 @@ ActiveRecord::Schema.define(version: 2020_08_08_114507) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "cocktails", "categories"
   add_foreign_key "doses", "cocktails"
   add_foreign_key "doses", "ingredients"
   add_foreign_key "reviews", "cocktails"
