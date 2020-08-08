@@ -31,6 +31,11 @@ to_populate = [
 
 puts "Creating..."
 
+[Category, Glass].each do |table|
+  table.create(name: "NA")
+  puts "Created default #{Category.name.downcase}"
+end
+
 to_populate.each do |table|
   url = "https://www.thecocktaildb.com/api/json/v1/1/list.php?#{table[:class].name.first.downcase}=list"
   html_file = open(url).read

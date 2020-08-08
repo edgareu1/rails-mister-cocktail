@@ -23,15 +23,22 @@ class CocktailsController < ApplicationController
   def create
     @cocktail = Cocktail.new(cocktail_params)
 
+    # Provide the default values for Category and Glass
+    @cocktail.category = Category.first if @cocktail.category.nil?
+    @cocktail.glass = Glass.first if @cocktail.glass.nil?
+
     if @cocktail.save
       redirect_to cocktail_path(@cocktail)
     else
+      @ingredients = Ingredient.all.sort_by(&:name)
+
       if params[:query].present?
-        @cocktails_sorted = Cocktail.search_by_name(params[:query]).paginate(page: params[:page], per_page: 12)
+        @cocktails_sorted = Cocktail.search_by_name(params[:query])
       else
-        @cocktails = Cocktail.all
-        @cocktails_sorted = cocktails_sorter(@cocktails).paginate(page: params[:page], per_page: 12)
+        @cocktails_sorted = cocktails_sorter(Cocktail.all)
       end
+
+      @cocktails_sorted = @cocktails_sorted.paginate(page: params[:page], per_page: 12)
 
       render 'cocktails/index'
     end
