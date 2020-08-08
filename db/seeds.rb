@@ -1,7 +1,16 @@
 require 'json'
 require 'open-uri'
 
-puts "Preparing..."
+puts "Destroying existing DB..."
+
+Category.destroy_all
+Cocktail.destroy_all
+Dose.destroy_all
+Glass.destroy_all
+Ingredient.destroy_all
+Review.destroy_all
+
+puts "Preparing to create..."
 
 to_populate = [
   {
