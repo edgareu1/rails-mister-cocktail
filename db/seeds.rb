@@ -60,6 +60,7 @@ end
   cocktail.alcoholic = cocktail_data['strAlcoholic']
   cocktail.editable = false
   cocktail.photo.attach(io: image, filename: 'nes.png', content_type: 'image/png')
+  cocktail.instructions = cocktail_data['strInstructions']
 
   cocktail.save
 
