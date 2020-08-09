@@ -1,10 +1,25 @@
 <%= simple_form_for @cocktail do |f| %>
-  <%= f.input :name, placeholder: "Please insert" %>
-  <%= f.input :alcoholic, prompt: "Please select", default: "Optional",
-    collection: ['Optional', 'Yes', 'No']
-  %>
-  <%= f.association :category, label_method: :name, default: "NA" %>
-  <%= f.association :glass, label_method: :name, default: "NA" %>
+  <table style="width: 95%">
+    <tr>
+      <td><label class="string required" for="cocktail_name">Name <abbr title="required">*</abbr></label></td>
+      <td><%= f.input :name, placeholder: "Please insert", label: false %></td>
+    </tr>
+    <tr>
+      <td><label class="select optional" for="cocktail_alcoholic">Alcoholic</label></td>
+      <td><%= f.input :alcoholic, prompt: "Please select", label: false, default: "Optional",
+        collection: ['Optional', 'Yes', 'No']
+      %></td>
+    </tr>
+    <tr>
+      <td><label class="select required" for="cocktail_category_id">Category</label></td>
+      <td><%= f.association :category, label_method: :name, label: false, default: "NA" %></td>
+    </tr>
+    <tr>
+      <td><label class="select required" for="cocktail_glass_id">Glass</label></td>
+      <td><%= f.association :glass, label_method: :name, label: false, default: "NA" %></td>
+    </tr>
+  </table>
+
   <%= f.input :photo, as: :file %>
   <%= f.button :submit, class: "btn btn-ghost" %>
 <% end %>
