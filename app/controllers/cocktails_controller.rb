@@ -23,10 +23,6 @@ class CocktailsController < ApplicationController
   def create
     @cocktail = Cocktail.new(cocktail_params)
 
-    # Provide the default values for Category and Glass
-    @cocktail.category = Category.first if @cocktail.category.nil?
-    @cocktail.glass = Glass.first if @cocktail.glass.nil?
-
     if @cocktail.save
       redirect_to cocktail_path(@cocktail)
     else
@@ -85,6 +81,6 @@ class CocktailsController < ApplicationController
   end
 
   def cocktail_params
-    params.require(:cocktail).permit(:name, :photo)
+    params.require(:cocktail).permit(:name, :category_id, :glass_id, :alcoholic, :photo)
   end
 end
