@@ -1,5 +1,6 @@
 require 'json'
 require 'open-uri'
+require 'faker'
 
 puts "Destroying existing DB..."
 
@@ -55,9 +56,10 @@ def random_cocktail_generator
   # Makes sure a Cocktail with the same name doesn't already exist (name has an uniqueness validation)
   if Cocktail.find_by(name: data['strDrink']).nil?
     new_cocktail = create_cocktail(data)
-    counter = create_cocktail_doses(data, new_cocktail)
+    num_doses = create_cocktail_doses(data, new_cocktail)
+    num_reviews = create_cocktail_reviews(new_cocktail)
 
-    puts "Created the #{new_cocktail.name} cocktail with #{counter} doses"
+    puts "Created the #{new_cocktail.name} cocktail with #{num_doses} doses and #{num_reviews} reviews"
   end
 end
 
@@ -107,6 +109,21 @@ def create_cocktail_doses(data, new_cocktail)
   end
 
   return counter
+end
+
+# Method that creates 5..10 random reviews to a Cocktail passed as argument
+def create_cocktail_reviews(new_cocktail)
+  num_reviews = rand(5..10).times do
+    review = Review.new
+
+    review.rating = Math.sqrt(rand(0..30)).floor  # Random ratings between 0..5 biased towards 3..5
+    review.content = Faker::Restaurant.review     # Uses Restaurant fake reviews
+    review.cocktail = new_cocktail
+
+    review.save
+  end
+
+  return num_reviews
 end
 
 # Creating 50 random Cocktails
