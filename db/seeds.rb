@@ -103,8 +103,9 @@ def create_cocktail_doses(data, new_cocktail)
   until data["strIngredient#{counter}"].nil? || data["strIngredient#{counter}"].empty?
     dose = Dose.new(description: data["strMeasure#{counter}"])
 
-    ingredient = Ingredient.find_by(name: data["strIngredient#{counter}"])
-    ingredient = Ingredient.create(name: data["strIngredient#{counter}"]) if ingredient.nil?
+    ingredient_name = data["strIngredient#{counter}"].split.map(&:capitalize).join(" ") # Capitalizes each word
+    ingredient = Ingredient.find_by(name: ingredient_name)
+    ingredient = Ingredient.create(name: ingredient_name) if ingredient.nil?
 
     dose.ingredient = ingredient
     dose.cocktail = new_cocktail
