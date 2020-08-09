@@ -12,11 +12,15 @@
     </tr>
     <tr>
       <td><label class="select required" for="cocktail_category_id">Category</label></td>
-      <td><%= f.association :category, label_method: :name, label: false, default: "NA" %></td>
+      <td><%= f.association :category, collection: Category.order('name ASC'),
+        label_method: :name, label: false, selected: Category.find_by(name: "NA").id
+      %></td>
     </tr>
     <tr>
       <td><label class="select required" for="cocktail_glass_id">Glass</label></td>
-      <td><%= f.association :glass, label_method: :name, label: false, default: "NA" %></td>
+      <td><%= f.association :glass, collection: Glass.order('name ASC'),
+        label_method: :name, label: false, selected: Glass.find_by(name: "NA").id
+      %></td>
     </tr>
   </table>
 
