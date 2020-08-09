@@ -22,7 +22,7 @@
 
     <%= link_to "Rating", cocktails_path(sort_by: "rating", anchor: "container-cards") %>
     <%= link_to "Abc", cocktails_path(sort_by: "abc", anchor: "container-cards") %>
-    <%= link_to "Ingredients", cocktails_path(sort_by: "ingredients", anchor: "container-cards"), data: { toggle: "modal", target: "#ModalCocktailsFilter" } %>
+    <%= link_to "Filter", cocktails_path(sort_by: "ingredients", anchor: "container-cards"), data: { toggle: "modal", target: "#ModalCocktailsFilter" } %>
   </div>
 
   <div class="cards">
@@ -69,12 +69,12 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Ingredients Filter</h4>
+        <h4 class="modal-title">Cocktails Filter</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
 
       <div class="modal-body">
-        <%= render "cocktails/form-fridge-filter" %>
+        <%= render "cocktails/form-filter" %>
       </div>
     </div>
   </div>

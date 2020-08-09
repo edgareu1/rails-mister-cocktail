@@ -1,8 +1,9 @@
 .modal {
-  margin-top: 15vh;
+  margin-top: 10vh;
 }
 
 .modal-dialog {
+  min-width: 300px;
   max-width: 450px;
 }
 
@@ -25,11 +26,14 @@
 }
 
 #ModalCocktailsFilter > .modal-dialog {
-  max-width: 320px;
+  max-width: 480px;
+  max-width: 480px;
+
+  #ingredients_ {
+    width: 220px;
+  }
 
   .btn-ghost {
-    position: absolute;
-    bottom: 20px;
-    margin-left: 20px;
+    margin-top: 10px;
   }
 }
