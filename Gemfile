@@ -64,3 +64,6 @@ gem 'will_paginate-bootstrap4'
 
 # Search bar
 gem 'pg_search', '~> 2.3.0'
+
+# Seed fake data
+gem 'faker'
