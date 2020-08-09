@@ -3,7 +3,8 @@ require 'will_paginate/array'
 class CocktailsController < ApplicationController
   def index
     @cocktail = Cocktail.new
-    @ingredients = Ingredient.all.sort_by(&:name)
+    @ingredients = Ingredient.all.collect(&:name).sort
+    @categories = Category.all.collect(&:name).sort
 
     if params[:query].present?
       @cocktails_sorted = Cocktail.search_by_name(params[:query])
@@ -26,7 +27,8 @@ class CocktailsController < ApplicationController
     if @cocktail.save
       redirect_to cocktail_path(@cocktail)
     else
-      @ingredients = Ingredient.all.sort_by(&:name)
+      @ingredients = Ingredient.all.collect(&:name).sort
+      @categories = Category.all.collect(&:name).sort
 
       if params[:query].present?
         @cocktails_sorted = Cocktail.search_by_name(params[:query])

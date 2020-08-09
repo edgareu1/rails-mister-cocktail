@@ -1,6 +1,7 @@
 <%= form_tag cocktails_path(anchor: "container-cards"), method: 'get' do %>
   <%= check_box_tag(:only_this) %>
   <%= label_tag(:only_this, "Only this ingredients") %>
-  <%= select_tag 'ingredients[]', options_for_select(@ingredients.collect(&:name)), multiple: true, size: 8 %>
+  <%= select_tag 'ingredients[]', options_for_select(@ingredients), multiple: true, size: 8 %>
+  <%= select_tag 'categories[]', options_for_select(@categories), multiple: true, size: 5 %>
   <%= submit_tag "Filter", name: "sort_by", class: "btn btn-ghost" %>
 <% end %>
