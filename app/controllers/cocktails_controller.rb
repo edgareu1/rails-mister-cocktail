@@ -3,16 +3,7 @@ require 'will_paginate/array'
 class CocktailsController < ApplicationController
   def index
     @cocktail = Cocktail.new
-    @ingredients = Ingredient.all.collect(&:name).sort
-    @categories = Category.all.collect(&:name).sort
-
-    if params[:query].present?
-      @cocktails_sorted = Cocktail.search_by_name(params[:query])
-    else
-      @cocktails_sorted = cocktails_sorter(Cocktail.all)
-    end
-
-    @cocktails_sorted = @cocktails_sorted.paginate(page: params[:page], per_page: 12)
+    index_reload
   end
 
   def show
@@ -27,22 +18,26 @@ class CocktailsController < ApplicationController
     if @cocktail.save
       redirect_to cocktail_path(@cocktail)
     else
-      @ingredients = Ingredient.all.collect(&:name).sort
-      @categories = Category.all.collect(&:name).sort
-
-      if params[:query].present?
-        @cocktails_sorted = Cocktail.search_by_name(params[:query])
-      else
-        @cocktails_sorted = cocktails_sorter(Cocktail.all)
-      end
-
-      @cocktails_sorted = @cocktails_sorted.paginate(page: params[:page], per_page: 12)
-
+      index_reload
       render 'cocktails/index'
     end
   end
 
   private
+
+  # Method that prepares the Cocktail#Index page to be displayed
+  def index_reload
+    @ingredients = Ingredient.all.collect(&:name).sort
+    @categories = Category.all.collect(&:name).sort
+
+    if params[:query].present?
+      @cocktails_sorted = Cocktail.search_by_name(params[:query])
+    else
+      @cocktails_sorted = cocktails_sorter(Cocktail.all)
+    end
+
+    @cocktails_sorted = @cocktails_sorted.paginate(page: params[:page], per_page: 12)
+  end
 
   def cocktails_sorter(cocktails)
     # Sorting by the cocktails name
