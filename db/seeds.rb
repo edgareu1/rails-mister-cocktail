@@ -2,6 +2,11 @@ require 'json'
 require 'open-uri'
 require 'faker'
 
+# Capitalizes the multiples words of a string
+def capitalize_string(string)
+  string.split.map(&:capitalize).join(" ")
+end
+
 puts "Destroying existing DB..."
 
 Cocktail.destroy_all # Doses and Reviews also destroyed as they are dependent on Cocktails
@@ -36,15 +41,16 @@ to_populate.each do |table|
   html_doc = JSON.parse(html_file)
 
   html_doc['drinks'].each do |element|
-    table[:class].create(name: element[table[:json_element]])
-    puts "Created the #{table[:class].name.downcase} #{element[table[:json_element]]}"
+    element_name = capitalize_string(element[table[:json_element]])
+    table[:class].create(name: element_name)
+    puts "Created the #{table[:class].name.downcase} #{element_name}"
   end
 end
 
 # Populates the Glass table with 10 Glasses; the API had more than 30, wich was to many
 glasses_array = [
-  "Champagne flute", "Collins glass", "Cocktai glass", "Goblet", "Mug",
-  "Plastic cup", "Shop glass", "Teacup", "Vodka glass", "Wine glass"
+  "Champagne Flute", "Collins Glass", "Cocktail Glass", "Goblet", "Mug",
+  "Plastic Cup", "Shot Glass", "Teacup", "Vodka Glass", "Wine Glass"
 ]
 
 glasses_array.each do |glass|
@@ -60,7 +66,7 @@ def random_cocktail_generator
   data = html_doc['drinks'].first
 
   # Makes sure a Cocktail with the same name doesn't already exist (name has an uniqueness validation)
-  if Cocktail.find_by(name: data['strDrink']).nil?
+  if Cocktail.find_by(name: capitalize_string(data['strDrink'])).nil?
     new_cocktail = create_cocktail(data)
     num_doses = create_cocktail_doses(data, new_cocktail)
     num_reviews = create_cocktail_reviews(new_cocktail)
@@ -74,17 +80,17 @@ def create_cocktail(data)
   new_cocktail = Cocktail.new
 
   new_cocktail.editable = false
-  new_cocktail.name = data['strDrink']
+  new_cocktail.name = capitalize_string(data['strDrink'])
   new_cocktail.alcoholic = data['strAlcoholic']
   new_cocktail.instructions = data['strInstructions']
 
   image = URI.open(data['strDrinkThumb'])
   new_cocktail.photo.attach(io: image, filename: 'nes.png', content_type: 'image/png')
 
-  category = Category.find_by(name: data['strCategory'])
+  category = Category.find_by(name: capitalize_string(data['strCategory']))
   category = Category.find_by(name: "NA") if category.nil?
 
-  glass = Glass.find_by(name: data['strGlass'])
+  glass = Glass.find_by(name: capitalize_string(data['strGlass']))
   glass = Glass.find_by(name: "NA") if glass.nil?
 
   new_cocktail.category = category
@@ -103,7 +109,7 @@ def create_cocktail_doses(data, new_cocktail)
   until data["strIngredient#{counter}"].nil? || data["strIngredient#{counter}"].empty?
     dose = Dose.new(description: data["strMeasure#{counter}"])
 
-    ingredient_name = data["strIngredient#{counter}"].split.map(&:capitalize).join(" ") # Capitalizes each word
+    ingredient_name = capitalize_string(data["strIngredient#{counter}"])
     ingredient = Ingredient.find_by(name: ingredient_name)
     ingredient = Ingredient.create(name: ingredient_name) if ingredient.nil?
 
