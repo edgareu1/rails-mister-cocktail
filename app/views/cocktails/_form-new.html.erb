@@ -1,5 +1,10 @@
 <%= simple_form_for @cocktail do |f| %>
-  <%= f.input :name %>
+  <%= f.input :name, placeholder: "Please insert" %>
+  <%= f.input :alcoholic, prompt: "Please select", default: "Optional",
+    collection: ['Optional', 'Yes', 'No']
+  %>
+  <%= f.association :category, label_method: :name, default: "NA" %>
+  <%= f.association :glass, label_method: :name, default: "NA" %>
   <%= f.input :photo, as: :file %>
   <%= f.button :submit, class: "btn btn-ghost" %>
 <% end %>
