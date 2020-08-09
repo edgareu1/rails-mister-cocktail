@@ -18,11 +18,6 @@ to_populate = [
   {
     class: Category,
     json_element: 'strCategory'
-  },
-
-  {
-    class: Glass,
-    json_element: 'strGlass'
   }
 ]
 
@@ -34,7 +29,7 @@ puts "Creating..."
   puts "Created default #{Category.name.downcase}"
 end
 
-# Populates the Ingredient, Category and Glass tables
+# Populates the Ingredient and Category tables
 to_populate.each do |table|
   url = "https://www.thecocktaildb.com/api/json/v1/1/list.php?#{table[:class].name.first.downcase}=list"
   html_file = open(url).read
@@ -44,6 +39,17 @@ to_populate.each do |table|
     table[:class].create(name: element[table[:json_element]])
     puts "Created the #{table[:class].name.downcase} #{element[table[:json_element]]}"
   end
+end
+
+# Populates the Glass table with 10 Glasses; the API had more than 30, wich was to many
+glasses_array = [
+  "Champagne flute", "Collins glass", "Cocktai glass", "Goblet", "Mug",
+  "Plastic cup", "Shop glass", "Teacup", "Vodka glass", "Wine glass"
+]
+
+glasses_array.each do |glass|
+  Glass.create(name: glass)
+  puts "Created the glass #{glass}"
 end
 
 # Method that generates a random cocktail. It handles the whole process of fetching data from the API
