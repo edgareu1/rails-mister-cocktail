@@ -12,6 +12,9 @@
           <%= link_to edit_cocktail_path, data: { toggle: "modal", target: "#ModalEditCocktail" }, style: "margin: 0 10px" do %>
             <i class="fas fa-edit"></i>
           <% end %>
+          <%= link_to cocktail_path(@cocktail), method: :delete, data: {confirm: "Are you sure?"}, style: "margin-right: 10px" do %>
+            <i class="fas fa-trash-alt"></i>
+          <% end %>
           <%= link_to cocktail_path(editable: 1) do %>
             <i class="fas fa-save"></i>
           <% end %>
