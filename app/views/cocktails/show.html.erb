@@ -10,13 +10,38 @@
 
     <div style="display: flex">
       <!-- Cocktail Image -->
-      <div style="background-image: url('<%= cl_image_path @cocktail.photo.key, height: 380, width: 380, crop: :fill %>'); min-height: 380px; min-width: 380px; padding: 0; border-radius: 2px"></div>
+      <div style="background-image: url('<%= cl_image_path @cocktail.photo.key, height: 380, width: 380, crop: :fill %>'); min-height: 380px; min-width: 380px; padding: 0; border-radius: 5px"></div>
 
       <!-- Cocktail Information -->
       <div class="container-general" style="margin-left: 20px; width: 100%">
-        <p>Difficulty: <%= @cocktail.difficulty %></p>
-        <p>Rating: <%= @cocktail.reviews.empty? ? "NA" : @cocktail.rating_average.round(1) %></p>
-        <p>Reviews: <%= @cocktail.reviews.size %></p>
+        <h3 style="margin-bottom: 12px">General Information</h3>
+
+        <table style="width: 100%">
+          <tr>
+            <td><p style="font-size: 18px">Category:</p></td>
+            <td><p><%= @cocktail.category.name %></p></td>
+          </tr>
+          <tr>
+            <td><p style="font-size: 18px">Alcoholic:</p></td>
+            <td><p><%= @cocktail.alcoholic %></p></td>
+          </tr>
+            <td><p style="font-size: 18px">Rating:</p></td>
+            <td><p><%= @cocktail.reviews.empty? ? "NA" : @cocktail.rating_average.round(1).to_s + " ★" %></p></td>
+          <tr>
+          </tr>
+          <tr>
+            <td><p style="font-size: 18px">Difficulty:</p></td>
+            <td><p><%= @cocktail.difficulty %></p></td>
+          </tr>
+          <tr>
+            <td><p style="font-size: 18px">Reviews:</p></td>
+            <td><p><%= @cocktail.reviews.size %></p></td>
+          </tr>
+          <tr>
+            <td><p style="font-size: 18px">Glass:</p></td>
+            <td><p><%= @cocktail.glass.name %></p></td>
+          </tr>
+        </table>
       </div>
     </div>
 
@@ -46,11 +71,11 @@
     </div>
 
     <div class="container-general" style="margin: 10px 0">
-      <div style="padding-left: 10px; margin-top: 20px">
+      <div style="padding-left: 10px">
         <div style="display: flex">
           <h3>Instructions</h3>
           <%= link_to "New Instructions", data: { toggle: "modal", target: "#ModalAddInstructions" }, class: "white-icon" do %>
-            <i class="fas fa-plus"></i>
+            <i class="fas fa-edit"></i>
           <% end %>
         </div>
 
