@@ -1,0 +1,5 @@
+<%= simple_form_for [@cocktail, @dose] do |f| %>
+  <%= f.association :ingredient, collection: Ingredient.order('name ASC'), selected: Ingredient.find_by(name: "Ice").id %>
+  <%= f.input :description, placeholder: "Specify quantity" %>
+  <%= f.button :submit, class: "btn btn-ghost" %>
+<% end %>
