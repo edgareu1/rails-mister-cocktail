@@ -14,48 +14,36 @@ Category.destroy_all
 Glass.destroy_all
 Ingredient.destroy_all
 
-to_populate = [
-  {
-    class: Ingredient,
-    json_element: 'strIngredient1'
-  },
-
-  {
-    class: Category,
-    json_element: 'strCategory'
-  }
-]
-
 puts "Creating..."
 
-# Creates default values for Category and Glass
-[Category, Glass].each do |table|
-  table.create(name: "NA")
-  puts "Created default #{Category.name.downcase}"
+# Populates the Ingredients table
+url = "https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list"
+html_file = open(url).read
+html_doc = JSON.parse(html_file)
+
+html_doc['drinks'].each do |ingredient|
+  ingredient_name = capitalize_string(ingredient["strIngredient1"])
+  Ingredient.create(name: ingredient_name)
+  puts "Created the ingredient #{ingredient_name}"
 end
 
-# Populates the Ingredient and Category tables
-to_populate.each do |table|
-  url = "https://www.thecocktaildb.com/api/json/v1/1/list.php?#{table[:class].name.first.downcase}=list"
-  html_file = open(url).read
-  html_doc = JSON.parse(html_file)
-
-  html_doc['drinks'].each do |element|
-    element_name = capitalize_string(element[table[:json_element]])
-    table[:class].create(name: element_name)
-    puts "Created the #{table[:class].name.downcase} #{element_name}"
-  end
-end
-
-# Populates the Glass table with 10 Glasses; the API had more than 30, wich was to many
+# Populates the Glass and Category tables with controlable values
+# The API is too unpredictable in regards to the names given to this classes
 glasses_array = [
-  "Champagne Flute", "Collins Glass", "Cocktail Glass", "Goblet", "Mug",
-  "Plastic Cup", "Shot Glass", "Teacup", "Vodka Glass", "Wine Glass"
+  "NA", "Champagne Flute", "Collins Glass", "Cocktail Glass", "Goblet", "Mug",
+  "Plastic Cup", "Shot Glass", "Teacup", "Vodka Glass", "Wine Glass", "Yard"
 ]
 
-glasses_array.each do |glass|
-  Glass.create(name: glass)
-  puts "Created the glass #{glass}"
+categories_array = [
+  "NA", "Beer", "Cocktail", "Cocoa", "Coffee", "Juice", "Liqueur", "Milk",
+  "Party Drink", "Shot", "Soft Drink", "Tea"
+]
+
+[[Glass, glasses_array], [Category, categories_array]].each do |table|
+  table[1].each do |element_name|
+    table[0].create(name: element_name)
+    puts "Created the #{table[0].name.downcase} #{element_name}"
+  end
 end
 
 # Method that generates a random cocktail. It handles the whole process of fetching data from the API
@@ -75,6 +63,22 @@ def random_cocktail_generator
   end
 end
 
+
+# Transforms the API category names in the corresponding names in this app
+Transform_category = {
+  "Ordinary Drink" => "Juice",
+  "Cocktail" => "Cocktail",
+  "Milk / Float / Shake" => "Milk",
+  "Other/unknown" => "NA",
+  "Cocoa" => "Cocoa",
+  "Shot" => "Shot",
+  "Coffee / Tea" => "Coffee",
+  "Homemade Liqueur" => "Liqueur",
+  "Punch / Party Drink" => "Party Drink",
+  "Beer" => "Beer",
+  "Soft Drink / Soda"  => "Soft Drink"
+}
+
 # Method that creates and returns a Cocktail based on the data passed
 def create_cocktail(data)
   new_cocktail = Cocktail.new
@@ -87,7 +91,7 @@ def create_cocktail(data)
   image = URI.open(data['strDrinkThumb'])
   new_cocktail.photo.attach(io: image, filename: 'nes.png', content_type: 'image/png')
 
-  category = Category.find_by(name: capitalize_string(data['strCategory']))
+  category = Category.find_by(name: Transform_category[capitalize_string(data['strCategory'])])
   category = Category.find_by(name: "NA") if category.nil?
 
   glass = Glass.find_by(name: capitalize_string(data['strGlass']))
