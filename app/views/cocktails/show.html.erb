@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <div class="container-general" style="margin: 20px 0">
+    <div class="container-general" style="margin: 20px 0 10px">
       <ul style="min-width: 630px">
         <div style="display: flex">
           <h3>Ingredients</h3>
@@ -43,9 +43,16 @@
           <% end %>
         <% end %>
       </ul>
+    </div>
 
-      <div style="padding-left: 10px">
-        <h3 style="margin-top: 20px">Instructions</h3>
+    <div class="container-general" style="margin: 10px 0">
+      <div style="padding-left: 10px; margin-top: 20px">
+        <div style="display: flex">
+          <h3>Instructions</h3>
+          <%= link_to "New Instructions", data: { toggle: "modal", target: "#ModalAddInstructions" }, class: "white-icon" do %>
+            <i class="fas fa-plus"></i>
+          <% end %>
+        </div>
 
         <!-- Display the Instructions -->
         <% if @cocktail.instructions.nil? %>
@@ -56,7 +63,7 @@
       </div>
     </div>
 
-    <ul class="container-general" style="margin: 0 0 10px 0; padding-left: 20px">
+    <ul class="container-general" style="margin: 10px 0; padding-left: 20px">
       <div style="display: flex">
         <h3>Reviews</h3>
         <%= link_to "New Review", data: { toggle: "modal", target: "#ModalNewReview" }, class: "white-icon" do %>
@@ -109,6 +116,22 @@
 
       <div class="modal-body">
         <%= render "cocktails/form-dose-new" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Instructions Creation -->
+<div class="modal fade" id="ModalAddInstructions" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">New Instructions</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <%= render "cocktails/form-add-instructions" %>
       </div>
     </div>
   </div>
