@@ -10,6 +10,8 @@ class CocktailsController < ApplicationController
     @cocktail = Cocktail.find(params[:id])
     @review = Review.new
     @dose = Dose.new
+
+    @cocktail.editable = false if params["editable"] == "1"
   end
 
   def create
