@@ -7,11 +7,14 @@
         <%= link_to cocktails_path(anchor: "container-cards") do %>
           <i class="fas fa-undo-alt"></i>
         <% end %>
-        <%= link_to edit_cocktail_path, data: { toggle: "modal", target: "#ModalEditCocktail" }, style: "margin: 0 10px" do %>
-          <i class="fas fa-edit"></i>
-        <% end %>
-        <%= link_to cocktail_path(editable: 1) do %>
-          <i class="fas fa-save"></i>
+
+        <% if @cocktail.editable %>
+          <%= link_to edit_cocktail_path, data: { toggle: "modal", target: "#ModalEditCocktail" }, style: "margin: 0 10px" do %>
+            <i class="fas fa-edit"></i>
+          <% end %>
+          <%= link_to cocktail_path(editable: 1) do %>
+            <i class="fas fa-save"></i>
+          <% end %>
         <% end %>
       </div>
     </div>
@@ -63,8 +66,11 @@
       <ul style="min-width: 630px">
         <div style="display: flex">
           <h3>Ingredients</h3>
-          <%= link_to "New Dose", data: { toggle: "modal", target: "#ModalNewDose" }, class: "white-icon" do %>
-            <i class="fas fa-edit"></i>
+
+          <% if @cocktail.editable %>
+            <%= link_to "New Dose", data: { toggle: "modal", target: "#ModalNewDose" }, class: "white-icon" do %>
+              <i class="fas fa-edit"></i>
+            <% end %>
           <% end %>
         </div>
 
@@ -88,8 +94,11 @@
       <div style="padding-left: 10px">
         <div style="display: flex">
           <h3>Instructions</h3>
-          <%= link_to "New Instructions", data: { toggle: "modal", target: "#ModalAddInstructions" }, class: "white-icon" do %>
-            <i class="fas fa-edit"></i>
+
+          <% if @cocktail.editable %>
+            <%= link_to "New Instructions", data: { toggle: "modal", target: "#ModalAddInstructions" }, class: "white-icon" do %>
+              <i class="fas fa-edit"></i>
+            <% end %>
           <% end %>
         </div>
 
