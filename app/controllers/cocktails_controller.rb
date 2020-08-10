@@ -23,6 +23,12 @@ class CocktailsController < ApplicationController
     end
   end
 
+  def update
+    @cocktail = Cocktail.find(params[:id])
+    @cocktail.update(cocktail_params)
+    redirect_to cocktail_path(@cocktail)
+  end
+
   private
 
   # Method that prepares the Cocktail#Index page to be displayed
@@ -90,6 +96,6 @@ class CocktailsController < ApplicationController
   end
 
   def cocktail_params
-    params.require(:cocktail).permit(:name, :category_id, :glass_id, :alcoholic, :photo)
+    params.require(:cocktail).permit(:name, :category_id, :glass_id, :alcoholic, :photo, :instructions)
   end
 end

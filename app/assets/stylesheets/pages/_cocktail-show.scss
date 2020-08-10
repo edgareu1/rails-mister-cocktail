@@ -35,3 +35,15 @@
 .form-group > label {
   color: white;
 }
+
+.white-icon {
+  color: white;
+  font-size: 26px;
+  margin-left: 12px;
+  display: flex;
+  align-items: baseline;
+
+  &:hover {
+    color: white;
+  }
+}
