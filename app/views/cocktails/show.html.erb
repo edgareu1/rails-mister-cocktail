@@ -12,28 +12,11 @@
       <!-- Cocktail Image -->
       <div style="background-image: url('<%= cl_image_path @cocktail.photo.key, height: 380, width: 380, crop: :fill %>'); min-height: 380px; min-width: 380px; padding: 0; border-radius: 2px"></div>
 
-      <!-- Form for Review Creation -->
-      <div class="container-general" style="margin-left: 20px">
-        <div>
-          <p>Difficulty: <%= @cocktail.difficulty %></p>
-          <p>Rating: <%= @cocktail.reviews.empty? ? "NA" : @cocktail.rating_average.round(1) %></p>
-          <p>Reviews: <%= @cocktail.reviews.size %></p>
-        </div>
-
-        <hr style="border: 1px solid white; margin: 25px 0">
-
-        <h3>Add Review</h3>
-
-        <%= simple_form_for [@cocktail, @review] do |f| %>
-          <div class="stars">
-            <%= f.collection_radio_buttons :rating, [[5], [4], [3], [2], [1]], :first, :last, item_wrapper_tag: false, boolean_style: :inline do |b| %>
-              <%= b.radio_button + b.label {''} %>
-            <% end %>
-          </div>
-
-          <%= f.input :content, label: false %>
-          <%= f.button :submit, class: "btn btn-ghost" %>
-        <% end %>
+      <!-- Cocktail Information -->
+      <div class="container-general" style="margin-left: 20px; width: 100%">
+        <p>Difficulty: <%= @cocktail.difficulty %></p>
+        <p>Rating: <%= @cocktail.reviews.empty? ? "NA" : @cocktail.rating_average.round(1) %></p>
+        <p>Reviews: <%= @cocktail.reviews.size %></p>
       </div>
     </div>
 
@@ -80,7 +63,12 @@
     </div>
 
     <ul class="container-general" style="margin: 0 0 10px 0; padding-left: 20px">
-      <h3>Reviews</h3>
+      <div style="display: flex">
+        <h3>Reviews</h3>
+        <%= link_to "New Review", data: { toggle: "modal", target: "#ModalNewReview" }, class: "white-icon" do %>
+          <i class="fas fa-plus"></i>
+        <% end %>
+      </div>
 
       <!-- Display the last 5 reviews -->
       <% if @cocktail.reviews.length == 0 %>
@@ -97,5 +85,21 @@
         <% end %>
       <% end %>
     </ul>
+  </div>
+</div>
+
+<!-- Modal Review Creation -->
+<div class="modal fade" id="ModalNewReview" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">New Review</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <%= render "cocktails/form-review-new" %>
+      </div>
+    </div>
   </div>
 </div>
