@@ -56,7 +56,7 @@
         <div style="display: flex">
           <h3>Ingredients</h3>
           <%= link_to "New Dose", data: { toggle: "modal", target: "#ModalNewDose" }, class: "white-icon" do %>
-            <i class="fas fa-plus"></i>
+            <i class="fas fa-edit"></i>
           <% end %>
         </div>
 
@@ -64,10 +64,10 @@
         <% if @cocktail.doses.length == 0 %>
           <p style="margin-left: 10px">No ingredients avaliable...</p>
         <% else %>
-          <% @cocktail.doses.each do |dose| %>
+          <% @cocktail.doses.sort_by {|dose| dose.ingredient.name }.each do |dose| %>
             <li style="list-style: none; display: flex; align-items: center; margin: 10px 0 0 10px">
               <%= link_to dose_path(dose), method: :delete, data: {confirm: "Are you sure?"} do %>
-                <i class="fas fa-trash-alt" style="margin-right: 5px; font-size: 16px; color: white"></i>
+                <i class="fas fa-trash-alt" style="margin-right: 15px; font-size: 16px; color: white"></i>
               <% end %>
               <p style="font-size: 18px; margin: 0"><%= "#{dose.ingredient.name}: #{dose.description}" %></p>
             </li>
