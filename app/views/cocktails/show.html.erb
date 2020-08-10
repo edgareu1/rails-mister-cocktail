@@ -3,9 +3,23 @@
     <div class="container-page-headers">
       <h1><%= @cocktail.name %></h1>
 
-      <%= link_to cocktails_path(anchor: "container-cards") do %>
-        <i class="fas fa-undo-alt"></i>
-      <% end %>
+      <div>
+        <%= link_to cocktails_path(anchor: "container-cards") do %>
+          <i class="fas fa-undo-alt"></i>
+        <% end %>
+
+        <% if @cocktail.editable %>
+          <%= link_to edit_cocktail_path, data: { toggle: "modal", target: "#ModalEditCocktail" }, style: "margin: 0 10px" do %>
+            <i class="fas fa-edit"></i>
+          <% end %>
+          <%= link_to cocktail_path(@cocktail), method: :delete, data: {confirm: "Are you sure?"}, style: "margin-right: 10px" do %>
+            <i class="fas fa-trash-alt"></i>
+          <% end %>
+          <%= link_to cocktail_path(editable: 1) do %>
+            <i class="fas fa-save"></i>
+          <% end %>
+        <% end %>
+      </div>
     </div>
 
     <div style="display: flex">
@@ -55,8 +69,11 @@
       <ul style="min-width: 630px">
         <div style="display: flex">
           <h3>Ingredients</h3>
-          <%= link_to "New Dose", data: { toggle: "modal", target: "#ModalNewDose" }, class: "white-icon" do %>
-            <i class="fas fa-plus"></i>
+
+          <% if @cocktail.editable %>
+            <%= link_to "New Dose", data: { toggle: "modal", target: "#ModalNewDose" }, class: "white-icon" do %>
+              <i class="fas fa-edit"></i>
+            <% end %>
           <% end %>
         </div>
 
@@ -64,10 +81,10 @@
         <% if @cocktail.doses.length == 0 %>
           <p style="margin-left: 10px">No ingredients avaliable...</p>
         <% else %>
-          <% @cocktail.doses.each do |dose| %>
+          <% @cocktail.doses.sort_by {|dose| dose.ingredient.name }.each do |dose| %>
             <li style="list-style: none; display: flex; align-items: center; margin: 10px 0 0 10px">
               <%= link_to dose_path(dose), method: :delete, data: {confirm: "Are you sure?"} do %>
-                <i class="fas fa-trash-alt" style="margin-right: 5px; font-size: 16px; color: white"></i>
+                <i class="fas fa-trash-alt" style="margin-right: 15px; font-size: 16px; color: white"></i>
               <% end %>
               <p style="font-size: 18px; margin: 0"><%= "#{dose.ingredient.name}: #{dose.description}" %></p>
             </li>
@@ -80,8 +97,11 @@
       <div style="padding-left: 10px">
         <div style="display: flex">
           <h3>Instructions</h3>
-          <%= link_to "New Instructions", data: { toggle: "modal", target: "#ModalAddInstructions" }, class: "white-icon" do %>
-            <i class="fas fa-edit"></i>
+
+          <% if @cocktail.editable %>
+            <%= link_to "New Instructions", data: { toggle: "modal", target: "#ModalAddInstructions" }, class: "white-icon" do %>
+              <i class="fas fa-edit"></i>
+            <% end %>
           <% end %>
         </div>
 
@@ -120,7 +140,7 @@
   </div>
 </div>
 
-<!-- Modal Review Creation -->
+<!-- Modal Create Review -->
 <div class="modal fade" id="ModalNewReview" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -136,7 +156,7 @@
   </div>
 </div>
 
-<!-- Modal Dose Creation -->
+<!-- Modal Create Dose -->
 <div class="modal fade" id="ModalNewDose" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -152,7 +172,7 @@
   </div>
 </div>
 
-<!-- Modal Instructions Creation -->
+<!-- Modal Edit Instructions -->
 <div class="modal fade" id="ModalAddInstructions" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -163,6 +183,22 @@
 
       <div class="modal-body">
         <%= render "cocktails/form-add-instructions" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Edit Cocktail -->
+<div class="modal fade" id="ModalEditCocktail" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Edit Cocktail</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <%= render "cocktails/form-edit" %>
       </div>
     </div>
   </div>

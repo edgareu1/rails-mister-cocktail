@@ -10,6 +10,8 @@ class CocktailsController < ApplicationController
     @cocktail = Cocktail.find(params[:id])
     @review = Review.new
     @dose = Dose.new
+
+    @cocktail.editable = false if params["editable"] == "1"
   end
 
   def create
@@ -27,6 +29,13 @@ class CocktailsController < ApplicationController
     @cocktail = Cocktail.find(params[:id])
     @cocktail.update(cocktail_params)
     redirect_to cocktail_path(@cocktail)
+  end
+
+  def destroy
+    @cocktail = Cocktail.find(params[:id])
+    @cocktail.destroy
+
+    redirect_to cocktails_path(anchor: "container-cards")
   end
 
   private
