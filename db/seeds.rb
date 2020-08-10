@@ -64,7 +64,7 @@ def random_cocktail_generator
 end
 
 
-# Transforms the API category names in the corresponding names in this app
+# Transforms the API category and alcoholic data in elements compatible with this app
 Transform_category = {
   "Ordinary Drink" => "Juice",
   "Cocktail" => "Cocktail",
@@ -79,13 +79,19 @@ Transform_category = {
   "Soft Drink / Soda"  => "Soft Drink"
 }
 
+Transform_alcoholic = {
+  "Alcoholic" => "Yes",
+  "Non alcoholic" => "No",
+  "Optional alcohol" => "Optional"
+}
+
 # Method that creates and returns a Cocktail based on the data passed
 def create_cocktail(data)
   new_cocktail = Cocktail.new
 
   new_cocktail.editable = false
   new_cocktail.name = capitalize_string(data['strDrink'])
-  new_cocktail.alcoholic = data['strAlcoholic']
+  new_cocktail.alcoholic = Transform_alcoholic[data['strAlcoholic']]
   new_cocktail.instructions = data['strInstructions']
 
   image = URI.open(data['strDrinkThumb'])

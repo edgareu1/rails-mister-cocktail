@@ -14,31 +14,37 @@
 
       <!-- Cocktail Information -->
       <div class="container-general" style="margin-left: 20px; width: 100%">
-        <h3 style="margin-bottom: 12px">General Information</h3>
+        <h3 style="margin-bottom: 14px">General Information</h3>
 
         <table style="width: 100%">
           <tr>
-            <td><p style="font-size: 18px">Category:</p></td>
+            <td><p style="text-align: end">Category</p></td>
+            <td style="width: 10px"></td>
             <td><p><%= @cocktail.category.name %></p></td>
           </tr>
           <tr>
-            <td><p style="font-size: 18px">Alcoholic:</p></td>
+            <td><p style="text-align: end">Alcoholic</p></td>
+            <td></td>
             <td><p><%= @cocktail.alcoholic %></p></td>
           </tr>
-            <td><p style="font-size: 18px">Rating:</p></td>
+            <td><p style="text-align: end">Rating</p></td>
+            <td></td>
             <td><p><%= @cocktail.reviews.empty? ? "NA" : @cocktail.rating_average.round(1).to_s + " ★" %></p></td>
           <tr>
           </tr>
           <tr>
-            <td><p style="font-size: 18px">Difficulty:</p></td>
+            <td><p style="text-align: end">Difficulty</p></td>
+            <td></td>
             <td><p><%= @cocktail.difficulty %></p></td>
           </tr>
           <tr>
-            <td><p style="font-size: 18px">Reviews:</p></td>
+            <td><p style="text-align: end">Reviews</p></td>
+            <td></td>
             <td><p><%= @cocktail.reviews.size %></p></td>
           </tr>
           <tr>
-            <td><p style="font-size: 18px">Glass:</p></td>
+            <td><p style="text-align: end">Glass</p></td>
+            <td></td>
             <td><p><%= @cocktail.glass.name %></p></td>
           </tr>
         </table>
