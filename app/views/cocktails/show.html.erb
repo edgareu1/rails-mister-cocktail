@@ -37,31 +37,44 @@
       </div>
     </div>
 
-    <div class="container-general" style="margin: 20px 0; display: flex">
-      <ul style="min-width: 400px">
-        <h3>Recipe</h3>
+    <div class="container-general" style="margin: 20px 0">
+      <div style="display: flex; min-width: 630px">
+        <ul style="min-width: 400px">
+          <h3>Ingredients</h3>
 
-        <!-- Display the ingredients -->
-        <% if @cocktail.doses.length == 0 %>
-          <p style="margin-left: 10px">No recipe yet...</p>
-        <% else %>
-          <% @cocktail.doses.each do |dose| %>
-            <li style="list-style: none; display: flex; align-items: center; margin: 10px 0 0 10px">
-              <%= link_to dose_path(dose), method: :delete, data: {confirm: "Are you sure?"} do %>
-                <i class="fas fa-trash-alt" style="margin-right: 5px; font-size: 16px; color: white"></i>
-              <% end %>
-              <p style="font-size: 18px; margin: 0"><%= "#{dose.ingredient.name}: #{dose.description}" %></p>
-            </li>
+          <!-- Display the Ingredients -->
+          <% if @cocktail.doses.length == 0 %>
+            <p style="margin-left: 10px">No ingredients avaliable...</p>
+          <% else %>
+            <% @cocktail.doses.each do |dose| %>
+              <li style="list-style: none; display: flex; align-items: center; margin: 10px 0 0 10px">
+                <%= link_to dose_path(dose), method: :delete, data: {confirm: "Are you sure?"} do %>
+                  <i class="fas fa-trash-alt" style="margin-right: 5px; font-size: 16px; color: white"></i>
+                <% end %>
+                <p style="font-size: 18px; margin: 0"><%= "#{dose.ingredient.name}: #{dose.description}" %></p>
+              </li>
+            <% end %>
           <% end %>
-        <% end %>
-      </ul>
+        </ul>
 
-      <!-- Form for Ingredient Creation -->
-      <div style="min-width: 230px">
-        <%= simple_form_for [@cocktail, @dose] do |f| %>
-          <%= f.association :ingredient, collection: Ingredient.order('name ASC') %>
-          <%= f.input :description %>
-          <%= f.button :submit, class: "btn btn-ghost" %>
+        <!-- Form for Ingredient Creation -->
+        <div style="min-width: 230px">
+          <%= simple_form_for [@cocktail, @dose] do |f| %>
+            <%= f.association :ingredient, collection: Ingredient.order('name ASC') %>
+            <%= f.input :description %>
+            <%= f.button :submit, class: "btn btn-ghost" %>
+          <% end %>
+        </div>
+      </div>
+
+      <div style="padding-left: 10px">
+        <h3 style="margin-top: 20px">Instructions</h3>
+
+        <!-- Display the Instructions -->
+        <% if @cocktail.instructions.nil? %>
+          <p style="margin: 10px; font-size: 14px">No instructions avaliable...</p>
+        <% else %>
+          <p style="margin-left: 10px; font-size: 14px"><%= @cocktail.instructions %></p>
         <% end %>
       </div>
     </div>
@@ -71,7 +84,7 @@
 
       <!-- Display the last 5 reviews -->
       <% if @cocktail.reviews.length == 0 %>
-        <p style="margin-left: 10px">Be the first to leave a review!</p>
+        <p style="margin-left: 10px; font-size: 14px">Be the first to leave a review!</p>
       <% else %>
         <% @cocktail.reviews.last(5).reverse.each do |review| %>
           <li style="list-style: none; align-items: center; margin: 10px 0 0 10px">
@@ -79,7 +92,7 @@
               <%= ("★" * review.rating) + ("☆" * (5 - review.rating)) %>
               <span style="font-size: 14px"><%= " #{review.created_at.strftime("%Y-%m-%d")}" %></span>
             </p>
-            <p style="margin-left: 15px"><%= review.content %></p>
+            <p style="margin-left: 15px; font-size: 14px"><%= review.content %></p>
           </li>
         <% end %>
       <% end %>
