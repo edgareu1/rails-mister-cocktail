@@ -1,5 +1,5 @@
 // Method that adds smooth scrolling to the same page links
-$(document).ready(function smothScrolling(){
+$(document).ready(function smoothScrolling(){
   $("a").on('click', function(event) {
     // Makes sure this.hash has a value before overriding default behavior
     if (this.hash !== "") {
