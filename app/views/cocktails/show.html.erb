@@ -83,10 +83,19 @@
         <% else %>
           <% @cocktail.doses.sort_by {|dose| dose.ingredient.name }.each do |dose| %>
             <li style="list-style: none; display: flex; align-items: center; margin: 10px 0 0 10px">
-              <%= link_to dose_path(dose), method: :delete, data: {confirm: "Are you sure?"} do %>
-                <i class="fas fa-trash-alt" style="margin-right: 15px; font-size: 16px; color: white"></i>
+              <% if @cocktail.editable %>
+                <%= link_to dose_path(dose), method: :delete, data: {confirm: "Are you sure?"} do %>
+                  <i class="fas fa-trash-alt" style="margin-right: 15px; font-size: 16px; color: white"></i>
+                <% end %>
               <% end %>
-              <p style="font-size: 18px; margin: 0"><%= "#{dose.ingredient.name}: #{dose.description}" %></p>
+
+              <p style="font-size: 18px; margin: 0">
+                <% if dose.description.nil? || dose.description.empty? %>
+                  <%= dose.ingredient.name %>
+                <% else %>
+                  <%= "#{dose.ingredient.name}: #{dose.description}" %>
+                <% end %>
+              </p>
             </li>
           <% end %>
         <% end %>
