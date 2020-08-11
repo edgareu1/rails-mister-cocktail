@@ -41,5 +41,3 @@ $(document).ready(function readMore() {
     return false;
   });
 });
-
-export default { readMore };

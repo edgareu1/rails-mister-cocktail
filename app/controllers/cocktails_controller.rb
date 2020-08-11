@@ -11,7 +11,10 @@ class CocktailsController < ApplicationController
     @review = Review.new
     @dose = Dose.new
 
-    @cocktail.editable = false if params["editable"] == "1"
+    if params["editable"] == "1"
+      @cocktail.editable = false
+      @cocktail.save
+    end
   end
 
   def create
@@ -48,8 +51,6 @@ class CocktailsController < ApplicationController
     @cocktails_sorted = cocktails_sorter.paginate(page: params[:page], per_page: 12)
   end
 
-  @@cocktails_sorted_by_rating = Cocktail.all.sort_by { |cocktail| - cocktail.rating_points }
-
   # Method that sorts and filters the Cocktails to be displayed
   def cocktails_sorter
     # Filtering by search query
@@ -62,15 +63,19 @@ class CocktailsController < ApplicationController
 
     # Filtering by the options selected by the user
     elsif params[:sort_by] == "Filter" && (params[:ingredients].present? || params[:categories].present?)
-      cocktails_sorted = params[:ingredients].present? ? filter_by_ingredients : @@cocktails_sorted_by_rating   # Filter by Ingredients
-      cocktails_sorted = filter_by_categories(cocktails_sorted) if params[:categories].present?                 # Filter by Categories
+      cocktails_sorted = params[:ingredients].present? ? filter_by_ingredients : cocktails_sorted_by_rating   # Filter by Ingredients
+      cocktails_sorted = filter_by_categories(cocktails_sorted) if params[:categories].present?               # Filter by Categories
 
       return cocktails_sorted
     end
 
     # By default cocktails are sorted by ranking; If the user chooses to filter by ingredients but
     # does not select any, the sorting will also be done by ranking
-    return @@cocktails_sorted_by_rating
+    return cocktails_sorted_by_rating
+  end
+
+  def cocktails_sorted_by_rating
+    Cocktail.all.sort_by { |cocktail| - cocktail.rating_points }
   end
 
   def filter_by_ingredients
