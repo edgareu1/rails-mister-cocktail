@@ -19,4 +19,5 @@ $(document).ready(function smothScrolling(){
   });
 });
 
-export default { smothScrolling };
+// For some reason, exporting more than one JS file is giving a bug...
+// As such, this file was directly introduced in Cocktail#Index...
