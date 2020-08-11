@@ -11,7 +11,10 @@ class CocktailsController < ApplicationController
     @review = Review.new
     @dose = Dose.new
 
-    @cocktail.editable = false if params["editable"] == "1"
+    if params["editable"] == "1"
+      @cocktail.editable = false
+      @cocktail.save
+    end
   end
 
   def create
