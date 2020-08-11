@@ -7,7 +7,7 @@
   </div>
 
   <div class="scroll-down">
-    <%= link_to "#container-cards" do %>
+    <%= link_to "#container-cards", id: "scroller" do %>
       <i class="fas fa-angle-double-down"></i>
     <% end %>
   </div>
@@ -48,6 +48,7 @@
   <%= will_paginate @cocktails_sorted, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, previous_label: "&laquo;", next_label: "&raquo;" %>
 </div>
 
+
 <!-- Modal Cocktail New Form -->
 <div class="modal fade" id="ModalNewCocktail" role="dialog">
   <div class="modal-dialog">
@@ -80,11 +81,12 @@
   </div>
 </div>
 
+
 <!-- JS module that was giving a bug when exported/imported the tradicional way -->
 <script>
   // Method that adds smooth scrolling to the same page links
-  $(document).ready(function smothScrolling(){
-    $("a").on('click', function(event) {
+  $(document).ready(function smoothScrolling() {
+    $("#scroller").on('click', function(event) {
       // Makes sure this.hash has a value before overriding default behavior
       if (this.hash !== "") {
         // Prevents default anchor click behavior
