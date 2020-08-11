@@ -1,15 +1,16 @@
 .btn-gradient {
   color: white;
+  font-size: 18px;
   padding: 6px 12px;
   border-radius: 5px;
   box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.25);
   font-weight: bold;
-  background: linear-gradient(rgba(160, 0, 0, 0.95), rgba(140, 0, 0, 0.6));
-  transition: background 0.3s ease;
+  background: linear-gradient(rgba(200, 0, 0, 0.55), rgba(200, 0, 0, 0.65));
+  transition: background 0.6s ease;
 }
   
 .btn-gradient:hover {
-  background: linear-gradient(rgba(190, 0, 0, 1), rgba(150, 0, 0, 0.8));
+  background: linear-gradient(rgba(200, 0, 0, 0.7), rgba(200, 0, 0, 0.8));
   color: white;
 }
 

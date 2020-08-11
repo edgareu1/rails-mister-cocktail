@@ -1,14 +1,11 @@
-.modal {
-  margin-top: 10vh;
-}
-
 .modal-dialog {
   min-width: 300px;
   max-width: 450px;
+  margin-top: 10vh;
 }
 
 .modal-content {
-  background-color: rgba(160, 0, 0, 0.7);
+  background-color: rgba(255, 0, 0, 0.4);
   border-radius: 5px;
   color: white
 }

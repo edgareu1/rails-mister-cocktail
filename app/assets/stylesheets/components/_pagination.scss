@@ -1,13 +1,13 @@
 .page-link, .page-item.disabled .page-link {
   color: white;
   border: none;
-  background: linear-gradient(rgba(160, 0, 0, 0.65), rgba(140, 0, 0, 0.40));
+  background: linear-gradient(rgba(255, 0, 0, 0.2), rgba(255, 0, 0, 0.5));
   margin-top: 10px;
 }
 
 .page-item.active .page-link, .page-item .page-link:hover {
   color: white;
-  background: linear-gradient(rgba(190, 0, 0, 1), rgba(150, 0, 0, 0.8));
+  background: linear-gradient(rgba(255, 0, 0, 0.55), rgba(255, 0, 0, 0.65));
   border: none;
 }
 
