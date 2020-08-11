@@ -132,7 +132,7 @@
               <%= ("★" * review.rating) + ("☆" * (5 - review.rating)) %>
               <span style="font-size: 14px"><%= " #{review.created_at.strftime("%Y-%m-%d")}" %></span>
             </p>
-            <p style="margin-left: 15px; font-size: 14px"><%= review.content %></p>
+            <p class="read-more" style="margin-left: 15px; font-size: 14px"><%= review.content %></p>
           </li>
         <% end %>
       <% end %>
