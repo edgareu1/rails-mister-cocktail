@@ -2,7 +2,7 @@
   float: left;
   overflow: hidden;
   width: 200px;
-  margin: 0 0 0 5px;
+  margin: 0 0 10px 5px;
 }
 
 .stars input[type=radio] {
@@ -27,7 +27,7 @@
   transition: all 0.15s;
   content: "\f005";
   font-family: 'Font Awesome 5 Free';
-  font-size: 20px;
+  font-size: 26px;
   font-weight: 600;
   color: white;
 }
