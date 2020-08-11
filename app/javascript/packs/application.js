@@ -10,6 +10,7 @@ require("channels")
 
 import 'bootstrap';
 
+import { smothScrolling } from '../custom/read-more';
 import { readMore } from '../custom/read-more';
 
 // Uncomment to copy all static images under ../images to the output folder and reference
