@@ -16,3 +16,13 @@ import 'bootstrap';
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+import { readMore } from '../components/read-more';
+import { smoothPagination } from '../components/smooth-pagination';
+import { smoothScrolling } from '../components/smooth-scrolling';
+
+document.addEventListener('turbolinks:load', () => {
+    readMore();
+    smoothPagination();
+    smoothScrolling();
+});

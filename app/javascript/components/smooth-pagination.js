@@ -1,5 +1,5 @@
-// Method that makes the pagination link pages scroll down to the Cocktails list
-$(document).ready(function smoothPagination() {
+// Function that makes the pagination link pages scroll down to the Cocktails list
+function smoothPagination() {
   var links = document.getElementsByClassName("page-link")
 
   // Gets each anchor of the pagination gem
@@ -11,4 +11,6 @@ $(document).ready(function smoothPagination() {
       link.href = link.href + '#container-cards';
     };
   });
-});
+};
+
+export { smoothPagination };
