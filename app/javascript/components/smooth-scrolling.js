@@ -1,6 +1,6 @@
-// Method that adds smooth scrolling to the same page links
-$(document).ready(function smoothScrolling(){
-  $("a").on('click', function(event) {
+// Function that adds smooth scrolling to the same page links
+function smoothScrolling() {
+  $("#scroller").on('click', function(event) {
     // Makes sure this.hash has a value before overriding default behavior
     if (this.hash !== "") {
       // Prevents default anchor click behavior
@@ -17,7 +17,6 @@ $(document).ready(function smoothScrolling(){
       });
     }
   });
-});
+};
 
-// For some reason, exporting more than one JS file is giving a bug...
-// As such, this file was directly introduced in Cocktail#Index...
+export { smoothScrolling };

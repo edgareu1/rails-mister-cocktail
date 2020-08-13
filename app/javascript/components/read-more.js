@@ -1,6 +1,6 @@
 // Function that will hide the text that exceds a certain length, while giving the user the option
 // to view it (view more); if this option is selected, the user may also choose 'read less'
-$(document).ready(function readMore() {
+function readMore() {
   var showChar = 140;
   var ellipsestext = "...";
   var moretext = "Read more";
@@ -40,4 +40,6 @@ $(document).ready(function readMore() {
 
     return false;
   });
-});
+};
+
+export { readMore };
