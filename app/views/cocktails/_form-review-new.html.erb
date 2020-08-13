@@ -1,4 +1,4 @@
-<%= simple_form_for [@cocktail, @review] do |f| %>
+<%= simple_form_for([@cocktail, @review], remote: true) do |f| %>
   <div class="stars">
     <%= f.collection_radio_buttons :rating, [[5], [4], [3], [2], [1]], :first, :last, item_wrapper_tag: false, boolean_style: :inline do |b| %>
     <%= b.radio_button + b.label {''} %>

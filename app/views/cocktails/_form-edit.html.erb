@@ -1,4 +1,4 @@
-<%= simple_form_for @cocktail do |f| %>
+<%= simple_form_for(@cocktail, remote: true) do |f| %>
   <table style="width: 95%">
     <tr>
       <td><label class="string required" for="cocktail_name">Name <abbr title="required">*</abbr></label></td>

@@ -1,4 +1,4 @@
-<%= simple_form_for [@cocktail, @dose] do |f| %>
+<%= simple_form_for([@cocktail, @dose], remote: true) do |f| %>
   <%= f.association :ingredient, collection: Ingredient.order('name ASC'), selected: Ingredient.find_by(name: "Ice").id %>
   <%= f.input :description, label: false, placeholder: "Specify quantity" %>
   <%= f.button :submit, class: "btn btn-ghost" %>
