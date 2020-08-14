@@ -65,7 +65,7 @@
       </div>
     </div>
 
-    <div class="container-general" style="margin: 20px 0 10px">
+    <div class="container-general" id="ingredients-list" style="margin: 20px 0 10px">
       <ul style="min-width: 630px">
         <div style="display: flex">
           <h3>Ingredients</h3>
@@ -84,7 +84,7 @@
           <% @cocktail.doses.sort_by {|dose| dose.ingredient.name }.each do |dose| %>
             <li style="list-style: none; display: flex; align-items: center; margin: 10px 0 0 10px">
               <% if @cocktail.editable %>
-                <%= link_to dose_path(dose), method: :delete, data: {confirm: "Are you sure?"} do %>
+                <%= link_to dose_path(dose), method: :delete, data: {confirm: "Are you sure?", remote: true} do %>
                   <i class="fas fa-trash-alt" style="margin-right: 15px; font-size: 16px; color: white"></i>
                 <% end %>
               <% end %>
@@ -102,7 +102,7 @@
       </ul>
     </div>
 
-    <div class="container-general" style="margin: 10px 0; padding: 10px 20px">
+    <div class="container-general" id="instructions-list" style="margin: 10px 0; padding: 10px 20px">
       <div style="display: flex">
         <h3>Instructions</h3>
 
@@ -121,7 +121,7 @@
       <% end %>
     </div>
 
-    <ul class="container-general" style="margin: 10px 0; padding: 10px 20px">
+    <ul class="container-general" id="reviews-list" style="margin: 10px 0; padding: 10px 20px">
       <div style="display: flex">
         <h3>Reviews</h3>
         <%= link_to "New Review", data: { toggle: "modal", target: "#ModalNewReview" }, class: "white-icon" do %>

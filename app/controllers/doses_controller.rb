@@ -10,7 +10,7 @@ class DosesController < ApplicationController
       @dose.cocktail = @cocktail
 
       if @dose.save
-        redirect_to cocktail_path(@cocktail)
+        redirect_to cocktail_path(@cocktail, anchor: "ingredients-list")
       else
         @review = Review.new
         render 'cocktails/show'
@@ -23,14 +23,14 @@ class DosesController < ApplicationController
     @dose = @cocktail.doses.find_by(ingredient_id: params["dose"]["ingredient_id"])
     @dose.update(dose_params)
 
-    redirect_to cocktail_path(@cocktail)
+    redirect_to cocktail_path(@cocktail, anchor: "ingredients-list")
   end
 
   def destroy
     @dose = Dose.find(params[:id])
     @dose.destroy
 
-    redirect_to cocktail_path(@dose.cocktail)
+    redirect_to cocktail_path(@dose.cocktail, anchor: "ingredients-list")
   end
 
   private
