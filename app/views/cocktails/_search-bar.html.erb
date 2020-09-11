@@ -1,0 +1,13 @@
+<%= form_tag cocktails_path, remote: true, method: :get do %>
+  <%= text_field_tag :query,
+    params[:query],
+    class: "form-control",
+    id: "search-input",
+    placeholder: "Cocktail name",
+    autocomplete: "off"
+  %>
+
+  <button type="submit">
+    <i class="fa fa-search" aria-hidden="true"></i>
+  </button>
+<% end %>

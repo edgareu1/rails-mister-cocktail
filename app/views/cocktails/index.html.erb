@@ -15,10 +15,7 @@
 
 <div id="container-cards">
   <div class="sorter">
-    <form action="/cocktails#container-cards" accept-charset="UTF-8" method="get">
-      <input type="text" name="query" id="query" class="form-control" placeholder="Cocktail name">
-      <button type="submit"><i class="fa fa-search"></i></button>
-    </form>
+    <%= render "search-bar" %>
 
     <%= link_to "Rating", cocktails_path(sort_by: "rating"), remote: true %>
     <%= link_to "Abc", cocktails_path(sort_by: "abc"), remote: true %>
