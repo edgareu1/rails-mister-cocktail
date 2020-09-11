@@ -4,6 +4,12 @@ class CocktailsController < ApplicationController
   def index
     @cocktail = Cocktail.new
     index_reload
+
+    # For the AJAX requests
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
