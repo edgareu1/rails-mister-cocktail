@@ -1,0 +1,17 @@
+<% @cocktails_sorted.each do |cocktail| %>
+  <%= link_to cocktail_path(cocktail) do %>
+    <div class="card" data-aos="fade-zoom-in" data-aos-duration="400">
+      <div class="img-card" style="background-image: url('<%= cl_image_path cocktail.photo.key, height: 250, width: 250, crop: :fill %>')"></div>
+
+      <div class="text-card">
+        <h5><%= cocktail.name %></h5>
+
+        <% if cocktail.reviews.empty? %>
+          <p>Not rated</p>
+        <% else %>
+          <p><%= cocktail.rating_average.round(1) %> ★</p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
