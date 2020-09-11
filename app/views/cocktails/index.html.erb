@@ -20,12 +20,12 @@
       <button type="submit"><i class="fa fa-search"></i></button>
     </form>
 
-    <%= link_to "Rating", cocktails_path(sort_by: "rating", anchor: "container-cards") %>
-    <%= link_to "Abc", cocktails_path(sort_by: "abc", anchor: "container-cards") %>
-    <%= link_to "Filter", cocktails_path(sort_by: "ingredients", anchor: "container-cards"), data: { toggle: "modal", target: "#ModalCocktailsFilter" } %>
+    <%= link_to "Rating", cocktails_path(sort_by: "rating"), remote: true %>
+    <%= link_to "Abc", cocktails_path(sort_by: "abc"), remote: true %>
+    <%= link_to "Filter", cocktails_path(sort_by: "ingredients"), data: { toggle: "modal", target: "#ModalCocktailsFilter" } %>
   </div>
 
-  <div class="cards">
+  <div id="cocktails-list">
     <%= render "cocktails-list" %>
   </div>
 
