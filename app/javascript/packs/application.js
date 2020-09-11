@@ -22,7 +22,7 @@ import { smoothPagination } from '../components/smooth-pagination';
 import { smoothScrolling } from '../components/smooth-scrolling';
 
 document.addEventListener('turbolinks:load', () => {
-    readMore();
-    smoothPagination();
-    smoothScrolling();
+  readMore();
+  smoothPagination();
+  smoothScrolling();
 });

@@ -1,16 +1,24 @@
-// Function that makes the pagination link pages scroll down to the Cocktails list
+// Function that makes the pagination links scroll up the beginning of the Cocktails list
 function smoothPagination() {
-  var links = document.getElementsByClassName("page-link")
+  // Get the Y Coordinate of the Cocktail list
+  const scrollCoordY = document.getElementById('container-cards')
+                               .offsetTop;
 
-  // Gets each anchor of the pagination gem
-  Array.prototype.forEach.call(links, link => {
-    const link_ref = link.href
+  let anchors = document.getElementsByClassName("page-link"); // Get the links of the pagination
 
-    // Adds to the current href the anchor of the list
-    if (typeof link_ref !== "undefined") {
-      link.href = link.href + '#container-cards';
-    };
-  });
-};
+  // For each of the links do...
+  for (let anchor of anchors) {
+    const anchorRef = anchor.href;
+
+    if (typeof anchorRef !== "undefined") {
+      anchor.setAttribute("data-remote", "true"); // Ajaxify the link
+
+      // Upon clicking on the link scroll to the beginning of the Cocktails list
+      anchor.addEventListener('click', () => {
+        window.scrollTo(0, scrollCoordY);
+      });
+    }
+  }
+}
 
 export { smoothPagination };
