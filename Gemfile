@@ -67,3 +67,5 @@ gem 'pg_search', '~> 2.3.0'
 
 # Seed fake data
 gem 'faker'
+
+gem 'turbolinks_render'
