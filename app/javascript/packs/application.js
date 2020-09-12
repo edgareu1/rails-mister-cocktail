@@ -24,5 +24,7 @@ import { smoothScrolling } from '../components/smooth-scrolling';
 document.addEventListener('turbolinks:load', () => {
   readMore();
   smoothPagination();
-  smoothScrolling();
+
+  const anchor = document.getElementById('scroller');
+  smoothScrolling(anchor, '#container-cards', 600);
 });

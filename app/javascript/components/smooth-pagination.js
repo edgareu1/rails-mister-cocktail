@@ -1,22 +1,19 @@
-// Function that makes the pagination links scroll up the beginning of the Cocktails list
+import { smoothScrolling } from './smooth-scrolling';
+
+// Function that makes the pagination anchors scroll up the beginning of the Cocktails list
 function smoothPagination() {
-  // Get the Y Coordinate of the Cocktail list
-  const scrollCoordY = document.getElementById('container-cards')
-                               .offsetTop;
+  const anchors = document.getElementsByClassName("page-link"); // Get the anchors of the pagination
 
-  let anchors = document.getElementsByClassName("page-link"); // Get the links of the pagination
-
-  // For each of the links do...
+  // For each of the anchors do...
   for (let anchor of anchors) {
     const anchorRef = anchor.href;
 
+    // Make sure the anchor has a page destination
     if (typeof anchorRef !== "undefined") {
-      anchor.setAttribute("data-remote", "true"); // Ajaxify the link
+      anchor.setAttribute("data-remote", "true"); // Ajaxify the anchor
 
-      // Upon clicking on the link scroll to the beginning of the Cocktails list
-      anchor.addEventListener('click', () => {
-        window.scrollTo(0, scrollCoordY);
-      });
+      // Upon clicking on the anchor, scroll to the beginning of the Cocktails list
+      smoothScrolling(anchor, '#container-cards', 250)
     }
   }
 }
