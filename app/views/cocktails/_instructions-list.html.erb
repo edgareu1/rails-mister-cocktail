@@ -1,0 +1,16 @@
+<div style="display: flex">
+  <h3>Instructions</h3>
+
+  <% if @cocktail.editable %>
+    <%= link_to "New Instructions", data: { toggle: "modal", target: "#ModalAddInstructions" }, class: "white-icon" do %>
+      <i class="fas fa-edit"></i>
+    <% end %>
+  <% end %>
+</div>
+
+<!-- Display the Instructions -->
+<% if @cocktail.instructions == "NA" || @cocktail.instructions.empty? %>
+  <p style="margin: 10px; font-size: 14px">No instructions avaliable...</p>
+<% else %>
+  <p style="margin-left: 10px; font-size: 14px; text-align: justify"><%= @cocktail.instructions %></p>
+<% end %>

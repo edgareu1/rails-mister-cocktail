@@ -38,10 +38,10 @@ class CocktailsController < ApplicationController
     @cocktail = Cocktail.find(params[:id])
     @cocktail.update(cocktail_params)
 
-    if params["cocktail"]["instructions"].present?
-      redirect_to cocktail_path(@cocktail, anchor: "instructions-list")
-    else
-      redirect_to cocktail_path(@cocktail)
+    # For the AJAX requests
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 
