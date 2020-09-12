@@ -5,7 +5,13 @@ class ReviewsController < ApplicationController
     @review.cocktail = @cocktail
 
     if @review.save
-      redirect_to cocktail_path(@cocktail, anchor: "reviews-list")
+      # For the AJAX requests
+      respond_to do |format|
+        format.html
+        format.js
+      end
+
+    # In case there's an error saving the new review
     else
       @dose = Dose.new
       render 'cocktails/show'
