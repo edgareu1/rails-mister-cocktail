@@ -22,9 +22,12 @@ import { smoothPagination } from '../components/smooth-pagination';
 import { smoothScrolling } from '../components/smooth-scrolling';
 
 document.addEventListener('turbolinks:load', () => {
-  readMore();
-  smoothPagination();
-
   const anchor = document.getElementById('scroller');
-  smoothScrolling(anchor, '#container-cards', 600);
+
+  if (anchor) {
+    smoothPagination();
+    smoothScrolling(anchor, '#container-cards', 600);
+  } else {
+    readMore();
+  }
 });
