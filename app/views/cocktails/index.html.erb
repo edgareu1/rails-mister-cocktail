@@ -15,37 +15,16 @@
 
 <div id="container-cards">
   <div class="sorter">
-    <form action="/cocktails#container-cards" accept-charset="UTF-8" method="get">
-      <input type="text" name="query" id="query" class="form-control" placeholder="Cocktail name">
-      <button type="submit"><i class="fa fa-search"></i></button>
-    </form>
+    <%= render "search-bar" %>
 
-    <%= link_to "Rating", cocktails_path(sort_by: "rating", anchor: "container-cards") %>
-    <%= link_to "Abc", cocktails_path(sort_by: "abc", anchor: "container-cards") %>
-    <%= link_to "Filter", cocktails_path(sort_by: "ingredients", anchor: "container-cards"), data: { toggle: "modal", target: "#ModalCocktailsFilter" } %>
+    <%= link_to "Rating", cocktails_path(sort_by: "rating"), remote: true %>
+    <%= link_to "Abc", cocktails_path(sort_by: "abc"), remote: true %>
+    <%= link_to "Filter", cocktails_path(sort_by: "ingredients"), data: { toggle: "modal", target: "#ModalCocktailsFilter" } %>
   </div>
 
-  <div class="cards">
-    <% @cocktails_sorted.each do |cocktail| %>
-      <%= link_to cocktail_path(cocktail) do %>
-        <div class="card" data-aos="fade-zoom-in" data-aos-duration="400">
-          <div class="img-card" style="background-image: url('<%= cl_image_path cocktail.photo.key, height: 250, width: 250, crop: :fill %>')"></div>
-
-          <div class="text-card">
-            <h5><%= cocktail.name %></h5>
-
-            <% if cocktail.reviews.empty? %>
-              <p>Not rated</p>
-            <% else %>
-              <p><%= cocktail.rating_average.round(1) %> ★</p>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
+  <div id="cocktails-list">
+    <%= render "cocktails-list" %>
   </div>
-
-  <%= will_paginate @cocktails_sorted, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, previous_label: "&laquo;", next_label: "&raquo;" %>
 </div>
 
 
