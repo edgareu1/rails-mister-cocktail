@@ -1,1 +1,18 @@
 document.getElementById("doses-list").innerHTML = "<%= j render partial: "doses-list" %>";
+
+document.querySelector('#ModalNewDose button').click();     // Close Modal
+document.getElementById('dose_description').value = '';     // Empty the description field
+
+// Get the list the of options
+if (typeof ingredientOptions === 'undefined') {
+  var ingredientOptions = document.querySelectorAll('#dose_ingredient_id option');
+}
+
+// Select the default ingredient (ice with value 8514)
+for (let i = 0; i < ingredientOptions.length; i++) {
+  if (ingredientOptions[i].selected == 'selected') {
+    ingredientOptions[i].selected = '';
+  } else if (ingredientOptions[i].value == 8514) {
+    ingredientOptions[i].selected = 'selected';
+  }
+}

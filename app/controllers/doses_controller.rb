@@ -8,15 +8,8 @@ class DosesController < ApplicationController
       @dose = Dose.new(dose_params)
       @dose.cocktail = @cocktail
 
-      if @dose.save
-        # For the AJAX requests
-        respond_to do |format|
-          format.html
-          format.js
-        end
-
       # In case there's an error saving the new dose
-      else
+      unless @dose.save
         @review = Review.new
         render 'cocktails/show'
       end
@@ -28,18 +21,18 @@ class DosesController < ApplicationController
 
   def update
     @dose = @cocktail.doses.find_by(ingredient_id: params["dose"]["ingredient_id"])
-    @dose.update(dose_params)
+    successful_update = @dose.update(dose_params)
+
+    # In case there's an error saving the new dose
+    unless successful_update
+      @review = Review.new
+      render 'cocktails/show'
+    end
   end
 
   def destroy
     @dose = Dose.find(params[:id])
     @dose.destroy
-
-    # For the AJAX requests
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   private
