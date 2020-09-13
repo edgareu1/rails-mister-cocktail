@@ -1,8 +1,14 @@
+.stars-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 10px 5px;
+}
+
 .stars {
   float: left;
   overflow: hidden;
   width: 200px;
-  margin: 0 0 10px 5px;
+  margin: 0;
 }
 
 .stars input[type=radio] {

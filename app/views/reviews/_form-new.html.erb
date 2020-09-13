@@ -1,10 +1,11 @@
 <%= simple_form_for([@cocktail, @review], remote: true) do |f| %>
-  <div class="stars">
-    <%= f.collection_radio_buttons :rating, [[5], [4], [3], [2], [1]], :first, :last, item_wrapper_tag: false, boolean_style: :inline do |b| %>
-    <%= b.radio_button + b.label {''} %>
-    <% end %>
+  <div class="stars-container">
+    <div class="stars">
+      <%= f.collection_radio_buttons :rating, [[5], [4], [3], [2], [1]], :first, :last, item_wrapper_tag: false, boolean_style: :inline do |b| %>
+      <%= b.radio_button + b.label {''} %>
+      <% end %>
+    </div>
   </div>
-
   <%= f.input :content, label: false, placeholder: "Review content" %>
   <%= f.button :submit, class: "btn btn-ghost" %>
 <% end %>

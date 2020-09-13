@@ -3,12 +3,7 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @cocktail = Cocktail.find(params[:cocktail_id])
     @review.cocktail = @cocktail
-
-    # In case there's an error saving the new review
-    unless @review.save
-      @dose = Dose.new
-      render 'cocktails/show'
-    end
+    @review.save
   end
 
   private
