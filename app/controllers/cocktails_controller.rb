@@ -22,9 +22,6 @@ class CocktailsController < ApplicationController
 
     if @cocktail.save
       redirect_to cocktail_path(@cocktail)
-    else
-      index_reload
-      render 'cocktails/index'
     end
   end
 

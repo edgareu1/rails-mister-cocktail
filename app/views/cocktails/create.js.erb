@@ -1,0 +1,39 @@
+// If there are any errors in the submited form, then...
+<% if @cocktail.errors.any? %>
+  var boxCocktailName = document.querySelector('.cocktail_name');     // Get the container of the Name input
+  var boxCocktailPhoto = document.querySelector('.cocktail_photo');   // Get the container of the Photo input
+
+  // If it exists, remove any Name input related error message
+  if (boxCocktailName.childElementCount > 1) {
+    boxCocktailName.classList.remove('form-group-invalid');
+    document.querySelector('.cocktail_name input').classList.remove('is-invalid');
+    document.querySelector('.cocktail_name .invalid-feedback').remove();
+  }
+
+  // If it exists, remove any Photo input related error message
+  if (boxCocktailPhoto.childElementCount > 2) {
+    document.querySelector('.cocktail_photo .invalid-feedback').remove();
+  }
+
+  // If here are Name input related errors, insert an error message
+  <% unless @cocktail.errors.messages[:name].empty? %>
+    var nameNode = document.createElement('div');
+    nameNode.classList = 'invalid-feedback';
+    nameNode.innerHTML = "Name <%= @cocktail.errors.messages[:name].first %>";
+
+    boxCocktailName.classList.add('form-group-invalid');
+    document.querySelector('.cocktail_name input').classList.add('is-invalid');
+    boxCocktailName.appendChild(nameNode);
+  <% end %>
+
+  // If here are Photo input related errors, insert an error message
+  <% unless @cocktail.errors.messages[:photo].empty? %>
+    var photoNode = document.createElement('div');
+    photoNode.classList = 'invalid-feedback';
+    photoNode.innerHTML = "Photo <%= @cocktail.errors.messages[:photo].first %>";
+
+    boxCocktailPhoto.classList.add('form-group-invalid');
+    document.querySelector('.cocktail_photo input').classList.add('is-invalid');
+    boxCocktailPhoto.appendChild(photoNode);
+  <% end %>
+<% end %>

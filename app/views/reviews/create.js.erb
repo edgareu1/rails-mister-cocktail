@@ -1,46 +1,40 @@
 var starsContainer = document.querySelector('.stars-container');    // Get the container of the Rating input
 var boxReviewContent = document.querySelector('.review_content');   // Get the container of the Content input
 
+// If it exists, remove any Rating input related error message
+if (starsContainer.childElementCount > 1) {
+  document.querySelector('.stars-container .invalid-feedback').remove();
+}
+
+// If it exists, remove any Content input related error message
+if (boxReviewContent.childElementCount > 1) {
+  boxReviewContent.classList.remove('form-group-invalid');
+  document.querySelector('.review_content textarea').classList.remove('is-invalid');
+  document.querySelector('.review_content .invalid-feedback').remove();
+}
+
 // If there are any errors in the submited form, then...
 <% if @review.errors.any? %>
-  // If there are no errors in the Rating input, then remove any error message if it exists
-  <% if @review.errors.messages[:rating].empty? %>
-    if (starsContainer.childElementCount > 1) {
-      document.querySelector('.stars-container .invalid-feedback').remove();
-    }
+  // If here are Rating input related errors, insert an error message
+  <% unless @review.errors.messages[:rating].empty? %>
+    var ratingNode = document.createElement('div');
+    ratingNode.classList = 'invalid-feedback';
+    ratingNode.style.display = 'block';
+    ratingNode.style.margin = '0';
+    ratingNode.innerHTML = "Rating <%= @review.errors.messages[:rating].first %>";
 
-  // Otherwise insert the error message (making sure only one error message is displayed)
-  <% else %>
-    if (starsContainer.childElementCount < 2) {
-      var ratingNode = document.createElement('div');
-      ratingNode.classList = 'invalid-feedback';
-      ratingNode.style.display = 'block';
-      ratingNode.style.margin = '0';
-      ratingNode.innerHTML = "Rating <%= @review.errors.messages[:rating].first %>";
-
-      document.querySelector('.stars-container').appendChild(ratingNode);
-    }
+    document.querySelector('.stars-container').appendChild(ratingNode);
   <% end %>
 
-  // If there are no errors in the Content input, then remove any error message if it exists
-  <% if @review.errors.messages[:content].empty? %>
-    if (boxReviewContent.childElementCount > 1) {
-      boxReviewContent.classList.remove('form-group-invalid');
-      document.querySelector('.review_content textarea').classList.remove('is-invalid');
-      document.querySelector('.review_content .invalid-feedback').remove();
-    }
+  // If here are Content input related errors, insert an error message
+  <% unless @review.errors.messages[:content].empty? %>
+    var contentNode = document.createElement('div');
+    contentNode.classList = 'invalid-feedback';
+    contentNode.innerHTML = "Content <%= @review.errors.messages[:content].first %>";
 
-  // Otherwise insert the error message (making sure only one error message is displayed)
-  <% else %>
-    if (boxReviewContent.childElementCount < 2) {
-      var contentNode = document.createElement('div');
-      contentNode.classList = 'invalid-feedback';
-      contentNode.innerHTML = "Content <%= @review.errors.messages[:content].first %>";
-
-      boxReviewContent.classList.add('form-group-invalid');
-      document.querySelector('.review_content textarea').classList.add('is-invalid');
-      boxReviewContent.appendChild(contentNode);
-    }
+    boxReviewContent.classList.add('form-group-invalid');
+    document.querySelector('.review_content textarea').classList.add('is-invalid');
+    boxReviewContent.appendChild(contentNode);
   <% end %>
 
 // Otherwise, if there are no errors in the submited form...

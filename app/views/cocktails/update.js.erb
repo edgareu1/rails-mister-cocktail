@@ -1,6 +1,34 @@
-document.querySelector('.container-page-headers h1').innerHTML = "<%= @cocktail.name %>"
-document.getElementById("cocktail-profile").innerHTML = "<%= j render partial: "cocktail-profile" %>";
-document.getElementById("instructions-list").innerHTML = "<%= j render partial: "instructions-list" %>";
+var boxCocktailName = document.querySelector('.cocktail_name');     // Get the container of the Name input
 
-document.querySelector('#ModalEditCocktail button').click();        // Close Edit Cocktail Modal
-document.querySelector('#ModalAddInstructions button').click();     // Close Add Instructions Modal
+// If it exists, remove any Name input related error message
+if (boxCocktailName.childElementCount > 1) {
+  boxCocktailName.classList.remove('form-group-invalid');
+  document.querySelector('.cocktail_name input').classList.remove('is-invalid');
+  document.querySelector('.cocktail_name .invalid-feedback').remove();
+}
+
+// If there are any errors in the submited form, then...
+<% if @cocktail.errors.any? %>
+  // If here are Name input related errors, insert an error message
+  <% unless @cocktail.errors.messages[:name].empty? %>
+    var nameNode = document.createElement('div');
+    nameNode.classList = 'invalid-feedback';
+    nameNode.innerHTML = "Name <%= @cocktail.errors.messages[:name].first %>";
+
+    boxCocktailName.classList.remove('form-group-valid');
+    boxCocktailName.classList.add('form-group-invalid');
+    document.querySelector('.cocktail_name input').classList.remove('is-valid');
+    document.querySelector('.cocktail_name input').classList.add('is-invalid');
+    boxCocktailName.appendChild(nameNode);
+  <% end %>
+
+// Otherwise, if there are no errors in the submited form...
+<% else %>
+  // Refresh the page content
+  document.querySelector('.container-page-headers h1').innerHTML = "<%= @cocktail.name %>"
+  document.getElementById("cocktail-profile").innerHTML = "<%= j render partial: "cocktail-profile" %>";
+  document.getElementById("instructions-list").innerHTML = "<%= j render partial: "instructions-list" %>";
+
+  document.querySelector('#ModalEditCocktail button').click();        // Close Edit Cocktail Modal
+  document.querySelector('#ModalAddInstructions button').click();     // Close Add Instructions Modal
+<% end %>
