@@ -3,13 +3,7 @@ class ReviewsController < ApplicationController
     @review = Review.new(review_params)
     @cocktail = Cocktail.find(params[:cocktail_id])
     @review.cocktail = @cocktail
-
-    if @review.save
-      redirect_to cocktail_path(@cocktail, anchor: "reviews-list")
-    else
-      @dose = Dose.new
-      render 'cocktails/show'
-    end
+    @review.save
   end
 
   private

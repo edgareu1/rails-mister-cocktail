@@ -38,3 +38,7 @@
 .form-group > textarea {
   height: 160px;
 }
+
+.form-control.is-valid {
+  background-position: right calc(1em + 0.1875rem) center !important;
+}

@@ -1,26 +1,32 @@
-<%= simple_form_for @cocktail do |f| %>
+<%= simple_form_for(@cocktail, remote: true) do |f| %>
   <table style="width: 95%">
     <tr>
       <td><label class="string required" for="cocktail_name">Name <abbr title="required">*</abbr></label></td>
       <td><%= f.input :name, placeholder: "Please insert", label: false %></td>
     </tr>
+
     <tr>
-      <td><label class="select optional" for="cocktail_alcoholic">Alcoholic</label></td>
-      <td><%= f.input :alcoholic, prompt: "Please select", label: false, default: "Optional",
-        collection: ['Optional', 'Yes', 'No']
-      %></td>
+      <td><label class="select required" for="cocktail_alcoholic">Alcoholic</label></td>
+      <td>
+        <%= f.input :alcoholic, prompt: "Please select", label: false, default: "Optional",
+            collection: ['Optional', 'Yes', 'No'] %>
+      </td>
     </tr>
+
     <tr>
       <td><label class="select required" for="cocktail_category_id">Category</label></td>
-      <td><%= f.association :category, collection: Category.order('name ASC'),
-        label_method: :name, label: false, selected: Category.find_by(name: "NA").id
-      %></td>
+      <td>
+        <%= f.association :category, collection: Category.order('name ASC'),
+            label_method: :name, label: false, default: Category.find_by(name: "NA").id %>
+      </td>
     </tr>
+
     <tr>
       <td><label class="select required" for="cocktail_glass_id">Glass</label></td>
-      <td><%= f.association :glass, collection: Glass.order('name ASC'),
-        label_method: :name, label: false, selected: Glass.find_by(name: "NA").id
-      %></td>
+      <td>
+        <%= f.association :glass, collection: Glass.order('name ASC'),
+            label_method: :name, label: false, default: Glass.find_by(name: "NA").id %>
+      </td>
     </tr>
   </table>
 

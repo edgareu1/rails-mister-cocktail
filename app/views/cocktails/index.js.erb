@@ -1,7 +1,20 @@
 document.getElementById("cocktails-list").innerHTML = "<%= j render partial: "cocktails-list" %>";
-smoothPagination();
 
-// Looking for a way to import this functions instead of repeating the code...
+document.querySelector('#ModalCocktailsFilter button').click();   // Close Modal
+
+document.getElementById('only_this').checked = false;   // Clear the 'Only this' option
+
+// Get the list of Filter select options
+var selectOptions = document.querySelectorAll('#ingredients_ option, #categories_ option');
+
+// Clear the Filter select options
+for (let i = 0; i < selectOptions.length; i++) {
+  selectOptions[i].selected = false;
+}
+
+smoothPagination();   // Make page navigation smoother
+
+// I am looking for a way to import this functions instead of repeating the code...
 
 // Function that makes the pagination anchors scroll up the beginning of the Cocktails list
 function smoothPagination() {

@@ -4,12 +4,6 @@ class CocktailsController < ApplicationController
   def index
     @cocktail = Cocktail.new
     index_reload
-
-    # For the AJAX requests
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   def show
@@ -28,21 +22,12 @@ class CocktailsController < ApplicationController
 
     if @cocktail.save
       redirect_to cocktail_path(@cocktail)
-    else
-      index_reload
-      render 'cocktails/index'
     end
   end
 
   def update
     @cocktail = Cocktail.find(params[:id])
     @cocktail.update(cocktail_params)
-
-    if params["cocktail"]["instructions"].present?
-      redirect_to cocktail_path(@cocktail, anchor: "instructions-list")
-    else
-      redirect_to cocktail_path(@cocktail)
-    end
   end
 
   def destroy

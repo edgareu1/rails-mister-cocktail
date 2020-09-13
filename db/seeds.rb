@@ -30,7 +30,7 @@ end
 # Populates the Glass and Category tables with controlable values
 # The API is too unpredictable in regards to the names given to this classes
 glasses_array = [
-  "NA", "Champagne Flute", "Collins Glass", "Cocktail Glass", "Goblet", "Mug",
+  "NA", "Collins Glass", "Cocktail Glass", "Flute Glass", "Goblet", "Mug",
   "Plastic Cup", "Shot Glass", "Teacup", "Vodka Glass", "Wine Glass", "Yard"
 ]
 
