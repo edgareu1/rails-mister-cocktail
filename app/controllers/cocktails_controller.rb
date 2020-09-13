@@ -4,12 +4,6 @@ class CocktailsController < ApplicationController
   def index
     @cocktail = Cocktail.new
     index_reload
-
-    # For the AJAX requests
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   def show
@@ -37,12 +31,6 @@ class CocktailsController < ApplicationController
   def update
     @cocktail = Cocktail.find(params[:id])
     @cocktail.update(cocktail_params)
-
-    # For the AJAX requests
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   def destroy

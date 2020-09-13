@@ -1,2 +1,6 @@
+document.querySelector('.container-page-headers h1').innerHTML = "<%= @cocktail.name %>"
 document.getElementById("cocktail-profile").innerHTML = "<%= j render partial: "cocktail-profile" %>";
 document.getElementById("instructions-list").innerHTML = "<%= j render partial: "instructions-list" %>";
+
+document.querySelector('#ModalEditCocktail button').click();        // Close Edit Cocktail Modal
+document.querySelector('#ModalAddInstructions button').click();     // Close Add Instructions Modal
