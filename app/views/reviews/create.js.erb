@@ -1,1 +1,12 @@
 document.getElementById("reviews-list").innerHTML = "<%= j render partial: "reviews-list" %>";
+
+document.querySelector('#ModalNewReview button').click();     // Close Modal
+document.getElementById('review_content').value = '';         // Empty the content field
+
+// Get the list of radio box boxes
+var radioBox = document.querySelectorAll('.stars input');
+
+// Empty the rating radio buttons
+for (let i = 1; i < 6; i++) {
+  radioBox[i].checked = false;
+}
