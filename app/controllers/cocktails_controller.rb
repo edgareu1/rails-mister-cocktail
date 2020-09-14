@@ -4,7 +4,8 @@ class CocktailsController < ApplicationController
   def index
     @cocktail = Cocktail.new
     gon.cocktails_names = Cocktail.all
-                                  .map(&:name)
+                                  .map { |cocktail| capitalize_string(cocktail.name) }
+                                  .sort
                                   .join(' -/- ')
 
     index_reload
@@ -42,6 +43,17 @@ class CocktailsController < ApplicationController
   end
 
   private
+
+  # Method that capitalizes every word of the string passed as an argument
+  def capitalize_string(string)
+    array_strings = string.split(' ')
+
+    if array_strings.size == 1
+      return string.capitalize
+    else
+      return array_strings.map(&:capitalize).join(' ')
+    end
+  end
 
   # Method that prepares the Cocktail#Index page to be displayed
   def index_reload
