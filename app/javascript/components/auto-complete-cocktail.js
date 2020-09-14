@@ -26,10 +26,16 @@ function autoCompleteCocktail() {
     // Iterate over the array of Cocktails
     for (let i = 0; i < coktaislNames.length; i++) {
       // Check if the item matches the search param
-      if (coktaislNames[i].toUpperCase().includes(param.toUpperCase())) {
+      let wordIndex = coktaislNames[i].toUpperCase().indexOf(param.toUpperCase());
+
+      // If it matches then...
+      if (wordIndex >= 0) {
         let cocktailElement = document.createElement("div");
 
-        cocktailElement.innerHTML = coktaislNames[i];
+        // Make the matching letters bold
+        cocktailElement.innerHTML = coktaislNames[i].substr(0, wordIndex);
+        cocktailElement.innerHTML += "<strong>" + coktaislNames[i].substr(wordIndex, param.length) + "</strong>";
+        cocktailElement.innerHTML += coktaislNames[i].substr(wordIndex + param.length);
 
         // Insert the matched item into the autocomplete list
         autoCompleteList.appendChild(cocktailElement);
