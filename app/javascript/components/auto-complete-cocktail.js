@@ -39,6 +39,13 @@ function autoCompleteCocktail() {
 
         // Insert the matched item into the autocomplete list
         autoCompleteList.appendChild(cocktailElement);
+
+        // If the item is clicked upon, then the 'searchField' is filled with that item's value
+        cocktailElement.addEventListener('click', function(e) {
+          searchField.value = coktaislNames[i];
+
+          emptyList();
+        });
       }
     }
   });
