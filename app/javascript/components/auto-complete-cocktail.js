@@ -99,6 +99,12 @@ function autoCompleteCocktail() {
     }
   });
 
+  // If the user clicks outside the 'searchField' or the autocomplete list, then empty the autocomplete list
+  document.addEventListener("click", function(e) {
+    if (e.target.hasAttribute('data-index') || e.target.id == 'search-input') return;
+    emptyList();
+  });
+
   // Empty the autocomplete list
   function emptyList() {
     let autoCompleteList = document.getElementById("autocomplete-list");
