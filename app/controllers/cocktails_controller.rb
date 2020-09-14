@@ -67,7 +67,7 @@ class CocktailsController < ApplicationController
   def cocktails_sorter
     # Filtering by search query
     if params[:query].present?
-      return Cocktail.search_by_name(params[:query])
+      return Cocktail.where("name ILIKE ?", "%#{params[:query]}%")
 
     # Sorting by the cocktails name
     elsif params[:sort_by] == "abc"
