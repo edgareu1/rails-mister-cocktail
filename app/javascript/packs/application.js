@@ -17,6 +17,7 @@ import 'bootstrap';
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
+import { autoCompleteCocktail } from '../components/auto-complete-cocktail';
 import { readMore } from '../components/read-more';
 import { smoothPagination } from '../components/smooth-pagination';
 import { smoothScrolling } from '../components/smooth-scrolling';
@@ -25,6 +26,7 @@ document.addEventListener('turbolinks:load', () => {
   const anchor = document.getElementById('scroller');
 
   if (anchor) {
+    autoCompleteCocktail();
     smoothPagination();
     smoothScrolling(anchor, '#container-cards', 600);
   } else {
