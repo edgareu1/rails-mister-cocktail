@@ -3,6 +3,10 @@ require 'will_paginate/array'
 class CocktailsController < ApplicationController
   def index
     @cocktail = Cocktail.new
+    gon.cocktails_names = Cocktail.all
+                                  .map(&:name)
+                                  .join(' -/- ')
+
     index_reload
   end
 
