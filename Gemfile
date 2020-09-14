@@ -68,4 +68,8 @@ gem 'pg_search', '~> 2.3.0'
 # Seed fake data
 gem 'faker'
 
+# Render PUT forms with AJAX
 gem 'turbolinks_render'
+
+# To pass variables from a controller to a JS file
+gem 'gon'
