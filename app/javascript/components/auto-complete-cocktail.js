@@ -1,13 +1,16 @@
 function autoCompleteCocktail() {
   const searchField = document.getElementById('search-input');    // Search field element
 
-  let indexCounter;   // Variable to track the items index on the autocomplete list
+  // Define two variables to track: the item's index on the autocomplete list;
+  //                                the currently selected item's index;
+  let indexCounter, selectedItemIndex;
 
   searchField.addEventListener('input', (event) => {
     const param = event.target.value.trim();                      // Search param striped of trailing whitespaces
     const coktaislNames = gon.cocktails_names.split(' -/- ');     // Array of Cocktails to search into
 
-    indexCounter = -1;    // The autocomplete list is empty
+    indexCounter = -1;        // The autocomplete list is empty
+    selectedItemIndex = -1;   // No item is selected
 
     let autoCompleteList = document.getElementById("autocomplete-list"); // Get the autocomplete list
 
@@ -58,10 +61,55 @@ function autoCompleteCocktail() {
     }
   });
 
+  // Each time the user presses down a key on the 'searchField'...
+  searchField.addEventListener("keydown", function(e) {
+    // Advance only if the autocomplete list exists and has items
+    let autoCompleteList = document.getElementById("autocomplete-list");
+    if ((!autoCompleteList) || autoCompleteList.childElementCount == 0) return;
+
+    // If the arrow DOWN key is pressed, then the 'selected' item becomes the one with +1 index value
+    if (e.keyCode == 40) {
+      selectedItemIndex++;
+      removeSelected();
+      addSelected();
+
+    // If the arrow UP key is pressed, then the 'selected' item becomes the one with -1 index value
+    } else if (e.keyCode == 38) {
+      selectedItemIndex--;
+      removeSelected();
+      addSelected();
+
+    // If the ENTER key is pressed, then prevent the form from being submitted and simulate the click on the
+    // 'selected' item
+    } else if (e.keyCode == 13) {
+      e.preventDefault();
+
+      autoCompleteList = autoCompleteList.getElementsByTagName("div");
+      if (selectedItemIndex > -1) autoCompleteList[selectedItemIndex].click();
+    }
+  });
+
   // Empty the autocomplete list
   function emptyList() {
     let autoCompleteList = document.getElementById("autocomplete-list");
     if (autoCompleteList) autoCompleteList.innerHTML = '';
+  }
+
+  // Remove the 'selected' classification from the previous 'selected' item
+  function removeSelected() {
+    let selectedElement = document.getElementsByClassName('autocomplete-selected')[0];
+    if (selectedElement) selectedElement.classList.remove("autocomplete-selected");
+  }
+
+  // Get the new 'selected' item (which highlights the item)
+  function addSelected() {
+    let autoCompleteList = document.getElementById("autocomplete-list")
+                                   .getElementsByTagName("div");
+
+    if (selectedItemIndex >= autoCompleteList.length) selectedItemIndex = 0;
+    if (selectedItemIndex < 0) selectedItemIndex = (autoCompleteList.length - 1);
+
+    autoCompleteList[selectedItemIndex].classList.add("autocomplete-selected");
   }
 }
 
