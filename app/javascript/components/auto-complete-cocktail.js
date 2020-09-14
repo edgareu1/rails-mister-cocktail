@@ -1,9 +1,13 @@
 function autoCompleteCocktail() {
   const searchField = document.getElementById('search-input');    // Search field element
 
+  let indexCounter;   // Variable to track the items index on the autocomplete list
+
   searchField.addEventListener('input', (event) => {
     const param = event.target.value.trim();                      // Search param striped of trailing whitespaces
     const coktaislNames = gon.cocktails_names.split(' -/- ');     // Array of Cocktails to search into
+
+    indexCounter = -1;    // The autocomplete list is empty
 
     let autoCompleteList = document.getElementById("autocomplete-list"); // Get the autocomplete list
 
@@ -30,6 +34,10 @@ function autoCompleteCocktail() {
 
       // If it matches then...
       if (wordIndex >= 0) {
+        // Make sure the maximum number of matched items displayed is 5
+        indexCounter++;
+        if (indexCounter > 4) break;
+
         let cocktailElement = document.createElement("div");
 
         // Make the matching letters bold
