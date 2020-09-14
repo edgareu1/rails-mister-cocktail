@@ -5,13 +5,43 @@ function autoCompleteCocktail() {
     const param = event.target.value.trim();                      // Search param striped of trailing whitespaces
     const coktaislNames = gon.cocktails_names.split(' -/- ');     // Array of Cocktails to search into
 
+    let autoCompleteList = document.getElementById("autocomplete-list"); // Get the autocomplete list
+
+    // If the autocomplete list does not exist, then create it
+    if (!autoCompleteList) {
+      autoCompleteList = document.createElement("div");
+      autoCompleteList.setAttribute("id", "autocomplete-list");
+
+      let searchFieldContainer = searchField.parentNode;
+      searchFieldContainer.appendChild(autoCompleteList);
+
+      // Make sure the position of the autocomplete list is relative to the 'searchField'
+      searchFieldContainer.style.position = 'relative';
+
+    // If the autocomplete list already exists, then empty it
+    } else {
+      emptyList();
+    }
+
+    // Iterate over the array of Cocktails
     for (let i = 0; i < coktaislNames.length; i++) {
-      // Iterate over the array of Cocktails and get the elements that include the search param
+      // Check if the item matches the search param
       if (coktaislNames[i].toUpperCase().includes(param.toUpperCase())) {
-        console.log(coktaislNames[i]);
+        let cocktailElement = document.createElement("div");
+
+        cocktailElement.innerHTML = coktaislNames[i];
+
+        // Insert the matched item into the autocomplete list
+        autoCompleteList.appendChild(cocktailElement);
       }
     }
   });
+
+  // Empty the autocomplete list
+  function emptyList() {
+    let autoCompleteList = document.getElementById("autocomplete-list");
+    if (autoCompleteList) autoCompleteList.innerHTML = '';
+  }
 }
 
 export { autoCompleteCocktail };
