@@ -3,6 +3,11 @@ require 'will_paginate/array'
 class CocktailsController < ApplicationController
   def index
     @cocktail = Cocktail.new
+    gon.cocktails_names = Cocktail.all
+                                  .map { |cocktail| capitalize_string(cocktail.name) }
+                                  .sort
+                                  .join(' -/- ')
+
     index_reload
   end
 
@@ -39,6 +44,17 @@ class CocktailsController < ApplicationController
 
   private
 
+  # Method that capitalizes every word of the string passed as an argument
+  def capitalize_string(string)
+    array_strings = string.split(' ')
+
+    if array_strings.size == 1
+      return string.capitalize
+    else
+      return array_strings.map(&:capitalize).join(' ')
+    end
+  end
+
   # Method that prepares the Cocktail#Index page to be displayed
   def index_reload
     @ingredients = Ingredient.all.collect(&:name).sort
@@ -51,7 +67,7 @@ class CocktailsController < ApplicationController
   def cocktails_sorter
     # Filtering by search query
     if params[:query].present?
-      return Cocktail.search_by_name(params[:query])
+      return Cocktail.where("name ILIKE ?", "%#{params[:query]}%")
 
     # Sorting by the cocktails name
     elsif params[:sort_by] == "abc"
