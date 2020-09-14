@@ -2,7 +2,7 @@ function autoCompleteCocktail() {
   const searchField = document.getElementById('search-input');    // Search field element
 
   // Define two variables to track: the item's index on the autocomplete list;
-  //                                the currently selected item's index;
+  //                                and the currently selected item's index;
   let indexCounter, selectedItemIndex;
 
   searchField.addEventListener('input', (event) => {
@@ -30,6 +30,12 @@ function autoCompleteCocktail() {
       emptyList();
     }
 
+    // If the param is empty, then just refresh the page
+    if (param === '') {
+      refreshPageSearch(param);
+      return;
+    };
+
     // Iterate over the array of Cocktails
     for (let i = 0; i < coktaislNames.length; i++) {
       // Check if the item matches the search param
@@ -55,20 +61,23 @@ function autoCompleteCocktail() {
         autoCompleteList.appendChild(cocktailElement);
 
         // If the item is clicked upon, then the 'searchField' is filled with that item's value
-        cocktailElement.addEventListener('click', function(e) {
+        cocktailElement.addEventListener('click', function() {
           searchField.value = coktaislNames[i];
 
+          refreshPageSearch(searchField.value); // Refresh the page with the clicked item as a search param
           emptyList();
         });
 
         // Each time the user hovers it's mouse over an item, it becomes the 'selected' item
-        cocktailElement.addEventListener("mouseover", function(e) {
+        cocktailElement.addEventListener("mouseover", function() {
           selectedItemIndex = cocktailElement.getAttribute('data-index');
           removeSelected();
           addSelected();
         });
       }
     }
+
+    refreshPageSearch(param); // Refresh the page with the search param
   });
 
   // Each time the user presses down a key on the 'searchField'...
@@ -100,8 +109,13 @@ function autoCompleteCocktail() {
   });
 
   // If the user clicks outside the 'searchField' or the autocomplete list, then empty the autocomplete list
+  // Clicking on the dismiss button of a Modal is the AJAX behaviour to assure all Modals are closed. As such this
+  // 'click' event is ingored
   document.addEventListener("click", function(e) {
-    if (e.target.hasAttribute('data-index') || e.target.id == 'search-input') return;
+    if (e.target.id == 'search-input' || e.target.hasAttribute('data-index') || e.target.hasAttribute('data-dismiss')) {
+      return
+    };
+
     emptyList();
   });
 
@@ -109,6 +123,11 @@ function autoCompleteCocktail() {
   function emptyList() {
     let autoCompleteList = document.getElementById("autocomplete-list");
     if (autoCompleteList) autoCompleteList.innerHTML = '';
+  }
+
+  // Use jQuery to refresh the page based on the search param
+  function refreshPageSearch(param) {
+    $.getScript(`/cocktails?query=${param}&commit=Search`);
   }
 
   // Remove the 'selected' classification from the previous 'selected' item
