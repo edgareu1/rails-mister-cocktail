@@ -43,6 +43,9 @@ function autoCompleteCocktail() {
 
         let cocktailElement = document.createElement("div");
 
+        // Save the index of the item in a data attribute
+        cocktailElement.setAttribute('data-index', indexCounter);
+
         // Make the matching letters bold
         cocktailElement.innerHTML = coktaislNames[i].substr(0, wordIndex);
         cocktailElement.innerHTML += "<strong>" + coktaislNames[i].substr(wordIndex, param.length) + "</strong>";
@@ -56,6 +59,13 @@ function autoCompleteCocktail() {
           searchField.value = coktaislNames[i];
 
           emptyList();
+        });
+
+        // Each time the user hovers it's mouse over an item, it becomes the 'selected' item
+        cocktailElement.addEventListener("mouseover", function(e) {
+          selectedItemIndex = cocktailElement.getAttribute('data-index');
+          removeSelected();
+          addSelected();
         });
       }
     }
