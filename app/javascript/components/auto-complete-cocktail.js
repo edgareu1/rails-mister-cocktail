@@ -1,13 +1,16 @@
+// Create an autocomplete list for the Cocktails search while refreshing the page automatically (using AJAX)
+// based on the search parameter
 function autoCompleteCocktail() {
   const searchField = document.getElementById('search-input');    // Search field element
+  const cocktailsNames = gon.cocktails_names.split(' -/- ');      // Array of Cocktails to search into
 
   // Define two variables to track: the item's index on the autocomplete list;
   //                                and the currently selected item's index;
   let indexCounter, selectedItemIndex;
 
+  // Each time the user writes on the 'searchField', then...
   searchField.addEventListener('input', (event) => {
-    const param = event.target.value.trim();                      // Search param striped of trailing whitespaces
-    const coktaislNames = gon.cocktails_names.split(' -/- ');     // Array of Cocktails to search into
+    const param = event.target.value.trim();    // Search param striped of trailing whitespaces
 
     indexCounter = -1;        // The autocomplete list is empty
     selectedItemIndex = -1;   // No item is selected
@@ -37,9 +40,9 @@ function autoCompleteCocktail() {
     };
 
     // Iterate over the array of Cocktails
-    for (let i = 0; i < coktaislNames.length; i++) {
+    for (let i = 0; i < cocktailsNames.length; i++) {
       // Check if the item matches the search param
-      let wordIndex = coktaislNames[i].toUpperCase().indexOf(param.toUpperCase());
+      let wordIndex = cocktailsNames[i].toUpperCase().indexOf(param.toUpperCase());
 
       // If it matches then...
       if (wordIndex >= 0) {
@@ -53,16 +56,16 @@ function autoCompleteCocktail() {
         cocktailElement.setAttribute('data-index', indexCounter);
 
         // Make the matching letters bold
-        cocktailElement.innerHTML = coktaislNames[i].substr(0, wordIndex);
-        cocktailElement.innerHTML += "<strong>" + coktaislNames[i].substr(wordIndex, param.length) + "</strong>";
-        cocktailElement.innerHTML += coktaislNames[i].substr(wordIndex + param.length);
+        cocktailElement.innerHTML = cocktailsNames[i].substr(0, wordIndex);
+        cocktailElement.innerHTML += "<strong>" + cocktailsNames[i].substr(wordIndex, param.length) + "</strong>";
+        cocktailElement.innerHTML += cocktailsNames[i].substr(wordIndex + param.length);
 
         // Insert the matched item into the autocomplete list
         autoCompleteList.appendChild(cocktailElement);
 
         // If the item is clicked upon, then the 'searchField' is filled with that item's value
         cocktailElement.addEventListener('click', function() {
-          searchField.value = coktaislNames[i];
+          searchField.value = cocktailsNames[i];
 
           refreshPageSearch(searchField.value); // Refresh the page with the clicked item as a search param
           emptyList();
@@ -110,7 +113,7 @@ function autoCompleteCocktail() {
 
   // If the user clicks outside the 'searchField' or the autocomplete list, then empty the autocomplete list
   // Clicking on the dismiss button of a Modal is the AJAX behaviour to assure all Modals are closed. As such this
-  // 'click' event is ingored
+  // 'click' event is also ingored
   document.addEventListener("click", function(e) {
     if (e.target.id == 'search-input' || e.target.hasAttribute('data-index') || e.target.hasAttribute('data-dismiss')) {
       return
