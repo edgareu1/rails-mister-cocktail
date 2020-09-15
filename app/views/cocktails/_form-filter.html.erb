@@ -1,16 +1,29 @@
-<%= form_tag cocktails_path, method: 'get', remote: true do %>
-  <div style="display: flex; width: 95%">
-    <div>
-      <h5>Ingredients</h5>
-      <%= check_box_tag(:only_this) %>
-      <%= label_tag(:only_this, "Only this ingredients") %>
-      <%= select_tag 'ingredients[]', options_for_select(@ingredients), multiple: true, size: 9 %>
-    </div>
+<div class="modal fade" id="ModalCocktailsFilter" role="dialog">
+  <div class="modal-dialog" style="min-width: 420px; max-width: 420px">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Cocktails Filter</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
 
-    <div>
-      <h5>Categories</h5>
-      <%= select_tag 'categories[]', options_for_select(@categories), multiple: true, size: 8 %>
-      <%= submit_tag "Filter", name: "sort_by", class: "btn btn-ghost" %>
-    </div>  
+      <div class="modal-body">
+        <%= form_tag cocktails_path, method: 'get', remote: true do %>
+          <div style="display: flex; width: 95%">
+            <div>
+              <h5>Ingredients</h5>
+              <%= check_box_tag(:only_this) %>
+              <%= label_tag(:only_this, "Only this ingredients") %>
+              <%= select_tag 'ingredients[]', options_for_select(@ingredients), multiple: true, size: 9 %>
+            </div>
+
+            <div>
+              <h5>Categories</h5>
+              <%= select_tag 'categories[]', options_for_select(@categories), multiple: true, size: 8 %>
+              <%= submit_tag "Filter", name: "sort_by", class: "btn btn-ghost" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
-<% end %>
+</div>

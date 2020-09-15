@@ -1,35 +1,48 @@
-<%= simple_form_for(@cocktail, remote: true) do |f| %>
-  <table style="width: 95%">
-    <tr>
-      <td><label class="string required" for="cocktail_name">Name <abbr title="required">*</abbr></label></td>
-      <td><%= f.input :name, placeholder: "Please insert", label: false %></td>
-    </tr>
+<div class="modal fade" id="ModalNewCocktail" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">New Cocktail</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
 
-    <tr>
-      <td><label class="select required" for="cocktail_category_id">Category</label></td>
-      <td>
-        <%= f.association :category, collection: Category.order('name ASC'),
-            label_method: :name, label: false, selected: Category.find_by(name: "NA").id %>
-      </td>
-    </tr>
+      <div class="modal-body">
+        <%= simple_form_for(@cocktail, remote: true) do |f| %>
+          <table style="width: 95%">
+            <tr>
+              <td><label class="string required" for="cocktail_name">Name</label></td>
+              <td><%= f.input :name, placeholder: "Please insert", label: false %></td>
+            </tr>
 
-    <tr>
-      <td><label class="select required" for="cocktail_alcoholic">Alcoholic</label></td>
-      <td>
-        <%= f.input :alcoholic, label: false, default: "Optional",
-            collection: ['Optional', 'Yes', 'No'] %>
-      </td>
-    </tr>
+            <tr>
+              <td><label class="select required" for="cocktail_category_id">Category</label></td>
+              <td>
+                <%= f.association :category, collection: Category.order('name ASC'),
+                    label_method: :name, label: false, selected: Category.find_by(name: "NA").id %>
+              </td>
+            </tr>
 
-    <tr>
-      <td><label class="select required" for="cocktail_glass_id">Glass</label></td>
-      <td>
-        <%= f.association :glass, collection: Glass.order('name ASC'),
-            label_method: :name, label: false, selected: Glass.find_by(name: "NA").id %>
-      </td>
-    </tr>
-  </table>
+            <tr>
+              <td><label class="select required" for="cocktail_alcoholic">Alcoholic</label></td>
+              <td>
+                <%= f.input :alcoholic, label: false, default: "Optional",
+                    collection: ['Optional', 'Yes', 'No'] %>
+              </td>
+            </tr>
 
-  <%= f.input :photo, as: :file %>
-  <%= f.button :submit, class: "btn btn-ghost" %>
-<% end %>
+            <tr>
+              <td><label class="select required" for="cocktail_glass_id">Glass</label></td>
+              <td>
+                <%= f.association :glass, collection: Glass.order('name ASC'),
+                    label_method: :name, label: false, selected: Glass.find_by(name: "NA").id %>
+              </td>
+            </tr>
+          </table>
+
+          <%= f.input :photo, as: :file %>
+          <%= f.button :submit, class: "btn btn-ghost" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

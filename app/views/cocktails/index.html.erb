@@ -29,35 +29,8 @@
   </div>
 </div>
 
-
 <!-- Modal Cocktail New Form -->
-<div class="modal fade" id="ModalNewCocktail" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">New Cocktail</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-
-      <div class="modal-body">
-        <%= render "cocktails/form-new" %>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render "cocktails/form-new" %>
 
 <!-- Modal Ingredients Filter -->
-<div class="modal fade" id="ModalCocktailsFilter" role="dialog">
-  <div class="modal-dialog" style="min-width: 420px; max-width: 420px">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Cocktails Filter</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-
-      <div class="modal-body">
-        <%= render "cocktails/form-filter" %>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render "cocktails/form-filter" %>
