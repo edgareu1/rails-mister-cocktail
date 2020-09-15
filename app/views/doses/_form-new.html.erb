@@ -1,5 +1,19 @@
-<%= simple_form_for([@cocktail, @dose], remote: true) do |f| %>
-  <%= f.association :ingredient, collection: Ingredient.order('name ASC'), selected: Ingredient.find_by(name: "Ice").id %>
-  <%= f.input :description, label: false, placeholder: "Specify quantity" %>
-  <%= f.button :submit, class: "btn btn-ghost" %>
-<% end %>
+<div class="modal fade" id="ModalNewDose" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">New Dose</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <%= simple_form_for([@cocktail, @dose], remote: true) do |f| %>
+          <%= f.association :ingredient, collection: Ingredient.order('name ASC'),
+              selected: Ingredient.find_by(name: "Ice").id %>
+          <%= f.input :description, label: false, placeholder: "Specify quantity" %>
+          <%= f.button :submit, class: "btn btn-ghost" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

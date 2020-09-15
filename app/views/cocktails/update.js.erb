@@ -1,29 +1,15 @@
-var boxCocktailName = document.querySelector('.cocktail_name');     // Get the container of the Name input
-
-// If it exists, remove any Name input related error message
-if (boxCocktailName.childElementCount > 1) {
-  boxCocktailName.classList.remove('form-group-invalid');
-  document.querySelector('.cocktail_name input').classList.remove('is-invalid');
-  document.querySelector('.cocktail_name .invalid-feedback').remove();
-}
-
 // If there are any errors in the submited form, then...
 <% if @cocktail.errors.any? %>
-  // If here are Name input related errors, insert an error message
-  <% unless @cocktail.errors.messages[:name].empty? %>
-    var nameNode = document.createElement('div');
-    nameNode.classList = 'invalid-feedback';
-    nameNode.innerHTML = "Name <%= @cocktail.errors.messages[:name].first %>";
-
-    boxCocktailName.classList.remove('form-group-valid');
-    boxCocktailName.classList.add('form-group-invalid');
-    document.querySelector('.cocktail_name input').classList.remove('is-valid');
-    document.querySelector('.cocktail_name input').classList.add('is-invalid');
-    boxCocktailName.appendChild(nameNode);
-  <% end %>
+  // Refresh the input error messages
+  refreshErrorMessages('.cocktail_name', 1, "Name <%= @cocktail.errors.messages[:name].first %>");
+  refreshErrorMessages('.cocktail_photo', 2, "Photo <%= @cocktail.errors.messages[:photo].first %>");
 
 // Otherwise, if there are no errors in the submited form...
 <% else %>
+  // Mark the input fields as valid
+  markInputValid('.cocktail_name');
+  markInputValid('.cocktail_photo');
+
   // Refresh the page content
   document.querySelector('.container-page-headers h1').innerHTML = "<%= @cocktail.name %>"
   document.getElementById("cocktail-profile").innerHTML = "<%= j render partial: "cocktail-profile" %>";
@@ -32,3 +18,49 @@ if (boxCocktailName.childElementCount > 1) {
   document.querySelector('#ModalEditCocktail button').click();        // Close Edit Cocktail Modal
   document.querySelector('#ModalAddInstructions button').click();     // Close Add Instructions Modal
 <% end %>
+
+// Function that refreshes the error messages in the Cocktails#new form
+// Parameters: containerSelector - selector of the container of a specific input;
+//             containerChildrenNum - number of children in that container (without error messages);
+//             errorMessage - the first error message of that input, or it's input denomination if there are no errors;
+function refreshErrorMessages(containerSelector, containerChildrenNum, errorMessage) {
+  var inputContainer = document.querySelector(containerSelector);
+  var inputField = document.querySelector(`${containerSelector} input`);
+
+  // If it exists, remove any input related error message
+  if (inputContainer.childElementCount > containerChildrenNum) {
+    inputContainer.classList.remove('form-group-valid', 'form-group-invalid');
+    inputField.classList.remove('is-valid', 'is-invalid');
+
+    document.querySelector(`${containerSelector} .invalid-feedback`).remove();
+  }
+
+  // If here are input related errors, mark the input as invalid and insert an error message
+  if (errorMessage !== 'Name ' && errorMessage !== 'Photo ') {
+    inputContainer.classList.add('form-group-invalid');
+    inputField.classList.add('is-invalid');
+
+    var Node = document.createElement('div');
+    Node.classList = 'invalid-feedback';
+    Node.innerHTML = errorMessage;
+
+    inputContainer.appendChild(Node);
+
+  // Otherwise mark the input as valid
+  } else {
+    inputContainer.classList.add('form-group-valid');
+    inputField.classList.add('is-valid');
+  }
+}
+
+// Function that marks the input fields as valid
+function markInputValid(containerSelector) {
+  var inputContainer = document.querySelector(containerSelector);
+  var inputField = document.querySelector(`${containerSelector} input`);
+
+  inputContainer.classList.remove('form-group-valid', 'form-group-invalid');
+  inputField.classList.remove('is-valid', 'is-invalid');
+
+  inputContainer.classList.add('form-group-valid');
+  inputField.classList.add('is-valid');
+}

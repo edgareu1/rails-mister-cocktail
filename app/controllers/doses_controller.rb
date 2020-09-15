@@ -23,7 +23,7 @@ class DosesController < ApplicationController
     @dose = @cocktail.doses.find_by(ingredient_id: params["dose"]["ingredient_id"])
     successful_update = @dose.update(dose_params)
 
-    # In case there's an error saving the new dose
+    # In case there's an error saving the new dose (which at the moment is not possible)
     unless successful_update
       @review = Review.new
       render 'cocktails/show'

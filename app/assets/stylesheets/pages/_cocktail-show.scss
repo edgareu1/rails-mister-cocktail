@@ -9,31 +9,43 @@
 .container-page-headers {
   display: flex;
   justify-content: space-between;
-  margin: 0 20px 10px 10px;
+  margin: 0 5px 8px 5px;
 
   h1 {
     color: white;
     font-weight: bold;
+    width: 76%;
+    overflow: hidden;
+    font-size: 38px;
   }
 
-  a {
-    color: white;
-    font-size: 30px;
+  .container-page-actions {
+    width: 24%;
+    margin-left: 10px;
+    display: contents;
+
+    a {
+      color: white;
+      font-size: 26px;
+    }
   }
 }
 
 .container-general {
-  background-color: rgba(255, 0, 0, 0.4);
+  background-color: rgba(255, 0, 0, 0.45);
   padding: 10px;
   border-radius: 5px;
 
   h3, p {
-    color: white;
     text-shadow: 1px 1px rgba(0, 0, 0, 0.8);
   }
 
   h3 {
-    color: rgb(255, 200, 115);
+    color: rgba(255, 255, 255, 1);
+  }
+
+  p {
+    color: rgba(255, 255, 255, 0.9);
   }
 }
 

@@ -1,13 +1,11 @@
 document.getElementById("cocktails-list").innerHTML = "<%= j render partial: "cocktails-list" %>";
 
 document.querySelector('#ModalCocktailsFilter button').click();   // Close Modal
+document.getElementById('only_this').checked = false;             // Clear the 'Only this' option
 
-document.getElementById('only_this').checked = false;   // Clear the 'Only this' option
-
-// Get the list of Filter select options
-var selectOptions = document.querySelectorAll('#ingredients_ option, #categories_ option');
 
 // Clear the Filter select options
+var selectOptions = document.querySelectorAll('#ingredients_ option, #categories_ option');
 for (let i = 0; i < selectOptions.length; i++) {
   selectOptions[i].selected = false;
 }
