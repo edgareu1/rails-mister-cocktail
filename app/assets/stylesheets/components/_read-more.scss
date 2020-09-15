@@ -1,9 +1,23 @@
-a.morelink {
-  text-decoration: none;
-  color: rgb(255, 220, 20);;
-  outline: none;
+.read-more {
+  overflow: hidden;
 }
 
-.morecontent span {
-  display: none;
+a.morelink {
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+
+  color: #ffc873;
+  font-size: 14px;
+  text-decoration: none;
+  padding-left: 15px;
+
+  &:hover {
+    color: rgb(255, 220, 20);
+  }
+
+  .elipse {
+    color: white;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.8);
+  }
 }
