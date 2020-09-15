@@ -10,23 +10,30 @@
 //             errorMessage - the first error message of that input, or it's input denomination if there are no errors;
 function refreshErrorMessages(containerSelector, containerChildrenNum, errorMessage) {
   var inputContainer = document.querySelector(containerSelector);
+  var inputField = document.querySelector(`${containerSelector} input`);
 
   // If it exists, remove any input related error message
   if (inputContainer.childElementCount > containerChildrenNum) {
-    inputContainer.classList.remove('form-group-invalid');
-    document.querySelector(`${containerSelector} input`).classList.remove('is-invalid');
+    inputContainer.classList.remove('form-group-valid', 'form-group-invalid');
+    inputField.classList.remove('is-valid', 'is-invalid');
+
     document.querySelector(`${containerSelector} .invalid-feedback`).remove();
   }
 
-  // If here are input related errors, insert an error message
+  // If here are input related errors, mark the input as invalid and insert an error message
   if (errorMessage !== 'Name ' && errorMessage !== 'Photo ') {
-    console.log(errorMessage);
+    inputContainer.classList.add('form-group-invalid');
+    inputField.classList.add('is-invalid');
+
     var Node = document.createElement('div');
     Node.classList = 'invalid-feedback';
     Node.innerHTML = errorMessage;
 
-    inputContainer.classList.add('form-group-invalid');
-    document.querySelector(`${containerSelector} input`).classList.add('is-invalid');
     inputContainer.appendChild(Node);
+
+  // Otherwise mark the input as valid
+  } else {
+    inputContainer.classList.add('form-group-valid');
+    inputField.classList.add('is-valid');
   }
 }
