@@ -6,18 +6,17 @@
     </tr>
 
     <tr>
-      <td><label class="select required" for="cocktail_alcoholic">Alcoholic</label></td>
+      <td><label class="select required" for="cocktail_category_id">Category</label></td>
       <td>
-        <%= f.input :alcoholic, prompt: "Please select", label: false, default: "Optional",
-            collection: ['Optional', 'Yes', 'No'] %>
+        <%= f.association :category, collection: Category.order('name ASC'),
+            label_method: :name, label: false %>
       </td>
     </tr>
 
     <tr>
-      <td><label class="select required" for="cocktail_category_id">Category</label></td>
+      <td><label class="select required" for="cocktail_alcoholic">Alcoholic</label></td>
       <td>
-        <%= f.association :category, collection: Category.order('name ASC'),
-            label_method: :name, label: false, default: Category.find_by(name: "NA").id %>
+        <%= f.input :alcoholic, label: false, collection: ['Optional', 'Yes', 'No'] %>
       </td>
     </tr>
 
@@ -25,10 +24,11 @@
       <td><label class="select required" for="cocktail_glass_id">Glass</label></td>
       <td>
         <%= f.association :glass, collection: Glass.order('name ASC'),
-            label_method: :name, label: false, default: Glass.find_by(name: "NA").id %>
+            label_method: :name, label: false %>
       </td>
     </tr>
   </table>
 
+  <%= f.input :photo, as: :file %>
   <%= f.button :submit, class: "btn btn-ghost" %>
 <% end %>
