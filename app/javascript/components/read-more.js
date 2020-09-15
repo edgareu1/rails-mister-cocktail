@@ -2,44 +2,53 @@
 // to view it (view more); if this option is selected, the user may also choose 'read less'
 function readMore() {
   var showChar = 140;
-  var ellipsestext = "...";
-  var moretext = "Read more";
-  var lesstext = "Read less";
+  var moretext = '&nbsp;Read more';
+  var lesstext = '&nbsp;Read less';
 
-  $('.read-more').each(function() {
-    var content = $(this).html();
+  var reviewsList = document.getElementsByClassName('read-more');
+
+  for (let i = 0; i < reviewsList.length; i++) {
+    var element = reviewsList[i];
+    var content = element.innerHTML;
 
     if(content.length > showChar) {
       var c = content.substr(0, showChar);
       var h = content.substr(showChar, content.length - showChar);
-
       var html = c
-        + '<span class="moreellipses">'
-        + ellipsestext
-        + '&nbsp;</span><span class="morecontent"><span>'
-        + h
-        + '</span>&nbsp;<a href="" class="morelink">'
-        + moretext
-        + '</a></span>';
+        + '<span class="elipse-text">...</span>'
+        + '<span class="morecontent">'
+        +   '<span class="hidden-content">'
+        +     h
+        +   '</span>'
+        +   '<a href="" class="morelink">'
+        +     moretext
+        +   '</a>'
+        + '</span>';
 
-      $(this).html(html);
+      element.innerHTML = html;
+
+      element.lastChild.lastChild.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        var target = event.target;
+
+        if (target.classList.contains('less')) {
+          target.classList.remove('less');
+          target.innerHTML = moretext;
+
+          target.previousSibling.style.display = 'none';
+          target.parentElement.previousSibling.style.display = 'contents';
+
+        } else {
+          target.classList.add('less');
+          target.innerHTML = lesstext;
+
+          target.previousSibling.style.display = 'contents';
+          target.parentElement.previousSibling.style.display = 'none';
+        }
+      });
     }
-  });
-
-  $(".morelink").click(function(){
-    if($(this).hasClass("less")) {
-      $(this).removeClass("less");
-      $(this).html(moretext);
-    } else {
-      $(this).addClass("less");
-      $(this).html(lesstext);
-    }
-
-    $(this).parent().prev().toggle();
-    $(this).prev().toggle();
-
-    return false;
-  });
+  }
 };
 
 export { readMore };
