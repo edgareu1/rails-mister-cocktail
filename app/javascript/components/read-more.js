@@ -22,6 +22,25 @@ function readMore() {
       link.classList.add('morelink');
 
       element.parentElement.appendChild(link);
+
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        var target = event.target;
+
+        if (target.classList.contains('less')) {
+          target.classList.remove('less');
+          target.innerHTML = moretext;
+
+          target.previousElementSibling.style.height = `${showHeight}px`;
+
+        } else {
+          target.classList.add('less');
+          target.innerHTML = lesstext;
+
+          target.previousElementSibling.style.height = 'fit-content';
+        }
+      });
     }
   }
 };
