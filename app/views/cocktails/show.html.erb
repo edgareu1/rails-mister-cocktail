@@ -40,67 +40,14 @@
   </div>
 </div>
 
-
-<!-- Modal Create Review -->
-<div class="modal fade" id="ModalNewReview" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">New Review</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-
-      <div class="modal-body">
-        <%= render "reviews/form-new" %>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- Modal Edit Cocktail -->
+<%= render "cocktails/form-edit" %>
 
 <!-- Modal Create Dose -->
-<div class="modal fade" id="ModalNewDose" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">New Dose</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-
-      <div class="modal-body">
-        <%= render "doses/form-new" %>
-      </div>
-    </div>
-  </div>
-</div>
+<%= render "doses/form-new" %>
 
 <!-- Modal Edit Instructions -->
-<div class="modal fade" id="ModalAddInstructions" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">New Instructions</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
+<%= render "cocktails/form-edit-instructions" %>
 
-      <div class="modal-body">
-        <%= render "cocktails/form-add-instructions" %>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal Edit Cocktail -->
-<div class="modal fade" id="ModalEditCocktail" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Edit Cocktail</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-
-      <div class="modal-body">
-        <%= render "cocktails/form-edit" %>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- Modal Create Review -->
+<%= render "reviews/form-new" %>

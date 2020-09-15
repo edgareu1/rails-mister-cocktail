@@ -1,11 +1,25 @@
-<%= simple_form_for([@cocktail, @review], remote: true) do |f| %>
-  <div class="stars-container">
-    <div class="stars">
-      <%= f.collection_radio_buttons :rating, [[5], [4], [3], [2], [1]], :first, :last, item_wrapper_tag: false, boolean_style: :inline do |b| %>
-      <%= b.radio_button + b.label {''} %>
-      <% end %>
+<div class="modal fade" id="ModalNewReview" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">New Review</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <%= simple_form_for([@cocktail, @review], remote: true) do |f| %>
+          <div class="stars-container">
+            <div class="stars">
+              <%= f.collection_radio_buttons :rating, [[5], [4], [3], [2], [1]], :first, :last,
+                  item_wrapper_tag: false, boolean_style: :inline do |b| %>
+                <%= b.radio_button + b.label {''} %>
+              <% end %>
+            </div>
+          </div>
+          <%= f.input :content, label: false, placeholder: "Review content" %>
+          <%= f.button :submit, class: "btn btn-ghost" %>
+        <% end %>
+      </div>
     </div>
   </div>
-  <%= f.input :content, label: false, placeholder: "Review content" %>
-  <%= f.button :submit, class: "btn btn-ghost" %>
-<% end %>
+</div>
