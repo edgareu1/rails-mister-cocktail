@@ -1,7 +1,10 @@
 var starsContainer = document.querySelector('.stars-container');    // Get the container of the Rating input
 var boxReviewContent = document.querySelector('.review_content');   // Get the container of the Content input
 
-// If it exists, remove any Rating and Content related error messages
+// Content input field (textarea)
+var reviewContentTextArea = document.querySelector('.review_content textarea');
+
+// If it exists, remove any Rating and Content related error messages and validation marks
 removeErrors();
 
 // If there are any errors in the submited form, then...
@@ -24,8 +27,13 @@ removeErrors();
     contentNode.innerHTML = "Content <%= @review.errors.messages[:content].first %>";
 
     boxReviewContent.classList.add('form-group-invalid');
-    document.querySelector('.review_content textarea').classList.add('is-invalid');
+    reviewContentTextArea.classList.add('is-invalid');
     boxReviewContent.appendChild(contentNode);
+
+  // Otherwise mark the input field as valid
+  <% else %>
+    boxReviewContent.classList.add('.form-group-valid');
+    reviewContentTextArea.classList.add('is-valid');
   <% end %>
 
 // Otherwise, if there are no errors in the submited form...
@@ -42,11 +50,11 @@ removeErrors();
     radioBox[i].checked = false;
   }
 
-  // If it exists, remove any Rating and Content related error messages
+  // If it exists, remove any Rating and Content related error messages and validation marks
   removeErrors();
 <% end %>
 
-// Function that, if it exists, remove any Rating and Content related error messages
+// Function that, if it exists, removes any Rating and Content related error messages and validation marks
 function removeErrors() {
   // Remove Rating related error messages
   if (starsContainer.childElementCount > 1) {
@@ -55,8 +63,10 @@ function removeErrors() {
 
   // Remove Content related error messages
   if (boxReviewContent.childElementCount > 1) {
-    boxReviewContent.classList.remove('form-group-invalid');
-    document.querySelector('.review_content textarea').classList.remove('is-invalid');
     document.querySelector('.review_content .invalid-feedback').remove();
   }
+
+  // Remove the validation marks from the Content input field
+  reviewContentTextArea.classList.remove('is-valid', 'is-invalid');
+  boxReviewContent.classList.remove('form-group-valid', 'form-group-invalid');
 }
