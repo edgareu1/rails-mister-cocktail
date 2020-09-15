@@ -23,17 +23,20 @@
 }
 
 .container-general {
-  background-color: rgba(255, 0, 0, 0.4);
+  background-color: rgba(255, 0, 0, 0.45);
   padding: 10px;
   border-radius: 5px;
 
   h3, p {
-    color: white;
     text-shadow: 1px 1px rgba(0, 0, 0, 0.8);
   }
 
   h3 {
-    color: rgb(255, 200, 115);
+    color: rgba(255, 255, 255, 1);
+  }
+
+  p {
+    color: rgba(255, 255, 255, 0.9);
   }
 }
 
