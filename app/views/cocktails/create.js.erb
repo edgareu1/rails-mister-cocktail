@@ -1,5 +1,6 @@
 // If there are any errors in the submited form, then...
 <% if @cocktail.errors.any? %>
+  // Refresh the input error messages
   refreshErrorMessages('.cocktail_name', 1, "Name <%= @cocktail.errors.messages[:name].first %>");
   refreshErrorMessages('.cocktail_photo', 2, "Photo <%= @cocktail.errors.messages[:photo].first %>");
 <% end %>
