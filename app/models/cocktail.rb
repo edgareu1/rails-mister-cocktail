@@ -1,6 +1,7 @@
 class Cocktail < ApplicationRecord
   validates :name, presence: true, uniqueness: true, length: { maximum: 20 }
   validates :photo, presence: true
+  validates :alcoholic, presence: true
 
   belongs_to :category
   belongs_to :glass
