@@ -22,6 +22,16 @@ import { readMore } from '../components/read-more';
 import { smoothPagination } from '../components/smooth-pagination';
 import { smoothScrolling } from '../components/smooth-scrolling';
 
+// Make the following JS functions accessible from the HTML files
+window.smoothPagination = function() {
+  smoothPagination();
+}
+
+window.smoothScrolling = function() {
+  smoothScrolling();
+}
+
+// Upon loading a page, load also the following JS functions
 document.addEventListener('turbolinks:load', () => {
   const anchor = document.getElementById('scroller');
 

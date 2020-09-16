@@ -13,7 +13,7 @@ function smoothPagination() {
       anchor.setAttribute("data-remote", "true"); // Ajaxify the anchor
 
       // Upon clicking on the anchor, scroll to the beginning of the Cocktails list
-      smoothScrolling(anchor, '#container-cards', 250)
+      smoothScrolling(anchor, '#container-cards', 250);
     }
   }
 }
