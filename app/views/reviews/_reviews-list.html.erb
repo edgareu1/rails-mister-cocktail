@@ -7,7 +7,7 @@
 
 <!-- Display the last 5 reviews -->
 <% if @cocktail.reviews.length == 0 %>
-  <p style="margin-left: 10px; font-size: 14px">Be the first to leave a review!</p>
+  <p style="margin-left: 10px">No reviews...</p>
 <% else %>
   <% @cocktail.reviews.last(5).reverse.each do |review| %>
     <li style="list-style: none; align-items: center; margin: 10px 0 0 10px">
