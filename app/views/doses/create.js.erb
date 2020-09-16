@@ -3,7 +3,7 @@ document.getElementById("doses-list").innerHTML = "<%= j render partial: "doses-
 document.querySelector('#ModalNewDose button').click();     // Close Modal
 document.getElementById('dose_description').value = '';     // Empty the description field
 
-// Set the default ingredient ('Ice')
+// Set 'Ice' as the default ingredient
 var ingredientOptions = document.querySelectorAll('#dose_ingredient_id option');
 for (let i = 0; i < ingredientOptions.length; i++) {
   if (ingredientOptions[i].selected == 'selected') {

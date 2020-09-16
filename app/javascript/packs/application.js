@@ -19,16 +19,22 @@ import 'bootstrap';
 
 import { autoCompleteCocktail } from '../components/auto-complete-cocktail';
 import { readMore } from '../components/read-more';
+import { refreshInputValidations } from '../components/refresh-input-validations';
+import { removeValidations } from '../components/refresh-input-validations';
 import { smoothPagination } from '../components/smooth-pagination';
 import { smoothScrolling } from '../components/smooth-scrolling';
 
 // Make the following JS functions accessible from the HTML files
+window.refreshInputValidations = function(containerSelector, containerChildNum, inputType, errorMessage) {
+  refreshInputValidations(containerSelector, containerChildNum, inputType, errorMessage);
+}
+
 window.smoothPagination = function() {
   smoothPagination();
 }
 
-window.smoothScrolling = function() {
-  smoothScrolling();
+window.smoothScrolling = function(from, to, time) {
+  smoothScrolling(from, to, time);
 }
 
 // Upon loading a page, load also the following JS functions
