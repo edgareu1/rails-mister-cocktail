@@ -8,12 +8,7 @@ function refreshInputValidations(containerSelector, containerChildNum, inputType
   var inputField = document.querySelector(`${containerSelector} ${inputType}`);
 
   // If it exists, remove any input related error message
-  if (inputContainer.childElementCount > containerChildNum) {
-    inputContainer.classList.remove('form-group-valid', 'form-group-invalid');
-    inputField.classList.remove('is-valid', 'is-invalid');
-
-    document.querySelector(`${containerSelector} .invalid-feedback`).remove();
-  }
+  removeValidations(containerSelector, containerChildNum, inputType)
 
   // Get the error message that's passed in case there's no erros
   // It's the input denomination capitalized with a trailing whitespace to the right
@@ -39,4 +34,20 @@ function refreshInputValidations(containerSelector, containerChildNum, inputType
   }
 }
 
+// Function that, if it exists, removes any Rating and Content related error messages and validation marks
+function removeValidations(containerSelector, containerChildNum, inputType) {
+  var inputContainer = document.querySelector(containerSelector);
+  var inputField = document.querySelector(`${containerSelector} ${inputType}`);
+
+  // Remove the error messages
+  if (inputContainer.childElementCount > containerChildNum) {
+    document.querySelector(`${containerSelector} .invalid-feedback`).remove();
+  }
+
+  // Remove the validation marks
+  inputContainer.classList.remove('form-group-valid', 'form-group-invalid');
+  inputField.classList.remove('is-valid', 'is-invalid');
+}
+
 export { refreshInputValidations };
+export { removeValidations };

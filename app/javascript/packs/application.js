@@ -29,6 +29,10 @@ window.refreshInputValidations = function(containerSelector, containerChildNum, 
   refreshInputValidations(containerSelector, containerChildNum, inputType, errorMessage);
 }
 
+window.removeValidations = function(containerSelector, containerChildNum, inputType) {
+  removeValidations(containerSelector, containerChildNum, inputType);
+}
+
 window.smoothPagination = function() {
   smoothPagination();
 }
