@@ -14,7 +14,7 @@
         <%= link_to "Delete", data: { toggle: "modal", target: "#ModalDeleteCocktail" }, style: "margin-right: 10px" do %>
           <i class="fas fa-trash-alt"></i>
         <% end %>
-        <%= link_to cocktail_path(editable: 1) do %>
+        <%= link_to "Save", data: { toggle: "modal", target: "#ModalSaveCocktail" } do %>
           <i class="fas fa-save"></i>
         <% end %>
       <% end %>
@@ -38,14 +38,17 @@
   </ul>
 </div>
 
-<!-- Modal Edit Cocktail -->
-<%= render "cocktails/form-edit" %>
+<!-- Modal Delete Cocktail -->
+<%= render "cocktails/form-delete" %>
 
 <!-- Modal Edit Instructions -->
 <%= render "cocktails/form-edit-instructions" %>
 
-<!-- Modal Delete Cocktail -->
-<%= render "cocktails/form-delete" %>
+<!-- Modal Edit Cocktail -->
+<%= render "cocktails/form-edit" %>
+
+<!-- Modal Save Cocktail -->
+<%= render "cocktails/form-save" %>
 
 <!-- Modal Create Dose -->
 <%= render "doses/form-new" %>
