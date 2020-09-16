@@ -25,7 +25,7 @@ class Cocktail < ApplicationRecord
 
   # Rating points has a positive correlation with both the average rating and the number of reviews
   # While the first variable manifests a perfect correlation, the second shows a decreasing one
-  def rating_points
+  def rating
     num_reviews = reviews.size
     rating_average.nan? ? 0 : (num_reviews * rating_average) / (num_reviews ** 0.8)
   end
