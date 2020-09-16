@@ -10,7 +10,7 @@
 
 <!-- Display the Ingredients -->
 <% if @cocktail.doses.length == 0 %>
-  <p style="margin-left: 10px">No ingredients...</p>
+  <p style="margin: 10px 0 0 10px">No ingredients...</p>
 <% else %>
   <% @cocktail.doses.sort_by {|dose| dose.ingredient.name }.each do |dose| %>
     <li style="list-style: none; display: flex; align-items: center; margin: 10px 0 0 10px">
