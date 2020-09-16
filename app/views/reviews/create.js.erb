@@ -9,6 +9,9 @@
   // Refresh the Reviews list
   document.getElementById("reviews-list").innerHTML = "<%= j render partial: "reviews-list" %>";
 
+  starRating(); // Quantify each review's rating with stars
+  readMore();   // Hide the review's content if it is too long
+
   document.querySelector('#ModalNewReview button').click();     // Close New Review Modal
   document.getElementById('review_content').value = '';         // Empty the content field
 
@@ -21,4 +24,5 @@
   // If it exists, remove any Rating and Content related error messages and validation marks
   removeValidations('.review_rating', 1, '.stars');
   removeValidations('.review_content', 1, 'textarea');
+
 <% end %>

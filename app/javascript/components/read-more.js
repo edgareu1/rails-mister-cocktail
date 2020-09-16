@@ -20,7 +20,7 @@ function readMore() {
       // Change the parent to accommodate the changes
       let elementParent = element.parentElement;
       elementParent.style.position = 'relative';
-      elementParent.style.marginBottom = '32px';
+      elementParent.style.marginBottom = '36px';
 
       // Create the link to change the content displayed
       let readLink = document.createElement("a");
