@@ -1,31 +1,33 @@
 <%= include_gon %>
 
-<div class="banner">
-  <div class="container">
-    <h1>Mister Cocktail</h1>
-    <p>World class cocktails waiting for you</p>
+<div class="index-container-page">
+  <div class="banner">
+    <div class="container">
+      <h1>Mister Cocktail</h1>
+      <p>World class cocktails waiting for you</p>
 
-    <%= link_to "New Cocktail", new_cocktail_path, data: { toggle: "modal", target: "#ModalNewCocktail" }, class: "btn btn-gradient" %>
+      <%= link_to "New Cocktail", new_cocktail_path, data: { toggle: "modal", target: "#ModalNewCocktail" }, class: "btn btn-gradient" %>
+    </div>
+
+    <div class="scroll-down">
+      <%= link_to "#container-cards", id: "scroller" do %>
+        <i class="fas fa-angle-double-down"></i>
+      <% end %>
+    </div>
   </div>
 
-  <div class="scroll-down">
-    <%= link_to "#container-cards", id: "scroller" do %>
-      <i class="fas fa-angle-double-down"></i>
-    <% end %>
-  </div>
-</div>
+  <div id="container-cards">
+    <div class="sorter">
+      <%= render "search-bar" %>
 
-<div id="container-cards">
-  <div class="sorter">
-    <%= render "search-bar" %>
+      <%= link_to "Rating", cocktails_path(sort_by: "rating"), remote: true %>
+      <%= link_to "Abc", cocktails_path(sort_by: "abc"), remote: true %>
+      <%= link_to "Filter", cocktails_path(sort_by: "ingredients"), data: { toggle: "modal", target: "#ModalCocktailsFilter" } %>
+    </div>
 
-    <%= link_to "Rating", cocktails_path(sort_by: "rating"), remote: true %>
-    <%= link_to "Abc", cocktails_path(sort_by: "abc"), remote: true %>
-    <%= link_to "Filter", cocktails_path(sort_by: "ingredients"), data: { toggle: "modal", target: "#ModalCocktailsFilter" } %>
-  </div>
-
-  <div id="cocktails-list">
-    <%= render "cocktails-list" %>
+    <div id="cocktails-list">
+      <%= render "cocktails-list" %>
+    </div>
   </div>
 </div>
 

@@ -24,6 +24,16 @@ body {
   background-size: cover;
 }
 
+.index-container-page {
+  min-width: 650px;
+}
+
+@media (max-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+
 .invalid-feedback {
   color: rgb(255, 200, 0);
 }

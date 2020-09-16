@@ -2,12 +2,12 @@
 <div style="background-image: url('<%= cl_image_path @cocktail.photo.key, height: 360, width: 360, crop: :fill %>'); min-height: 360px; min-width: 360px; padding: 0; border-radius: 5px"></div>
 
 <!-- Cocktail Information -->
-<div class="container-general" style="margin-left: 20px; width: 100%">
+<div class="container-general" style="width: 100%; padding: 10px 20px; margin: 0 0 0 16px">
   <h3 style="margin: 0 10px 20px">Detailed Info</h3>
 
   <table style="width: 100%">
     <tr>
-      <td style="width: 100px"><h5 style="text-align: end">Category</h5></td>
+      <td style="width: 85px"><h5 style="text-align: end">Category</h5></td>
       <td style="width: 15px"></td>
       <td><h6><%= @cocktail.category.name %></h6></td>
     </tr>

@@ -1,40 +1,41 @@
-.container-page {
+.show-container-page {
   display: flex;
   flex-direction: column;
   width: 650px;
   min-width: 650px;
-  margin: 20px 0 0;
-}
+  margin: 20px auto 10px;
 
-.container-page-headers {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 5px 8px 5px;
+  .container-page-headers {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 10px 8px;
 
-  h1 {
-    color: white;
-    font-weight: bold;
-    width: 76%;
-    overflow: hidden;
-    font-size: 38px;
-  }
-
-  .container-page-actions {
-    width: 24%;
-    margin-left: 10px;
-    display: contents;
-
-    a {
+    h1 {
       color: white;
-      font-size: 26px;
+      font-weight: bold;
+      width: 76%;
+      overflow: hidden;
+      font-size: 38px;
+    }
+
+    .container-page-actions {
+      width: 24%;
+      margin-left: 10px;
+      display: contents;
+
+      a {
+        color: white;
+        font-size: 26px;
+      }
     }
   }
 }
 
 .container-general {
   background-color: rgba(255, 0, 0, 0.45);
-  padding: 10px;
+  padding: 10px 30px 10px 20px;
   border-radius: 5px;
+  margin: 8px 5px;
 
   h3, p {
     text-shadow: 1px 1px rgba(0, 0, 0, 0.8);
@@ -64,8 +65,8 @@
 
 .white-icon {
   color: white;
-  font-size: 26px;
-  margin-left: 12px;
+  font-size: 24px;
+  margin: 2px 0 0 12px;
   display: flex;
   align-items: baseline;
 

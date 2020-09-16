@@ -10,7 +10,7 @@
         <%= simple_form_for(@cocktail, remote: true) do |f| %>
           <table style="width: 95%">
             <tr>
-              <td><label class="string required" for="cocktail_name">Name</label></td>
+              <td style="width: 95px"><label class="string required" for="cocktail_name">Name</label></td>
               <td><%= f.input :name, placeholder: "Please insert", label: false %></td>
             </tr>
 
