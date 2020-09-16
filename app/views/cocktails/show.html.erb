@@ -8,10 +8,10 @@
       <% end %>
 
       <% if @cocktail.editable %>
-        <%= link_to edit_cocktail_path, data: { toggle: "modal", target: "#ModalEditCocktail" }, style: "margin: 0 10px" do %>
+        <%= link_to "Edit", data: { toggle: "modal", target: "#ModalEditCocktail" }, style: "margin: 0 10px" do %>
           <i class="fas fa-edit"></i>
         <% end %>
-        <%= link_to cocktail_path(@cocktail), method: :delete, data: {confirm: "Are you sure?"}, style: "margin-right: 10px" do %>
+        <%= link_to "Delete", data: { toggle: "modal", target: "#ModalDeleteCocktail" }, style: "margin-right: 10px" do %>
           <i class="fas fa-trash-alt"></i>
         <% end %>
         <%= link_to cocktail_path(editable: 1) do %>
@@ -41,11 +41,14 @@
 <!-- Modal Edit Cocktail -->
 <%= render "cocktails/form-edit" %>
 
-<!-- Modal Create Dose -->
-<%= render "doses/form-new" %>
-
 <!-- Modal Edit Instructions -->
 <%= render "cocktails/form-edit-instructions" %>
+
+<!-- Modal Delete Cocktail -->
+<%= render "cocktails/form-delete" %>
+
+<!-- Modal Create Dose -->
+<%= render "doses/form-new" %>
 
 <!-- Modal Create Review -->
 <%= render "reviews/form-new" %>
