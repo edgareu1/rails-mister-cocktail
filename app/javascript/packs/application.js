@@ -41,7 +41,7 @@ window.smoothScrolling = function(from, to, time) {
   smoothScrolling(from, to, time);
 }
 
-// Upon loading a page, load also the following JS functions
+// Upon loading a page, load the following JS functions
 document.addEventListener('turbolinks:load', () => {
   const anchor = document.getElementById('scroller');
 

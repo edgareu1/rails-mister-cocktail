@@ -1,5 +1,5 @@
-// Create an autocomplete list for the Cocktails search while refreshing the page automatically (using AJAX)
-// based on the search parameter
+// Function that creates an autocomplete list for the Cocktails search, while refreshing the page
+// automatically (using AJAX) based on the search parameter
 function autoCompleteCocktail() {
   const searchField = document.getElementById('search-input');    // Search field element
   const cocktailsNames = gon.cocktails_names.split(' -/- ');      // Array of Cocktails to search into

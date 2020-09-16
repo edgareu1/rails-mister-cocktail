@@ -1,6 +1,7 @@
+// Refresh the Cocktails list
 document.getElementById("cocktails-list").innerHTML = "<%= j render partial: "cocktails-list" %>";
 
-document.querySelector('#ModalCocktailsFilter button').click();   // Close Modal
+document.querySelector('#ModalCocktailsFilter button').click();   // Close Filter Cocktail Modal
 document.getElementById('only_this').checked = false;             // Clear the 'Only this' option
 
 // Clear the Filter select options

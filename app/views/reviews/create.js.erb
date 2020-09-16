@@ -1,21 +1,15 @@
 // If there are any errors in the submited form, then...
 <% if @review.errors.any? %>
+  // Refresh the input validations (Add error messages and change the input's container colors)
   refreshInputValidations('.review_rating', 1, '.stars', "Rating <%= @review.errors.messages[:rating].first %>");
-
-  var ratingErrorMessage = document.querySelector('.review_rating .invalid-feedback');
-  if (ratingErrorMessage) {
-    ratingErrorMessage.style.display = 'block';
-    ratingErrorMessage.style.margin = '0';
-  }
-
   refreshInputValidations('.review_content', 1, 'textarea', "Content <%= @review.errors.messages[:content].first %>");
 
 // Otherwise, if there are no errors in the submited form...
 <% else %>
-  // Refresh the page Review content
+  // Refresh the Reviews list
   document.getElementById("reviews-list").innerHTML = "<%= j render partial: "reviews-list" %>";
 
-  document.querySelector('#ModalNewReview button').click();     // Close Modal
+  document.querySelector('#ModalNewReview button').click();     // Close New Review Modal
   document.getElementById('review_content').value = '';         // Empty the content field
 
   // Clear the Rating radio boxes

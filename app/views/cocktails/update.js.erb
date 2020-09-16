@@ -1,6 +1,6 @@
 // If there are any errors in the submited form, then...
 <% if @cocktail.errors.any? %>
-  // Refresh the input validations `(Add error messages and change the input's container colors)`
+  // Refresh the input validations (Add error messages and change the input's container colors)
   refreshInputValidations('.cocktail_name', 1, 'input', "Name <%= @cocktail.errors.messages[:name].first %>");
   refreshInputValidations('.cocktail_photo', 2, 'input', "Photo <%= @cocktail.errors.messages[:photo].first %>");
 

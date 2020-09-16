@@ -1,6 +1,7 @@
+// Refresh the Doses list
 document.getElementById("doses-list").innerHTML = "<%= j render partial: "doses-list" %>";
 
-document.querySelector('#ModalNewDose button').click();     // Close Modal
+document.querySelector('#ModalNewDose button').click();     // Close New Dose Modal
 document.getElementById('dose_description').value = '';     // Empty the description field
 
 // Set 'Ice' as the default ingredient

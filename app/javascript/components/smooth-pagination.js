@@ -1,6 +1,6 @@
 import { smoothScrolling } from './smooth-scrolling';
 
-// Function that makes the pagination anchors scroll up the beginning of the Cocktails list
+// Function that makes the pagination anchors scroll up to the beginning of the Cocktails list
 function smoothPagination() {
   const anchors = document.getElementsByClassName("page-link"); // Get the anchors of the pagination
 
