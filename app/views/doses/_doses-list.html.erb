@@ -1,34 +1,32 @@
-<ul style="min-width: 630px">
-  <div style="display: flex">
-    <h3>Ingredients</h3>
+<div style="display: flex">
+  <h3>Ingredients</h3>
 
-    <% if @cocktail.editable %>
-      <%= link_to "New Dose", data: { toggle: "modal", target: "#ModalNewDose" }, class: "white-icon" do %>
-        <i class="fas fa-edit"></i>
-      <% end %>
-    <% end %>
-  </div>
-
-  <!-- Display the Ingredients -->
-  <% if @cocktail.doses.length == 0 %>
-    <p style="margin-left: 10px">No ingredients specified...</p>
-  <% else %>
-    <% @cocktail.doses.sort_by {|dose| dose.ingredient.name }.each do |dose| %>
-      <li style="list-style: none; display: flex; align-items: center; margin: 10px 0 0 10px">
-        <% if @cocktail.editable %>
-          <%= link_to cocktail_dose_path(@cocktail, dose), method: :delete, remote: true, data: {confirm: "Are you sure?"} do %>
-            <i class="fas fa-trash-alt" style="margin-right: 15px; font-size: 16px; color: white"></i>
-          <% end %>
-        <% end %>
-
-        <p style="font-size: 18px; margin: 0">
-          <% if dose.description.nil? || dose.description.empty? %>
-            <%= dose.ingredient.name %>
-          <% else %>
-            <%= "#{dose.ingredient.name}: #{dose.description}" %>
-          <% end %>
-        </p>
-      </li>
+  <% if @cocktail.editable %>
+    <%= link_to "New Dose", data: { toggle: "modal", target: "#ModalNewDose" }, class: "white-icon" do %>
+      <i class="fas fa-edit"></i>
     <% end %>
   <% end %>
-</ul>
+</div>
+
+<!-- Display the Ingredients -->
+<% if @cocktail.doses.length == 0 %>
+  <p style="margin: 10px 0 0 10px">No ingredients...</p>
+<% else %>
+  <% @cocktail.doses.sort_by {|dose| dose.ingredient.name }.each do |dose| %>
+    <li style="list-style: none; display: flex; align-items: center; margin: 10px 0 0 10px">
+      <% if @cocktail.editable %>
+        <%= link_to cocktail_dose_path(@cocktail, dose), method: :delete, remote: true do %>
+          <i class="fas fa-trash-alt" style="margin-right: 15px; font-size: 16px; color: white"></i>
+        <% end %>
+      <% end %>
+
+      <p style="font-size: 18px; margin: 0">
+        <% if dose.description.nil? || dose.description.empty? %>
+          <%= dose.ingredient.name %>
+        <% else %>
+          <%= "#{dose.ingredient.name}: #{dose.description}" %>
+        <% end %>
+      </p>
+    </li>
+  <% end %>
+<% end %>

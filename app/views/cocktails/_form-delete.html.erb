@@ -1,0 +1,15 @@
+<div class="modal fade modal-confirm" id="ModalDeleteCocktail">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-confirm-body">
+        <h2 class="modal-title">Delete Cocktail</h2>
+        <p>Are you sure you want to delete the Cocktail?</p>
+
+        <div>
+          <button type="button" class="btn-cancel-confirm" data-dismiss="modal">Cancel</button>
+          <%= link_to "Delete", cocktail_path(@cocktail), method: :delete, class: "btn-accept-confirm" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

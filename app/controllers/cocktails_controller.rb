@@ -3,6 +3,8 @@ require 'will_paginate/array'
 class CocktailsController < ApplicationController
   def index
     @cocktail = Cocktail.new
+
+    # Variable to send to the JS autoCompleteCocktail function
     gon.cocktails_names = Cocktail.all
                                   .map { |cocktail| capitalize_string(cocktail.name) }
                                   .sort
@@ -16,6 +18,7 @@ class CocktailsController < ApplicationController
     @review = Review.new
     @dose = Dose.new
 
+    # Change the Cocktail from editable to not editable
     if params["editable"] == "1"
       @cocktail.editable = false
       @cocktail.save
@@ -44,7 +47,7 @@ class CocktailsController < ApplicationController
 
   private
 
-  # Method that capitalizes every word of the string passed as an argument
+  # Method that capitalizes every word of the string passed as argument
   def capitalize_string(string)
     array_strings = string.split(' ')
 
@@ -60,46 +63,55 @@ class CocktailsController < ApplicationController
     @ingredients = Ingredient.all.collect(&:name).sort
     @categories = Category.all.collect(&:name).sort
 
-    @cocktails_sorted = cocktails_sorter.paginate(page: params[:page], per_page: 12)
+    @sorted_cocktails = cocktails_sorter.paginate(page: params[:page], per_page: 12)
   end
 
-  # Method that sorts and filters the Cocktails to be displayed
+  # Method that returns the Cocktails list sorted and filtered
   def cocktails_sorter
-    # Filtering by search query
+    cocktails_list = Cocktail.all
+
+    # Filter by search query and sort by rating
     if params[:query].present?
-      return Cocktail.where("name ILIKE ?", "%#{params[:query]}%")
+      cocktails_filtered = cocktails_list.where("name ILIKE ?", "%#{params[:query]}%")
+      return sort_by_rating(cocktails_filtered)
 
     # Sorting by the cocktails name
     elsif params[:sort_by] == "abc"
-      return Cocktail.all.sort_by { |cocktail| cocktail.name.downcase }
+      return cocktails_list.sort_by { |cocktail| cocktail.name.downcase }
 
-    # Filtering by the options selected by the user
+    # Filter based on the options selected by the user
     elsif params[:sort_by] == "Filter" && (params[:ingredients].present? || params[:categories].present?)
-      cocktails_sorted = params[:ingredients].present? ? filter_by_ingredients : cocktails_sorted_by_rating   # Filter by Ingredients
-      cocktails_sorted = filter_by_categories(cocktails_sorted) if params[:categories].present?               # Filter by Categories
+      # Filter by Ingredients
+      cocktails_filtered = params[:ingredients].present? ? filter_by_ingredients(cocktails_list) : cocktails_list
 
-      return cocktails_sorted
+      # Filter by Categories
+      cocktails_filtered = params[:categories].present? ? filter_by_categories(cocktails_filtered) : cocktails_filtered
+
+      # Sort by rating
+      return sort_by_rating(cocktails_filtered)
     end
 
-    # By default cocktails are sorted by ranking; If the user chooses to filter by ingredients but
-    # does not select any, the sorting will also be done by ranking
-    return cocktails_sorted_by_rating
+    # By default, cocktails are sorted by rating; If the user chooses to filter by ingredients but
+    # does not select any option, the sorting will also be done by rating
+    return sort_by_rating(cocktails_list)
   end
 
-  def cocktails_sorted_by_rating
-    Cocktail.all.sort_by { |cocktail| - cocktail.rating_points }
+  # Method that returns the Cocktails list passed as param sorted by rating
+  def sort_by_rating(cocktails_list)
+    cocktails_list.sort_by { |cocktail| - cocktail.rating }
   end
 
-  def filter_by_ingredients
+  # Method that return the Cocktails list passed as param filtered by ingredients
+  def filter_by_ingredients(cocktails_list)
     # Only cocktails with ingredients should be displayed
-    relevant_cocktails = Cocktail.all.reject { |cocktail| cocktail.ingredients.empty? }
+    cocktails_filtered = cocktails_list.reject { |cocktail| cocktail.ingredients.empty? }
 
     # The cocktails will first be sorted based on the number of ingredients in common with the
-    # user's list and then sorted by ranking
-    relevant_cocktails.map! do |cocktail|
+    # user's list and then sorted by rating
+    cocktails_filtered.map! do |cocktail|
       [
         cocktail.ingredients.count { |ingredient| params[:ingredients].include?(ingredient.name) },
-        cocktail.rating_points,
+        cocktail.rating,
         cocktail
       ]
     end
@@ -107,18 +119,19 @@ class CocktailsController < ApplicationController
     # If the user selects the "only_this" option the cocktails that contain other ingredients
     # will be rejected
     if params[:only_this] == "1"
-      relevant_cocktails.select! { |cocktail| cocktail.first == cocktail.last.ingredients.size }
+      cocktails_filtered.select! { |cocktail| cocktail.first == cocktail.last.ingredients.size }
 
     # Nonetheless, even if the option is not selected, it should contain at least one match
     else
-      relevant_cocktails.select! { |cocktail| cocktail.first >= 1 }
+      cocktails_filtered.select! { |cocktail| cocktail.first >= 1 }
     end
 
-    return relevant_cocktails.sort.reverse.map(&:last)
+    return cocktails_filtered.sort.reverse.map(&:last)
   end
 
-  def filter_by_categories(cocktails)
-    return cocktails.select { |cocktail| params[:categories].include?(cocktail.category.name) }
+  # Method that return the Cocktails list passed as param filtered by categories
+  def filter_by_categories(cocktails_list)
+    return cocktails_list.select { |cocktail| params[:categories].include?(cocktail.category.name) }
   end
 
   def cocktail_params

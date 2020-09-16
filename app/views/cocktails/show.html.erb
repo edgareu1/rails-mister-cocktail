@@ -1,53 +1,57 @@
-<div class="row justify-content-center bar-image">
-  <div class="container-page">
-    <div class="container-page-headers">
-      <h1><%= @cocktail.name %></h1>
+<div class="show-container-page">
+  <div class="container-page-headers">
+    <h1><%= @cocktail.name %></h1>
 
-      <div class="container-page-actions">
-        <%= link_to cocktails_path(anchor: "container-cards") do %>
-          <i class="fas fa-undo-alt"></i>
+    <div class="container-page-actions">
+      <%= link_to cocktails_path(anchor: "container-cards") do %>
+        <i class="fas fa-undo-alt"></i>
+      <% end %>
+
+      <% if @cocktail.editable %>
+        <%= link_to "Edit", data: { toggle: "modal", target: "#ModalEditCocktail" }, style: "margin: 0 10px" do %>
+          <i class="fas fa-edit"></i>
         <% end %>
-
-        <% if @cocktail.editable %>
-          <%= link_to edit_cocktail_path, data: { toggle: "modal", target: "#ModalEditCocktail" }, style: "margin: 0 10px" do %>
-            <i class="fas fa-edit"></i>
-          <% end %>
-          <%= link_to cocktail_path(@cocktail), method: :delete, data: {confirm: "Are you sure?"}, style: "margin-right: 10px" do %>
-            <i class="fas fa-trash-alt"></i>
-          <% end %>
-          <%= link_to cocktail_path(editable: 1) do %>
-            <i class="fas fa-save"></i>
-          <% end %>
+        <%= link_to "Delete", data: { toggle: "modal", target: "#ModalDeleteCocktail" }, style: "margin-right: 10px" do %>
+          <i class="fas fa-trash-alt"></i>
         <% end %>
-      </div>
+        <%= link_to "Save", data: { toggle: "modal", target: "#ModalSaveCocktail" } do %>
+          <i class="fas fa-save"></i>
+        <% end %>
+      <% end %>
     </div>
-
-    <div id="cocktail-profile" style="display: flex">
-      <%= render "cocktails/cocktail-profile" %>
-    </div>
-
-    <div class="container-general" id="doses-list" style="margin: 20px 0 10px">
-      <%= render "doses/doses-list" %>
-    </div>
-
-    <div class="container-general" id="instructions-list" style="margin: 10px 0; padding: 10px 20px">
-      <%= render "cocktails/instructions-list" %>
-    </div>
-
-    <ul class="container-general" id="reviews-list" style="margin: 10px 0; padding: 10px 20px">
-      <%= render "reviews/reviews-list" %>
-    </ul>
   </div>
+
+  <div id="cocktail-profile" style="display: flex; margin: 0 5px 8px">
+    <%= render "cocktails/cocktail-profile" %>
+  </div>
+
+  <ul class="container-general" id="doses-list" style="padding-bottom: 26px">
+    <%= render "doses/doses-list" %>
+  </ul>
+
+  <div class="container-general" id="instructions-list">
+    <%= render "cocktails/instructions-list" %>
+  </div>
+
+  <ul class="container-general" id="reviews-list">
+    <%= render "reviews/reviews-list" %>
+  </ul>
 </div>
+
+<!-- Modal Delete Cocktail -->
+<%= render "cocktails/form-delete" %>
+
+<!-- Modal Edit Instructions -->
+<%= render "cocktails/form-edit-instructions" %>
 
 <!-- Modal Edit Cocktail -->
 <%= render "cocktails/form-edit" %>
 
+<!-- Modal Save Cocktail -->
+<%= render "cocktails/form-save" %>
+
 <!-- Modal Create Dose -->
 <%= render "doses/form-new" %>
-
-<!-- Modal Edit Instructions -->
-<%= render "cocktails/form-edit-instructions" %>
 
 <!-- Modal Create Review -->
 <%= render "reviews/form-new" %>

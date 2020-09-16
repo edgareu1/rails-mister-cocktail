@@ -1,0 +1,15 @@
+<div class="modal fade modal-confirm" id="ModalSaveCocktail">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-confirm-body">
+        <h2 class="modal-title">Save Cocktail</h2>
+        <p>After saving you will not be able to change it again</p>
+
+        <div>
+          <button type="button" class="btn-cancel-confirm" data-dismiss="modal">Cancel</button>
+          <%= link_to "Save", cocktail_path(editable: 1), class: "btn-accept-confirm" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -9,8 +9,8 @@
 </div>
 
 <!-- Display the Instructions -->
-<% if @cocktail.instructions == "NA" || @cocktail.instructions.empty? %>
-  <p style="margin: 10px; font-size: 14px">No instructions avaliable...</p>
+<% if @cocktail.instructions.nil? || @cocktail.instructions.empty? %>
+  <p style="margin: 10px">No instructions...</p>
 <% else %>
-  <p style="margin-left: 10px; font-size: 14px; text-align: justify"><%= @cocktail.instructions %></p>
+  <p style="margin: 10px; font-size: 15px; text-align: justify"><%= @cocktail.instructions %></p>
 <% end %>

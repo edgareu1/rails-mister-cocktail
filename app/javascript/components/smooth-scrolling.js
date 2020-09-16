@@ -1,7 +1,7 @@
-// jQuery Function that smooths same page scrolling
-// Arguments: from: element of the starting point
-//            to:   identifier of the destination element
-//            time: time in milliseconds the animation takes
+// jQuery Function that smooths the same page scrolling
+// Parameters: from    starting point's element
+//             to      identifier of the destination element
+//             time    time, in milliseconds, during which the animation takes place
 function smoothScrolling(from, to, time = 800) {
   from.addEventListener('click', (event) => {
     event.preventDefault(); // Prevents default anchor click behavior

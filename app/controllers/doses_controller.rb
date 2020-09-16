@@ -1,27 +1,30 @@
 class DosesController < ApplicationController
-  before_action :set_cocktail, only: [:create, :update, :destroy]
+  before_action :set_cocktail, only: [:create, :destroy]
 
+  # If a dose with that ingredient does not exist, then create a new one
+  # Otherwise update the already existing dose with the same ingredient
   def create
-    # If a dose with that ingredient does not exist, then create a new one
-    # Otherwise update the already existing dose with the same ingredient
-    if @cocktail.doses.find_by(ingredient_id: params["dose"]["ingredient_id"]).nil?
+    @cocktail = Cocktail.find(params[:cocktail_id])
+
+    existing_dose = @cocktail.doses.find_by(ingredient_id: params["dose"]["ingredient_id"])
+
+    if existing_dose.nil?
       @dose = Dose.new(dose_params)
       @dose.cocktail = @cocktail
 
-      # In case there's an error saving the new dose
+      # In case there's an error saving the new dose (which at the moment is not possible)
       unless @dose.save
         @review = Review.new
         render 'cocktails/show'
       end
 
     else
-      update
+      update(existing_dose)
     end
   end
 
-  def update
-    @dose = @cocktail.doses.find_by(ingredient_id: params["dose"]["ingredient_id"])
-    successful_update = @dose.update(dose_params)
+  def update(existing_dose)
+    successful_update = existing_dose.update(dose_params)
 
     # In case there's an error saving the new dose (which at the moment is not possible)
     unless successful_update

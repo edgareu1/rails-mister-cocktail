@@ -30,3 +30,29 @@
   border: 2px solid rgba(255, 255, 255, 1);
   box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.35);
 }
+
+.btn-accept-confirm, .btn-cancel-confirm {
+  width: 50%;
+  height: 100%;
+  float: left;
+  text-align: center;
+  text-decoration: none;
+  padding: 8px;
+  border: none;
+  margin: 0;
+}
+
+.btn-accept-confirm {
+  color: white;
+  background-color: #e5493d;
+
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.btn-cancel-confirm {
+  color: black;
+  background-color: lightgray;
+}

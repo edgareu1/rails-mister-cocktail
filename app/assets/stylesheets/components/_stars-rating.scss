@@ -1,7 +1,12 @@
-.stars-container {
+.review_rating {
   display: flex;
   flex-direction: column;
   margin: 0 0 10px 5px;
+
+  .invalid-feedback {
+    display: block;
+    margin: 0;
+  }
 }
 
 .stars {

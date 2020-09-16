@@ -7,16 +7,15 @@
 
 <!-- Display the last 5 reviews -->
 <% if @cocktail.reviews.length == 0 %>
-  <p style="margin-left: 10px; font-size: 14px">Be the first to leave a review!</p>
+  <p style="margin-left: 10px">No reviews...</p>
 <% else %>
   <% @cocktail.reviews.last(5).reverse.each do |review| %>
     <li style="list-style: none; align-items: center; margin: 10px 0 0 10px">
-      <p style="font-size: 20px; margin: 0">
-        <%= ("★" * review.rating) + ("☆" * (5 - review.rating)) %>
-        <span style="font-size: 14px"><%= " #{review.created_at.strftime("%Y-%m-%d")}" %></span>
+      <p data-rating=<%= review.rating %> style="font-size: 14px; margin: 0">
+        <span style="font-size: 13px; margin-left: 2px"><%= time_ago_in_words(review.created_at) %></span>
       </p>
 
-      <p class="read-more" style="margin-left: 15px; font-size: 14px; text-align: justify"><%= review.content %></p>
+      <p class="read-more" style="margin-left: 15px; font-size: 15px; text-align: justify"><%= review.content %></p>
     </li>
   <% end %>
 <% end %>

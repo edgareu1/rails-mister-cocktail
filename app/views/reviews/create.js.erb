@@ -1,47 +1,18 @@
-var starsContainer = document.querySelector('.stars-container');    // Get the container of the Rating input
-var boxReviewContent = document.querySelector('.review_content');   // Get the container of the Content input
-
-// Content input field (textarea)
-var reviewContentTextArea = document.querySelector('.review_content textarea');
-
-// If it exists, remove any Rating and Content related error messages and validation marks
-removeErrors();
-
 // If there are any errors in the submited form, then...
 <% if @review.errors.any? %>
-  // If there are Rating input related errors, insert an error message
-  <% unless @review.errors.messages[:rating].empty? %>
-    var ratingNode = document.createElement('div');
-    ratingNode.classList = 'invalid-feedback';
-    ratingNode.style.display = 'block';
-    ratingNode.style.margin = '0';
-    ratingNode.innerHTML = "Rating <%= @review.errors.messages[:rating].first %>";
-
-    document.querySelector('.stars-container').appendChild(ratingNode);
-  <% end %>
-
-  // If there are Content input related errors, insert an error message
-  <% unless @review.errors.messages[:content].empty? %>
-    var contentNode = document.createElement('div');
-    contentNode.classList = 'invalid-feedback';
-    contentNode.innerHTML = "Content <%= @review.errors.messages[:content].first %>";
-
-    boxReviewContent.classList.add('form-group-invalid');
-    reviewContentTextArea.classList.add('is-invalid');
-    boxReviewContent.appendChild(contentNode);
-
-  // Otherwise mark the input field as valid
-  <% else %>
-    boxReviewContent.classList.add('.form-group-valid');
-    reviewContentTextArea.classList.add('is-valid');
-  <% end %>
+  // Refresh the input validations (Add error messages and change the input's container colors)
+  refreshInputValidations('.review_rating', 1, '.stars', "Rating <%= @review.errors.messages[:rating].first %>");
+  refreshInputValidations('.review_content', 1, 'textarea', "Content <%= @review.errors.messages[:content].first %>");
 
 // Otherwise, if there are no errors in the submited form...
 <% else %>
-  // Refresh the page Review content
+  // Refresh the Reviews list
   document.getElementById("reviews-list").innerHTML = "<%= j render partial: "reviews-list" %>";
 
-  document.querySelector('#ModalNewReview button').click();     // Close Modal
+  starRating(); // Quantify each review's rating with stars
+  readMore();   // Hide the review's content if it is too long
+
+  document.querySelector('#ModalNewReview button').click();     // Close New Review Modal
   document.getElementById('review_content').value = '';         // Empty the content field
 
   // Clear the Rating radio boxes
@@ -51,22 +22,7 @@ removeErrors();
   }
 
   // If it exists, remove any Rating and Content related error messages and validation marks
-  removeErrors();
+  removeValidations('.review_rating', 1, '.stars');
+  removeValidations('.review_content', 1, 'textarea');
+
 <% end %>
-
-// Function that, if it exists, removes any Rating and Content related error messages and validation marks
-function removeErrors() {
-  // Remove Rating related error messages
-  if (starsContainer.childElementCount > 1) {
-    document.querySelector('.stars-container .invalid-feedback').remove();
-  }
-
-  // Remove Content related error messages
-  if (boxReviewContent.childElementCount > 1) {
-    document.querySelector('.review_content .invalid-feedback').remove();
-  }
-
-  // Remove the validation marks from the Content input field
-  reviewContentTextArea.classList.remove('is-valid', 'is-invalid');
-  boxReviewContent.classList.remove('form-group-valid', 'form-group-invalid');
-}

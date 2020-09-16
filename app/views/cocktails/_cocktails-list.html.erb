@@ -1,5 +1,5 @@
 <div class="cards">
-  <% @cocktails_sorted.each do |cocktail| %>
+  <% @sorted_cocktails.each do |cocktail| %>
     <%= link_to cocktail_path(cocktail) do %>
       <div class="card">
         <div class="img-card" style="background-image: url('<%= cl_image_path cocktail.photo.key, height: 250, width: 250, crop: :fill %>')"></div>
@@ -18,4 +18,4 @@
   <% end %>
 </div>
 
-<%= will_paginate @cocktails_sorted, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, previous_label: "&laquo;", next_label: "&raquo;" %>
+<%= will_paginate @sorted_cocktails, renderer: WillPaginate::ActionView::BootstrapLinkRenderer, previous_label: "&laquo;", next_label: "&raquo;" %>
