@@ -1,40 +1,45 @@
 <!-- Cocktail Image -->
-<div style="background-image: url('<%= cl_image_path @cocktail.photo.key, height: 380, width: 380, crop: :fill %>'); min-height: 380px; min-width: 380px; padding: 0; border-radius: 5px"></div>
+<div style="background-image: url('<%= cl_image_path @cocktail.photo.key, height: 360, width: 360, crop: :fill %>'); min-height: 360px; min-width: 360px; padding: 0; border-radius: 5px"></div>
 
 <!-- Cocktail Information -->
 <div class="container-general" style="margin-left: 20px; width: 100%">
-  <h3 style="margin: 0 0 16px 20px; text-indent: -15px">General Information</h3>
+  <h3 style="margin: 0 10px 20px">Detailed Info</h3>
 
   <table style="width: 100%">
     <tr>
-      <td style="width: 90px"><p style="text-align: end">Category</p></td>
+      <td style="width: 100px"><h5 style="text-align: end">Category</h5></td>
       <td style="width: 15px"></td>
-      <td><p><%= @cocktail.category.name %></p></td>
+      <td><h6><%= @cocktail.category.name %></h6></td>
     </tr>
     <tr>
-      <td><p style="text-align: end">Alcoholic</p></td>
+      <td><h5 style="text-align: end">Alcoholic</h5></td>
       <td></td>
-      <td><p><%= @cocktail.alcoholic %></p></td>
+      <td><h6><%= @cocktail.alcoholic %></h6></td>
     </tr>
-      <td><p style="text-align: end">Rating</p></td>
+      <td><h5 style="text-align: end">Rating</h5></td>
       <td></td>
-      <td><p><%= @cocktail.reviews.empty? ? "NA" : @cocktail.rating_average.round(1).to_s + " ★" %></p></td>
+      <td><h6><%= @cocktail.reviews.empty? ? "NA" : @cocktail.rating_average.round(1).to_s + " ★" %></h6></td>
     <tr>
     </tr>
     <tr>
-      <td><p style="text-align: end">Difficulty</p></td>
+      <td><h5 style="text-align: end">Difficulty</h5></td>
       <td></td>
-      <td><p><%= @cocktail.difficulty %></p></td>
+      <td><h6><%= @cocktail.difficulty %></h6></td>
     </tr>
     <tr>
-      <td><p style="text-align: end">Reviews</p></td>
+      <td><h5 style="text-align: end">Reviews</h5></td>
       <td></td>
-      <td><p><%= @cocktail.reviews.size %></p></td>
+      <td><h6><%= @cocktail.reviews.size %></h6></td>
     </tr>
     <tr>
-      <td><p style="text-align: end">Glass</p></td>
+      <td><h5 style="text-align: end">Glass</h5></td>
       <td></td>
-      <td><p><%= @cocktail.glass.name %></p></td>
+      <td><h6><%= @cocktail.glass.name %></h6></td>
+    </tr>
+    <tr>
+      <td><h5 style="text-align: end">Created</h5></td>
+      <td></td>
+      <td><h6><%= @cocktail.created_at.strftime('%b %e, %Y') %></h6></td>
     </tr>
   </table>
 </div>
