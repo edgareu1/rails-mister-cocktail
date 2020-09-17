@@ -39,7 +39,7 @@
   height: 160px;
 }
 
-.form-control.is-valid {
+.form-control.is-valid, .form-control.is-invalid {
   background-position: right calc(1em + 0.1875rem) center !important;
 }
 
