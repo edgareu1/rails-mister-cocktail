@@ -6,7 +6,7 @@ class CocktailsController < ApplicationController
 
     # Variable to send to the JS autoCompleteCocktail function
     gon.cocktails_names = Cocktail.all
-                                  .map { |cocktail| capitalize_string(cocktail.name) }
+                                  .map(&:name)
                                   .sort
                                   .join(' -/- ')
 
@@ -27,6 +27,7 @@ class CocktailsController < ApplicationController
 
   def create
     @cocktail = Cocktail.new(cocktail_params)
+    @cocktail.name = capitalize_string(@cocktail.name)    # Capitalizes the Cocktail's name
 
     if @cocktail.save
       redirect_to cocktail_path(@cocktail)
@@ -49,13 +50,7 @@ class CocktailsController < ApplicationController
 
   # Method that capitalizes every word of the string passed as argument
   def capitalize_string(string)
-    array_strings = string.split(' ')
-
-    if array_strings.size == 1
-      return string.capitalize
-    else
-      return array_strings.map(&:capitalize).join(' ')
-    end
+    return string.split(' ').map(&:capitalize).join(' ')
   end
 
   # Method that prepares the Cocktail#Index page to be displayed
