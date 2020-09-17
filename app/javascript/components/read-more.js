@@ -1,7 +1,7 @@
 // Function that will hide the text that exceds a certain height, while giving the user the option
 // to view it ('read more'); if this option is selected, the user can also choose to 'read less'
 function readMore() {
-  var showHeight = 42;  // Height limit that the review content paragraph can take initially
+  var showHeight = 44;  // Height limit that the review content paragraph can take initially
 
   // Text that will appear on each link
   var moretext = '<span class="elipse">...</span>&nbsp;Read more';
