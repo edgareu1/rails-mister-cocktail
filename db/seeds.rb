@@ -2,17 +2,19 @@ require 'json'
 require 'open-uri'
 require 'faker'
 
-# Capitalizes the multiples words of a string
+# Method that capitalizes every word of the string passed as argument
 def capitalize_string(string)
   string.split.map(&:capitalize).join(" ")
 end
 
+
 puts "Destroying existing DB..."
 
-Cocktail.destroy_all # Doses and Reviews also destroyed as they are dependent on Cocktails
+Cocktail.destroy_all    # Doses and Reviews are also destroyed as they are dependent on Cocktails
 Category.destroy_all
 Glass.destroy_all
 Ingredient.destroy_all
+
 
 puts "Creating..."
 
@@ -27,8 +29,9 @@ html_doc['drinks'].each do |ingredient|
   puts "Created the ingredient #{ingredient_name}"
 end
 
+
 # Populates the Glass and Category tables with controlable values
-# The API is too unpredictable in regards to the names given to this classes
+# The API is too unpredictable in regards to the names given to this elements
 glasses_array = [
   "NA", "Collins Glass", "Cocktail Glass", "Flute Glass", "Goblet", "Mug",
   "Plastic Cup", "Shot Glass", "Teacup", "Vodka Glass", "Wine Glass", "Yard"
@@ -46,6 +49,7 @@ categories_array = [
   end
 end
 
+
 # Method that generates a random cocktail. It handles the whole process of fetching data from the API
 def random_cocktail_generator
   url = "https://www.thecocktaildb.com/api/json/v1/1/random.php"
@@ -54,7 +58,7 @@ def random_cocktail_generator
   data = html_doc['drinks'].first
 
   # Makes sure a Cocktail with the same name doesn't already exist (name has an uniqueness validation)
-  if Cocktail.find_by(name: capitalize_string(data['strDrink'])).nil?
+  if Cocktail.find_by(name: capitalize_string(data['strDrink'])).nil? && data['strDrink'].length <= 20
     new_cocktail = create_cocktail(data)
     num_doses = create_cocktail_doses(data, new_cocktail)
     num_reviews = create_cocktail_reviews(new_cocktail)
@@ -85,6 +89,7 @@ Transform_alcoholic = {
   "Optional alcohol" => "Optional"
 }
 
+
 # Method that creates and returns a Cocktail based on the data passed
 def create_cocktail(data)
   new_cocktail = Cocktail.new
@@ -111,6 +116,7 @@ def create_cocktail(data)
   return new_cocktail
 end
 
+
 # Method that takes data and a Cocktail as arguments and creates, based on that data, that same
 # Cocktail's doses; returns the number of doses created
 def create_cocktail_doses(data, new_cocktail)
@@ -134,7 +140,9 @@ def create_cocktail_doses(data, new_cocktail)
   return counter
 end
 
+
 # Method that creates 5..10 random reviews to a Cocktail passed as argument
+# Returns the number of reviews created
 def create_cocktail_reviews(new_cocktail)
   num_reviews = rand(5..10).times do
     review = Review.new
@@ -149,13 +157,9 @@ def create_cocktail_reviews(new_cocktail)
   return num_reviews
 end
 
-# Creating 50 random Cocktails
-50.times do
-  random_cocktail_generator
-end
 
-# Makes sure 50 Cocktails where created
-until Cocktail.all.size == 50
+# Creates 52 random Cocktails
+until Cocktail.all.size == 52
   random_cocktail_generator
 end
 
