@@ -1,6 +1,7 @@
+// Cards
 #container-cards {
-  min-height: 100vh;
   position: relative;
+  min-height: 100vh;
   padding: 20px 10px 10px;
 }
 
@@ -15,24 +16,21 @@
     .form-control {
       height: 32px;
       width: 160px;
-
-      margin: -1px 0;
-      border-radius: 2px;
       border: 2px solid rgba(255, 0, 0, 0.4);
+      border-radius: 2px;
+      margin: -1px 0;
     }
   }
 
   a, button {
     color: white;
+    background: linear-gradient(rgba(255, 0, 0, 0.2), rgba(255, 0, 0, 0.5));
     font-size: 14px;
     height: 32px;
-
     padding: 5px 10px;
-    margin: -1px;
-    border-radius: 2px;
     border: none;
-
-    background: linear-gradient(rgba(255, 0, 0, 0.2), rgba(255, 0, 0, 0.5));
+    border-radius: 2px;
+    margin: -1px;
 
     i {
       font-size: 20px;
@@ -54,32 +52,27 @@
 }
 
 .card {
-  height: 250px;
-  width: 250px;
-  min-height: 250px;
-  min-width: 250px;
-
   position: relative;
   align-items: center;
   justify-content: space-around;
-
   background-color: rgba(15, 0, 0, 1);
+  height: 250px;
+  min-height: 250px;
+  width: 250px;
+  min-width: 250px;
   border-radius: 3px;
-
   transition: 0.2s ease;
 }
 
 .img-card {
-  height: 250px;
-  width: 250px;
-  min-height: 250px;
-  min-width: 250px;
-
   position: absolute;
   background-size: cover;
   background-position: center;
-
   opacity: 0.9;
+  height: 250px;
+  min-height: 250px;
+  width: 250px;
+  min-width: 250px;
   border-radius: 3px;
 }
 
@@ -94,8 +87,8 @@
   }
 
   h5 {
-    font-weight: bold;
     font-size: 20px;
+    font-weight: bold;
   }
 
   p {

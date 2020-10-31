@@ -1,3 +1,4 @@
+// Stars Rating
 .review_rating {
   display: flex;
   flex-direction: column;
@@ -11,9 +12,9 @@
 
 .stars {
   float: left;
-  overflow: hidden;
   width: 200px;
   margin: 0;
+  overflow: hidden;
 }
 
 .stars input[type=radio] {
@@ -22,34 +23,27 @@
 
 .stars label {
   box-sizing: border-box;
-  width: 40px;
-  height: 40px;
   float: right;
-  cursor: pointer;
+  height: 40px;
+  width: 40px;
   margin: 0;
+  cursor: pointer;
 }
 
 .stars label:after {
   display: block;
-  content: "";
-  height: 40px;
-  width: 40px;
   float: right;
-  transition: all 0.15s;
   content: "\f005";
   font-family: 'Font Awesome 5 Free';
+  color: white;
   font-size: 26px;
   font-weight: 600;
-  color: white;
+  height: 40px;
+  width: 40px;
+  transition: all 0.15s;
 }
 
-.stars input[type=radio]:first-child + label {}
-
-.stars:hover input[type=radio]:checked ~ label:after,
-.stars label:after {}
-
-.stars label:hover:after,
-.stars label:hover ~ label:after {
+.stars label:hover:after, .stars label:hover ~ label:after {
   color: rgb(255, 220, 0) !important;
 }
 
