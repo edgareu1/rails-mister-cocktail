@@ -5,10 +5,10 @@ class CocktailsController < ApplicationController
     @cocktail = Cocktail.new
 
     # Variable to send to the JS autoCompleteCocktail function
-    gon.cocktails_names = Cocktail.all
-                                  .map(&:name)
-                                  .sort
-                                  .join(' -/- ')
+    gon.cocktail_names = Cocktail.all
+                                 .map(&:name)
+                                 .sort
+                                 .join(' -/- ')
 
     index_reload
   end

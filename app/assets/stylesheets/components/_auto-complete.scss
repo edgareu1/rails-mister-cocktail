@@ -1,26 +1,30 @@
 // Autocomplete list
-#autocomplete-list {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  left: 0;
-  color: rgba(0, 0, 0, 0.95);
-  background: white;
-  z-index: 10;
-  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-  border-radius: 3px;
-  margin-top: 3px;
-  overflow: hidden;
+.sorter > form[action="/cocktails"] {
+  position: relative;
 
-  div {
-    height: 38px;
-    line-height: 38px;
-    padding-left: 18px;
+  #autocomplete-list {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    color: rgba(0, 0, 0, 0.95);
+    background: white;
+    z-index: 10;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    margin-top: 3px;
     overflow: hidden;
-    cursor: pointer;
-  }
 
-  .autocomplete-selected {
-    background-color: rgba(210, 210, 210, 1);
+    div {
+      height: 38px;
+      line-height: 38px;
+      padding-left: 18px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .autocomplete-selected {
+      background-color: rgba(210, 210, 210, 1);
+    }
   }
 }
